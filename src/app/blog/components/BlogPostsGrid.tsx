@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Mountain, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { formatGermanDate } from '@/lib/site';
 
 interface BlogPost {
   id: string;
@@ -31,14 +32,7 @@ interface BlogPostsGridProps {
   fallbackImages?: MediaItem[];
 }
 
-function formatDate(dateString: string | null) {
-  if (!dateString) return '';
-  return new Date(dateString).toLocaleDateString('de-DE', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
+const formatDate = formatGermanDate;
 
 export function BlogPostsGrid({ posts, fallbackImages = [] }: BlogPostsGridProps) {
   if (posts.length === 0) return null;

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
-Sitemap: https://sechszirbenhuette.com/sitemap.xml
+Sitemap: https://www.sechszirbenhuette.com/sitemap.xml

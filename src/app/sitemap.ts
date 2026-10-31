@@ -1,65 +1,43 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
+import { listPublishedPosts } from '@/lib/server/blog';
+import { SITE_URL, parseDbDate } from '@/lib/site';
 
-interface BlogPost {
-  slug: string;
-  published_at: string | null;
-  updated_at: string;
-}
+// Bei jedem Abruf aus D1, damit neue Beiträge sofort drinstehen. Ausgeliefert
+// unter https://www.sechszirbenhuette.com/sitemap.xml (über den Worker, siehe
+// public/_routes.json). In Google Search Console und Bing Webmaster Tools
+// eingereicht.
+export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://sechszirbenhuette.pages.dev';
+  const posts = await listPublishedPosts();
+  const newestPost = posts
+    .map((post) => parseDbDate(post.updated_at || post.published_at || post.created_at))
+    .filter((date): date is Date => !!date)
+    .sort((a, b) => b.getTime() - a.getTime())[0];
 
-  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/`, changeFrequency: 'weekly', priority: 1 },
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/blog`,
+      ...(newestPost ? { lastModified: newestPost } : {}),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/impressum`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/datenschutz`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
+    { url: `${SITE_URL}/impressum`, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${SITE_URL}/datenschutz`, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${SITE_URL}/agb`, changeFrequency: 'yearly', priority: 0.2 },
   ];
 
-  // Try to fetch blog posts for dynamic sitemap entries
-  let blogPages: MetadataRoute.Sitemap = [];
-  try {
-    // Fetch blog posts from the internal API during build
-    const response = await fetch(`${baseUrl}/api/blog?status=published`, {
-      next: { revalidate: 3600 }, // Revalidate every hour
-    });
-
-    if (response.ok) {
-      const data = (await response.json()) as { posts?: BlogPost[] };
-      if (data.posts && data.posts.length > 0) {
-        blogPages = data.posts.map((post) => ({
-          url: `${baseUrl}/blog/${post.slug}`,
-          lastModified: new Date(post.updated_at || post.published_at || new Date()),
-          changeFrequency: 'weekly' as const,
-          priority: 0.7,
-        }));
-      }
-    }
-  } catch (error) {
-    console.error('Error fetching blog posts for sitemap:', error);
-    // Continue with static pages only
-  }
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => {
+    const modified = parseDbDate(post.updated_at || post.published_at || post.created_at);
+    return {
+      url: `${SITE_URL}/blog/${post.slug}`,
+      ...(modified ? { lastModified: modified } : {}),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      ...(post.cover_image_url ? { images: [post.cover_image_url] } : {}),
+    };
+  });
 
   return [...staticPages, ...blogPages];
 }

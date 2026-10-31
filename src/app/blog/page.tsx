@@ -1,92 +1,77 @@
-'use client';
+import type { Metadata } from 'next';
+import { listPublishedPosts } from '@/lib/server/blog';
+import { absoluteUrl, plainTitle } from '@/lib/site';
+import { breadcrumbJsonLd, jsonLdString } from '@/lib/structuredData';
+import { BlogIndexView } from './BlogIndexView';
 
-import { useState, useEffect } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { BlogPostsGrid } from './components/BlogPostsGrid';
+// Liste bei jedem Aufruf aus D1 — fertig im HTML, damit Crawler alle
+// Beiträge über Links finden.
+export const dynamic = 'force-dynamic';
 
-interface MediaItem {
-  id: number;
-  url: string;
-  alt_text: string;
-  category?: string;
-}
+const title = 'Blog: Tipps für Ihren Urlaub am Falkert';
+const description =
+  'Wanderungen, Restaurants, Ausflüge mit Kindern und Hund, Kärnten Card und Off-Season: Tipps aus erster Hand rund um die Sechszirbenhütte am Falkert in den Nockbergen.';
 
-interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  subtitle: string | null;
-  excerpt: string | null;
-  cover_image_url: string | null;
-  cover_image_alt: string | null;
-  layout: 'standard' | 'carousel' | 'tabs';
-  status: 'draft' | 'published';
-  author: string;
-  published_at: string | null;
-  created_at: string;
-}
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: { canonical: absoluteUrl('/blog') },
+  openGraph: {
+    type: 'website',
+    url: absoluteUrl('/blog'),
+    title,
+    description,
+    siteName: 'Sechszirbenhütte',
+    locale: 'de_DE',
+  },
+};
 
-export default function BlogPage() {
-  const { t } = useLanguage();
-  const [images, setImages] = useState<MediaItem[]>([]);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+export default async function BlogPage() {
+  const posts = await listPublishedPosts();
 
-  useEffect(() => {
-    fetch('/api/media?category=aussen&type=image')
-      .then((res) => res.json() as Promise<{ media?: MediaItem[] }>)
-      .then((data) => {
-        if (data.media) {
-          setImages(data.media);
-        }
-      })
-      .catch(() => {});
-
-    // Load published blog posts
-    fetch('/api/blog?status=published')
-      .then((res) => res.json() as Promise<{ posts?: BlogPost[] }>)
-      .then((data) => {
-        if (data.posts) {
-          setBlogPosts(data.posts);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      '@id': `${absoluteUrl('/blog')}#blog`,
+      url: absoluteUrl('/blog'),
+      name: 'Blog der Sechszirbenhütte',
+      description,
+      inLanguage: 'de-DE',
+      blogPost: posts.map((post) => ({
+        '@type': 'BlogPosting',
+        headline: plainTitle(post.title),
+        url: absoluteUrl(`/blog/${post.slug}`),
+      })),
+    },
+    breadcrumbJsonLd([
+      { name: 'Startseite', path: '/' },
+      { name: 'Blog', path: '/blog' },
+    ]),
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-12 pb-20">
-      <div className="container">
-        {/* Back Link */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-logo-green hover:text-logo-green/80 mb-8 transition-colors"
-        >
-          <ArrowLeft size={20} />
-          <span>{t.common.back}</span>
-        </Link>
-
-        {/* Page Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-4xl mx-auto mb-16"
-        >
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-logo-green mb-4"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            {t.navigation.blog || 'Blog'}
-          </h1>
-          <p className="text-lg text-gray-600">
-            {t.blog?.intro || 'Entdecken Sie unsere Reisetipps und Geschichten aus den Nockbergen'}
-          </p>
-        </motion.div>
-
-        {/* Dynamic Blog Posts */}
-        <BlogPostsGrid posts={blogPosts} fallbackImages={images} />
-      </div>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
+      />
+      <BlogIndexView
+        posts={posts.map((post) => ({
+          id: post.id,
+          slug: post.slug,
+          title: post.title,
+          subtitle: post.subtitle,
+          excerpt: post.excerpt,
+          cover_image_url: post.cover_image_url,
+          cover_image_alt: post.cover_image_alt,
+          layout: post.layout,
+          status: post.status,
+          author: post.author,
+          published_at: post.published_at,
+          created_at: post.created_at,
+        }))}
+      />
+    </>
   );
 }

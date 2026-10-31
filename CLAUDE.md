@@ -96,6 +96,9 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - **Blog-Editor (Admin):** `src/components/admin/BlogEditor.tsx` + `src/components/admin/blog-editor/*`
 - **Öffentliche Blog-Seite:** `src/app/blog/[slug]/page.tsx`; auf der Startseite ein Modul mit drei Teasern (Wunsch 31.10.2026): `src/components/sections/BlogTeaser.tsx` (unter „Umgebung“; Auswahl per `FEATURED_SLUGS`, erster = Leitbeitrag groß links, zwei rechts; fehlt einer, füllen die neuesten auf)
 - **Blog-API:** `src/app/api/blog/route.ts` (GET/POST/PUT/DELETE)
+- **SEO / KI-Suche (31.10.2026):** Blogseiten werden serverseitig gerendert — `src/app/blog/page.tsx` und `src/app/blog/[slug]/page.tsx` laden aus D1 (`src/lib/server/blog.ts`), setzen Titel/Beschreibung/Bild/Canonical per `generateMetadata` und schreiben JSON-LD (BlogPosting, BreadcrumbList, FAQPage aus dem Abschnitt „Häufige Fragen“: `<h2>…Fragen…</h2>` + `<p><b>Frage</b><br>Antwort</p>`) ins HTML; Darstellung in `BlogPostView.tsx`/`BlogIndexView.tsx` (Client). Nie wieder Beitragstext erst im Browser laden — Crawler von ChatGPT/Perplexity/Claude führen kein JavaScript aus
+  - Kanonische Adresse `SITE_URL` in `src/lib/site.ts` (www.sechszirbenhuette.com), strukturierte Daten in `src/lib/structuredData.ts` (Startseite: LodgingBusiness/VacationRental, WebSite, Organization)
+  - `sitemap.xml` dynamisch aus `src/app/sitemap.ts` (daher NICHT in `public/_routes.json` ausschließen), `public/robots.txt` statisch mit Verweis auf die www-Sitemap
 - **Media-API:** `src/app/api/admin/media/route.ts` (Upload) + `src/app/api/media/route.ts` (lesen)
 - **DB-Schema:** `db/schema.sql`, Migrations: `migrations/`
 

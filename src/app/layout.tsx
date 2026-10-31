@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { SiteSettingsProvider } from '@/contexts/SiteSettingsContext';
 import { STREAM_ORIGIN } from '@/lib/constants';
+import { SITE_URL } from '@/lib/site';
 import { ContentTextsProvider } from '@/contexts/ContentTextsContext';
 import { Header, MobileBookingButton } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -11,7 +12,7 @@ import '@/styles/globals.css';
 import '@/styles/brand.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sechszirbenhuette.pages.dev'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Sechszirbenhütte am Falkert | Premium-Hüttenurlaub in den Nockbergen',
     template: '%s | Sechszirbenhütte',
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
     images: ['/images/fallback/og-image.jpg'],
     locale: 'de_DE',
     type: 'website',
+    siteName: 'Sechszirbenhütte',
   },
   twitter: {
     card: 'summary_large_image',
