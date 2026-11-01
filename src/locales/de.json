@@ -266,7 +266,32 @@
       "invalid": "Die Abreise muss nach der Anreise liegen.",
       "maxGuests": "Die Hütte bietet Platz für bis zu 5 Personen.",
       "required": "Bitte Anreise und Abreise wählen.",
-      "hint": "Öffnet das Buchungsformular mit Preisaufstellung in einem neuen Fenster."
+      "hint": "Öffnet das Buchungsformular mit Preisaufstellung in einem neuen Fenster.",
+      "calendar": {
+        "placeholder": "Datum wählen",
+        "dialog": "Kalender mit freien Zeiträumen",
+        "free": "Frei",
+        "booked": "Belegt",
+        "selected": "Ihr Zeitraum",
+        "changeover": "Wechseltag",
+        "chooseArrival": "Bitte Anreisetag wählen",
+        "chooseDeparture": "Bitte Abreisetag wählen",
+        "minStay": "Mindestaufenthalt ab diesem Tag: {n} Nächte",
+        "bookableUntil": "Buchbar bis {date}",
+        "loading": "Verfügbarkeit wird geladen …",
+        "unavailable": "Verfügbarkeit gerade nicht abrufbar – das Buchungsformular prüft sie.",
+        "prev": "Vorheriger Monat",
+        "next": "Nächster Monat",
+        "jump": "Monat wählen",
+        "reset": "Zurücksetzen",
+        "done": "Fertig",
+        "close": "Schließen",
+        "dayFree": "frei",
+        "dayBooked": "belegt",
+        "dayArrivalOnly": "nur Anreise",
+        "dayDepartureOnly": "nur Abreise",
+        "tooShort": "Mindestaufenthalt {n} Nächte – bitte späteren Abreisetag wählen."
+      }
     },
     "form": {
       "title": "Buchungsanfrage",

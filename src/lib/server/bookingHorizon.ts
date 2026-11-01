@@ -24,6 +24,7 @@ import {
   setSetting,
 } from '@/lib/server/beds24';
 import { todayVienna } from '@/lib/server/bookingCutoff';
+import { invalidatePublicAvailability } from '@/lib/server/publicAvailability';
 
 const KEY_HORIZON = 'booking_horizon';
 /** `${heute}|${datum}` des letzten erfolgreichen Laufs — ein neues Datum löst erneut aus */
@@ -170,6 +171,7 @@ export async function setBookingHorizon(
   }
   const previous = await getHorizon(db);
   await setSetting(db, KEY_HORIZON, value);
+  await invalidatePublicAvailability(db);
   await writeAppLog(
     db,
     'info',

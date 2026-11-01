@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { CalendarDays } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { AvailabilityCalendar, type CalendarTarget } from '@/components/brand/AvailabilityCalendar';
+import { useAvailability } from '@/lib/availability';
 import {
-  addDays,
   beds24FormUrl,
   type BookingQuery,
   DEFAULT_QUERY,
@@ -11,10 +13,11 @@ import {
   nightsBetween,
   openBeds24Form,
   readBookingQuery,
-  todayIso,
 } from '@/lib/booking';
 
-// Kompakte Suche: Anreise, Abreise, Personen. „Anfragen“ (roter Knopf) öffnet
+// Kompakte Suche: Anreise, Abreise, Personen. Anreise und Abreise wählt man im
+// Kalender mit freien und belegten Nächten (AvailabilityCalendar, Daten aus
+// Beds24 über /api/availability). „Anfragen“ (roter Knopf) öffnet
 // direkt das Beds24-Buchungsformular mit Preisaufstellung in einem neuen
 // Fenster (lib/booking.ts). Hero auf Grün (schmal untereinander, „bar“ als
 // Leiste in einer Zeile im Aufmacher), Buchungsbereich auf Leinen.
@@ -30,11 +33,18 @@ export function BookingSearch({ variant, className = '' }: Props) {
   const id = useId();
   const [query, setQuery] = useState<BookingQuery>(DEFAULT_QUERY);
   const [error, setError] = useState('');
-  const [today, setToday] = useState('');
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [target, setTarget] = useState<CalendarTarget>('arrival');
+  const [ready, setReady] = useState(false);
+  const datesRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+  // Verfügbarkeit nach dem ersten Zeichnen laden, damit der Kalender sofort steht
+  const availability = useAvailability(ready);
 
   useEffect(() => {
-    setToday(todayIso());
     setQuery(readBookingQuery(new URLSearchParams(window.location.search)));
+    setReady(true);
   }, []);
 
   const nights = nightsBetween(query.arrival, query.departure);
@@ -42,20 +52,36 @@ export function BookingSearch({ variant, className = '' }: Props) {
   const onHero = variant !== 'section';
   const bar = variant === 'bar';
 
-  const setArrival = (arrival: string) => {
-    setError('');
-    setQuery((q) => {
-      const next = { ...q, arrival: arrival || undefined };
-      // Abreise mitziehen: eine Woche ist der übliche Mindestaufenthalt
-      if (arrival && (!q.departure || nightsBetween(arrival, q.departure) < 1)) {
-        next.departure = addDays(arrival, 7);
-      }
-      return next;
-    });
+  const openCalendar = (which: CalendarTarget, trigger: HTMLButtonElement) => {
+    triggerRef.current = trigger;
+    // Kalender am ganzen Feldraster ausrichten
+    setAnchor(datesRef.current?.parentElement ?? trigger);
+    setTarget(which === 'departure' && !query.arrival ? 'arrival' : which);
+    setCalendarOpen(true);
   };
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const closeCalendar = useCallback(() => {
+    setCalendarOpen(false);
+    triggerRef.current?.focus();
+  }, []);
+
+  const changeDates = (arrival: string | undefined, departure: string | undefined) => {
+    setError('');
+    setQuery((q) => ({ ...q, arrival, departure }));
+  };
+
+  const formatDate = (iso?: string) =>
+    iso
+      ? new Intl.DateTimeFormat(language === 'en' ? 'en-GB' : language, {
+          weekday: 'short',
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          timeZone: 'UTC',
+        }).format(new Date(`${iso}T12:00:00Z`))
+      : '';
+
+  const book = () => {
     if (!query.arrival || !query.departure) {
       setError(s.required);
       return;
@@ -71,7 +97,13 @@ export function BookingSearch({ variant, className = '' }: Props) {
     const url = beds24FormUrl(query, language);
     if (!url) return;
     setError('');
+    setCalendarOpen(false);
     openBeds24Form(url);
+  };
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    book();
   };
 
   const label = onHero ? 'text-holz' : 'text-rinde';
@@ -112,31 +144,37 @@ export function BookingSearch({ variant, className = '' }: Props) {
             : 'grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-2'
         }
       >
-        <label htmlFor={`${id}-in`} className={`text-[0.9375rem] ${label}`}>
-          {s.arrival}
-          <input
-            id={`${id}-in`}
-            type="date"
-            min={today || undefined}
-            value={query.arrival ?? ''}
-            onChange={(e) => setArrival(e.target.value)}
-            className={field}
-          />
-        </label>
-        <label htmlFor={`${id}-out`} className={`text-[0.9375rem] ${label}`}>
-          {s.departure}
-          <input
-            id={`${id}-out`}
-            type="date"
-            min={query.arrival ? addDays(query.arrival, 1) : today || undefined}
-            value={query.departure ?? ''}
-            onChange={(e) => {
-              setError('');
-              setQuery((q) => ({ ...q, departure: e.target.value || undefined }));
-            }}
-            className={field}
-          />
-        </label>
+        <div ref={datesRef} className="contents">
+          {(['arrival', 'departure'] as const).map((which) => {
+            const value = which === 'arrival' ? query.arrival : query.departure;
+            const active = calendarOpen && target === which;
+            return (
+              <div key={which} className={`text-[0.9375rem] ${label}`}>
+                <span id={`${id}-${which}-label`}>
+                  {which === 'arrival' ? s.arrival : s.departure}
+                </span>
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-expanded={calendarOpen}
+                  aria-labelledby={`${id}-${which}-label ${id}-${which}-value`}
+                  onClick={(e) => openCalendar(which, e.currentTarget)}
+                  className={`${field} flex items-center gap-2 text-left ${
+                    active ? 'ring-2 ring-zirbe ring-offset-1' : ''
+                  }`}
+                >
+                  <CalendarDays size={18} aria-hidden className="flex-none text-zirbe" />
+                  <span
+                    id={`${id}-${which}-value`}
+                    className={`truncate ${value ? '' : 'text-rinde/55'}`}
+                  >
+                    {value ? formatDate(value) : s.calendar.placeholder}
+                  </span>
+                </button>
+              </div>
+            );
+          })}
+        </div>
         <label htmlFor={`${id}-ad`} className={`text-[0.9375rem] ${label}`}>
           {s.adults}
           <select
@@ -196,6 +234,18 @@ export function BookingSearch({ variant, className = '' }: Props) {
           {hint}
         </>
       )}
+      <AvailabilityCalendar
+        open={calendarOpen}
+        anchor={anchor}
+        availability={availability}
+        arrival={query.arrival}
+        departure={query.departure}
+        target={target}
+        onTargetChange={setTarget}
+        onChange={changeDates}
+        onClose={closeCalendar}
+        onBook={book}
+      />
     </form>
   );
 }

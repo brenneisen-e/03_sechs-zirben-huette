@@ -268,7 +268,32 @@
       "invalid": "Departure must be after arrival.",
       "maxGuests": "The hut sleeps up to 5 people.",
       "required": "Please choose arrival and departure.",
-      "hint": "Opens the booking form with the price breakdown in a new window."
+      "hint": "Opens the booking form with the price breakdown in a new window.",
+      "calendar": {
+        "placeholder": "Select date",
+        "dialog": "Calendar with available dates",
+        "free": "Available",
+        "booked": "Booked",
+        "selected": "Your stay",
+        "changeover": "Changeover day",
+        "chooseArrival": "Please select your arrival date",
+        "chooseDeparture": "Please select your departure date",
+        "minStay": "Minimum stay from this day: {n} nights",
+        "bookableUntil": "Bookable until {date}",
+        "loading": "Loading availability …",
+        "unavailable": "Availability cannot be loaded right now – the booking form will check it.",
+        "prev": "Previous month",
+        "next": "Next month",
+        "jump": "Choose month",
+        "reset": "Reset",
+        "done": "Done",
+        "close": "Close",
+        "dayFree": "available",
+        "dayBooked": "booked",
+        "dayArrivalOnly": "arrival only",
+        "dayDepartureOnly": "departure only",
+        "tooShort": "Minimum stay {n} nights – please choose a later departure date."
+      }
     },
     "form": {
       "title": "Booking Request",

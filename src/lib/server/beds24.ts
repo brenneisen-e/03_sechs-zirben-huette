@@ -170,6 +170,7 @@ interface CalendarEntry {
   to?: string;
   numAvail?: number | null;
   price1?: number | null;
+  minStay?: number | null;
 }
 
 interface CalendarRoom {
@@ -181,6 +182,8 @@ export interface Beds24Availability {
   roomId: number;
   /** Nächte (YYYY-MM-DD), die bei Beds24 mit Verfügbarkeit 0 gesperrt sind */
   closedNights: string[];
+  /** Mindestaufenthalt je Anreisenacht (nur Nächte mit Wert > 1) */
+  minStay: Record<string, number>;
 }
 
 /**
@@ -203,7 +206,7 @@ export async function fetchBeds24Availability(
 
   const res = await fetch(
     `${BEDS24_API}/inventory/rooms/calendar?startDate=${from}&endDate=${to}` +
-      `&propertyId=${propertyId}&includeNumAvail=true&includePrices=true`,
+      `&propertyId=${propertyId}&includeNumAvail=true&includePrices=true&includeMinStay=true`,
     { headers: { token, Accept: 'application/json' } },
   );
   const parsed = await parseJsonSafe(res);
@@ -227,19 +230,24 @@ export async function fetchBeds24Availability(
   if (!Number.isFinite(roomId) || roomId <= 0) return { error: 'Beds24-Zimmer ohne ID' };
 
   const closed = new Set<string>();
+  const minStay: Record<string, number> = {};
   for (const entry of room.calendar || []) {
-    if (!entry.from || entry.numAvail !== 0) continue;
+    if (!entry.from) continue;
+    const isClosed = entry.numAvail === 0;
+    const stay = typeof entry.minStay === 'number' && entry.minStay > 1 ? entry.minStay : 0;
+    if (!isClosed && !stay) continue;
     const last = entry.to || entry.from;
     let day = entry.from < from ? from : entry.from;
     let guard = 0;
     while (day <= last && day <= to && guard < 800) {
-      closed.add(day);
+      if (isClosed) closed.add(day);
+      if (stay) minStay[day] = stay;
       day = addDaysIso(day, 1);
       guard++;
     }
   }
 
-  return { availability: { roomId, closedNights: [...closed].sort() } };
+  return { availability: { roomId, closedNights: [...closed].sort(), minStay } };
 }
 
 /**
@@ -265,5 +273,10 @@ export async function setBeds24Availability(
   }
   const apiError = beds24ResultError(parsed.data);
   if (apiError) return { success: false, error: apiError };
+  // Kalender der Website (publicAvailability.ts) beim nächsten Aufruf neu laden
+  await db
+    .prepare("DELETE FROM settings WHERE key = 'public_availability_cache'")
+    .run()
+    .catch(() => undefined);
   return { success: true };
 }

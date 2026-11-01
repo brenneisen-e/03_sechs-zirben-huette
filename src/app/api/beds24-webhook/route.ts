@@ -7,6 +7,7 @@ import { writeAppLog } from '@/lib/server/appLog';
 import { getPropertyId } from '@/lib/server/beds24';
 import { ensureBeds24BookingColumns } from '@/lib/server/beds24Columns';
 import { describeMatch, findExistingGuest } from '@/lib/server/guestMatch';
+import { invalidatePublicAvailability } from '@/lib/server/publicAvailability';
 import {
   sendCancellationNotification,
   sendNewBookingNotification,
@@ -43,6 +44,8 @@ export async function POST(request: NextRequest) {
     }
 
     await ensureBeds24BookingColumns(env.DB);
+    // Neue/geänderte Buchung: Kalender der Website sofort aktualisieren
+    await invalidatePublicAvailability(env.DB);
 
     const payload = (await request.json()) as Record<string, unknown>;
     const booking = (

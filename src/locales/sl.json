@@ -273,7 +273,32 @@
       "invalid": "Odhod mora biti po prihodu.",
       "maxGuests": "Koča sprejme do 5 oseb.",
       "required": "Izberite prihod in odhod.",
-      "hint": "Odpre obrazec za rezervacijo s podrobnostmi cene v novem oknu."
+      "hint": "Odpre obrazec za rezervacijo s podrobnostmi cene v novem oknu.",
+      "calendar": {
+        "placeholder": "Izberite datum",
+        "dialog": "Koledar s prostimi termini",
+        "free": "Prosto",
+        "booked": "Zasedeno",
+        "selected": "Vaš termin",
+        "changeover": "Dan menjave",
+        "chooseArrival": "Izberite dan prihoda",
+        "chooseDeparture": "Izberite dan odhoda",
+        "minStay": "Najkrajše bivanje od tega dne: {n} noči",
+        "bookableUntil": "Rezervacija možna do {date}",
+        "loading": "Nalaganje razpoložljivosti …",
+        "unavailable": "Razpoložljivosti trenutno ni mogoče naložiti – preveri jo obrazec za rezervacijo.",
+        "prev": "Prejšnji mesec",
+        "next": "Naslednji mesec",
+        "jump": "Izberite mesec",
+        "reset": "Ponastavi",
+        "done": "Končano",
+        "close": "Zapri",
+        "dayFree": "prosto",
+        "dayBooked": "zasedeno",
+        "dayArrivalOnly": "samo prihod",
+        "dayDepartureOnly": "samo odhod",
+        "tooShort": "Najkrajše bivanje {n} noči – izberite poznejši dan odhoda."
+      }
     },
     "form": {
       "title": "Povpraševanje za Rezervacijo",

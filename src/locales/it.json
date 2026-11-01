@@ -273,7 +273,32 @@
       "invalid": "La partenza deve essere dopo l'arrivo.",
       "maxGuests": "La baita ospita fino a 5 persone.",
       "required": "Scegliete arrivo e partenza.",
-      "hint": "Apre il modulo di prenotazione con il dettaglio dei prezzi in una nuova finestra."
+      "hint": "Apre il modulo di prenotazione con il dettaglio dei prezzi in una nuova finestra.",
+      "calendar": {
+        "placeholder": "Scegliete la data",
+        "dialog": "Calendario con le date disponibili",
+        "free": "Libero",
+        "booked": "Occupato",
+        "selected": "Il vostro soggiorno",
+        "changeover": "Giorno di cambio",
+        "chooseArrival": "Scegliete il giorno di arrivo",
+        "chooseDeparture": "Scegliete il giorno di partenza",
+        "minStay": "Soggiorno minimo da questo giorno: {n} notti",
+        "bookableUntil": "Prenotabile fino al {date}",
+        "loading": "Caricamento disponibilità …",
+        "unavailable": "Disponibilità non caricabile al momento – il modulo di prenotazione la verifica.",
+        "prev": "Mese precedente",
+        "next": "Mese successivo",
+        "jump": "Scegliete il mese",
+        "reset": "Azzera",
+        "done": "Fatto",
+        "close": "Chiudi",
+        "dayFree": "libero",
+        "dayBooked": "occupato",
+        "dayArrivalOnly": "solo arrivo",
+        "dayDepartureOnly": "solo partenza",
+        "tooShort": "Soggiorno minimo {n} notti – scegliete una partenza successiva."
+      }
     },
     "form": {
       "title": "Richiesta di Prenotazione",
