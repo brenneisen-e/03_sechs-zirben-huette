@@ -3,6 +3,7 @@
 // des Portals (Booking.com, Feratel, FeWo-direkt).
 
 import { SITE_CONFIG } from '@/lib/constants';
+import { PRECHECKIN_URL } from '@/lib/registration';
 
 /** Google-Bewertungslink (wie im Bewertungsbereich der Website) */
 export const REVIEW_LINK_GOOGLE = 'https://g.page/r/CSYqzFakCmSsEBM/review';
@@ -120,6 +121,47 @@ export function englishSalutation(info: GuestSalutationInfo): string {
   return `Dear ${fullName}`;
 }
 
+// Kurzer Absatz zur Anmeldung bei der Gemeinde (Pflicht seit 1.11.2026) für
+// die Willkommensnachrichten
+function registrationParagraph(lang: 'de' | 'en'): string {
+  if (lang === 'en') {
+    return `Important: since 1 November 2026, all guests in Carinthia must be registered digitally with the municipality. Please complete our short pre-check-in before you arrive (one person can register everyone). In return you receive the guest card, which lets you use almost all buses and trains in Carinthia free of charge:
+
+${PRECHECKIN_URL}`;
+  }
+  return `Wichtig: Seit 1. November 2026 müssen in Kärnten alle Gäste digital bei der Gemeinde angemeldet werden. Bitte füllen Sie vor der Anreise kurz unseren Pre-Check-in aus (eine Person trägt alle ein). Dafür erhalten Sie die Gästekarte, mit der Sie fast alle Busse und Züge in Kärnten kostenlos nutzen:
+
+${PRECHECKIN_URL}`;
+}
+
+/**
+ * Ausführliche Erinnerung an den Pre-Check-in (Text von Malte, 02.11.2026),
+ * ein paar Tage vor der Anreise zu verschicken.
+ */
+export function buildPreCheckinText(info: GuestSalutationInfo): string {
+  const { gender, fullName } = resolveSalutation(info);
+  const firstName = fullName.split(/\s+/)[0] || fullName;
+  const greeting = gender === 'female' ? 'Liebe' : gender === 'male' ? 'Lieber' : 'Hallo';
+  return `${greeting} ${firstName},
+
+in wenigen Tagen geht es los – wir freuen uns schon sehr auf euch in der Sechszirbenhütte!
+
+Eine kurze Bitte vorab: Seit dem 1. November 2026 müssen in Kärnten alle Gäste digital bei der Gemeinde angemeldet werden. Bitte tragt eure Daten vor der Anreise über unseren Pre-Check-in ein – das dauert nur ein paar Minuten:
+
+${PRECHECKIN_URL}
+
+Benötigt werden unter anderem Name, Adresse, Nationalität, Geburtsdatum und eure E-Mail-Adresse sowie die Anzahl der Mitreisenden.
+
+Das Gute daran: Im Tausch bekommt ihr eine digitale Gästekarte. Sie ist zugleich euer Fahrschein – damit fahrt ihr während eures gesamten Aufenthalts, inklusive An- und Abreisetag, mit fast allen Bussen und Zügen in Kärnten kostenlos. Wenn ihr den Pre-Check-in vorab erledigt, kommt die Karte schon vor der Anreise per Link aufs Handy – eine App braucht ihr nicht. Kinder unter 6 Jahren fahren gratis, für Hunde und Fahrräder braucht es ein eigenes Ticket.
+
+Alle weiteren Infos zur Anreise, zur Schlüsselbox und zur Hütte findet ihr in unserer Gäste-App.
+
+Falls mit dem Link etwas nicht klappt, meldet euch einfach bei mir.
+
+Herzliche Grüße vom Falkert
+Malte`;
+}
+
 // Vorformuliertes Gäste-App-Schreiben (Willkommensnachricht mit App-Link)
 export function buildGuestWelcomeText(
   lang: 'de' | 'en',
@@ -135,6 +177,8 @@ Everything you need for your stay — directions, arrival, the cabin and our tip
 
 ${link}
 
+${registrationParagraph('en')}
+
 If you have any questions, simply reply here or call us at ${HOST_PHONE}.
 
 Warm regards
@@ -147,6 +191,8 @@ vielen Dank für Ihre Buchung — wir freuen uns sehr, Sie bald in der Sechszirb
 Alles Wichtige für Ihren Aufenthalt — Anfahrt, Anreise, die Hütte und unsere Tipps für die Nockberge — finden Sie in unserer Gäste-App:
 
 ${link}
+
+${registrationParagraph('de')}
 
 Bei Fragen antworten Sie einfach auf diese Nachricht oder rufen Sie uns unter ${HOST_PHONE} an.
 
@@ -185,6 +231,8 @@ Your guest app is unlocked from today. There you will find everything about the 
 
 ${link}
 
+${registrationParagraph('en')}
+
 If you have any questions before then, simply write to us here or call us at ${HOST_PHONE}.
 
 We wish you a good time until then.
@@ -199,6 +247,8 @@ wie schön, dass Sie unsere Gäste in der Sechszirbenhütte sein werden! Bis zu 
 Ihre Gäste-App ist ab heute freigeschaltet. Dort finden Sie alles rund um die Hütte, die Anfahrt auf den Falkert und unsere Tipps für die Umgebung — schauen Sie hinein, wann immer Sie mögen, und gerne noch einmal näher am Termin:
 
 ${link}
+
+${registrationParagraph('de')}
 
 Falls Sie schon vorher Fragen haben, schreiben Sie uns einfach hier oder rufen Sie uns unter ${HOST_PHONE} an.
 

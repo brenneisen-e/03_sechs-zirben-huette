@@ -26,6 +26,7 @@ import { beds24Source } from '@/lib/beds24Channels';
 import { parseArrivalTime } from '@/lib/bookingComComments';
 import {
   buildGuestEarlyWelcomeText,
+  buildPreCheckinText,
   buildGuestReviewText,
   buildGuestWelcomeText,
   daysUntilArrival,
@@ -1429,6 +1430,12 @@ export default function Beds24Cockpit() {
   const insertReviewTemplate = (lang: 'de' | 'en') => {
     if (!activeBooking) return;
     setReplyText(buildGuestReviewText(lang, salutationInfo(activeBooking, chosenGender)));
+  };
+
+  // Ausführliche Erinnerung an den Pre-Check-in (Anmeldung bei der Gemeinde)
+  const insertPreCheckinTemplate = () => {
+    if (!activeBooking) return;
+    setReplyText(buildPreCheckinText(salutationInfo(activeBooking, chosenGender)));
   };
 
   // Buchung in die Gästedatenbank übernehmen (bestehender oder neuer Gast).
@@ -3071,6 +3078,12 @@ export default function Beds24Cockpit() {
                   >
                     {creatingToken && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                     Vorlage Gäste-App EN{isEarlyBooking ? ' (früh)' : ''}
+                  </button>
+                  <button
+                    onClick={insertPreCheckinTemplate}
+                    className="px-3 py-1.5 text-xs bg-emerald-100 text-emerald-800 rounded-lg hover:bg-emerald-200 transition-colors"
+                  >
+                    Vorlage Pre-Check-in
                   </button>
                   <button
                     onClick={() => insertReviewTemplate('de')}

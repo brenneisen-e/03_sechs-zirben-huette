@@ -5,14 +5,16 @@ import de from '@/locales/de.json';
 import en from '@/locales/en.json';
 import it from '@/locales/it.json';
 import sl from '@/locales/sl.json';
+import nl from '@/locales/nl.json';
 
-export type Language = 'de' | 'en' | 'it' | 'sl';
+export type Language = 'de' | 'en' | 'it' | 'sl' | 'nl';
 
 const translations = {
   de,
   en,
   it,
   sl,
+  nl,
 };
 
 type TranslationType = typeof de;

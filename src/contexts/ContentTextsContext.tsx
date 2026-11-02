@@ -6,9 +6,10 @@ import de from '@/locales/de.json';
 import en from '@/locales/en.json';
 import it from '@/locales/it.json';
 import sl from '@/locales/sl.json';
+import nl from '@/locales/nl.json';
 
 // Translation mappings for each text key to the locale structure
-const translations = { de, en, it, sl };
+const translations = { de, en, it, sl, nl };
 
 // Map text_key to the path in locale files
 const textKeyToLocalePath: Record<string, string> = {

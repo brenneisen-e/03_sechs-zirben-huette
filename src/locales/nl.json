@@ -1,0 +1,594 @@
+{
+  "metadata": {
+    "title": "Sechszirbenhütte aan de Falkert | Premium berghuttenvakantie in de Nockberge",
+    "description": "Historische berghut met sauna in afgelegen ligging op 1.700 m. Wandelen, skiën en ontspannen in Karinthië. Gezinnen en honden welkom. Boek nu!"
+  },
+  "navigation": {
+    "home": "Home",
+    "ferienhaus": "Vakantiehuis",
+    "umgebung": "Omgeving",
+    "blog": "Blog",
+    "galerie": "Galerij",
+    "anfrage": "Aanvraag",
+    "buchung": "Boeken",
+    "bewertungen": "Beoordelingen",
+    "impressum": "Colofon",
+    "datenschutz": "Privacy",
+    "agb": "Algemene voorwaarden"
+  },
+  "hero": {
+    "welcome": "Hartelijk welkom in de Sechszirbenhütte",
+    "title": "in de Sechszirbenhütte",
+    "subtitle": "Uw berghuttenvakantie aan de Falkert",
+    "description": "Ontdek de Sechszirbenhütte, uw droomaccommodatie op 1.700 m hoogte in het hart van de Nockberge in Karinthië, Oostenrijk. Gelegen aan de schilderachtige zuidkant van de Alpen bij de Falkertsee, biedt onze hut het hele jaar door een vakantieparadijs voor gezinnen en natuurliefhebbers.",
+    "cta_book": "Nu direct boeken",
+    "cta_explore": "Vakantiehuis ontdekken"
+  },
+  "features": {
+    "altitude": {
+      "title": "1.700 m hoogte",
+      "description": "Alpenpanorama met uitzicht tot aan de Karawanken"
+    },
+    "secluded": {
+      "title": "Afgelegen ligging",
+      "description": "Absolute rust te midden van alpenden- en lariksbossen"
+    },
+    "sauna": {
+      "title": "Sauna & wellness",
+      "description": "Eigen sauna-aanbouw met rustruimte en regendouche"
+    },
+    "guests": {
+      "title": "Tot 5 personen",
+      "description": "Ideaal voor gezinnen en kleine groepen"
+    },
+    "dogs": {
+      "title": "Hondvriendelijk",
+      "description": "Uw viervoeters zijn bij ons van harte welkom"
+    },
+    "rating": {
+      "title": "5-sterrenbeoordelingen",
+      "description": "Onze gasten zijn dol op de Sechszirbenhütte"
+    }
+  },
+  "introText": {
+    "mainHeadline": "Authentiek vakantiehuis aan de Falkert – met sauna en rustruimte",
+    "section1Title": "Wandelen, skiën & ontspannen in de Nockberge, Karinthië",
+    "section1Text": "Ontdek de Sechszirbenhütte, uw droomaccommodatie op 1.700 m hoogte in het hart van de Nockberge in Karinthië, Oostenrijk. Gelegen aan de schilderachtige zuidkant van de Alpen bij de Falkertsee, biedt onze hut het hele jaar door een vakantieparadijs voor gezinnen en natuurliefhebbers",
+    "section2Title": "Heidi Alm Bergresort: dicht bij de hemel, ver van het dagelijks leven",
+    "section2Text": "Beleef een onvergetelijke vakantie in het Heidi Alm Bergresort, omringd door gezonde lucht, kristalhelder bergwater en een kleurrijke natuur. Geniet van de alpenflora zoals gentiaan, alpenroos en edelweiss en spot met een beetje geluk marmotten in hun natuurlijke omgeving.",
+    "section3Title": "Wintervakantie op de Heidi-Alm: gezinsvriendelijk skigebied & veel activiteiten",
+    "section3Text": "Het gezinsvriendelijke skigebied van de Heidi-Alm biedt drie liften, een toverkleed en gevarieerde pistes voor beginners tot gevorderden. Verheug u op ontspannen skiën zonder wachtrijen bij de liften, langlaufen, schaatsen op het meer of begeleide sneeuwschoenwandelingen. In de skischool van Peter leren kinderen en volwassenen geduldig en speels skiën en snowboarden. Skitochten en fakkeltochten maken het winterprogramma compleet. Beleef de Sechszirbenhütte: wandelen, skiën & ontspannen in de Nockberge van Karinthië. Boek nu uw onvergetelijke vakantie te midden van een adembenemend natuurdecor."
+  },
+  "heidiAlm": {
+    "title": "Heidi Alm Bergresort: dicht bij de hemel, ver van het dagelijks leven",
+    "description": "Beleef een onvergetelijke vakantie in het Heidi Alm Bergresort, omringd door gezonde berglucht, kristalhelder bergwater en een kleurrijke alpennatuur. Ontdek gentiaan, alpenroos en edelweiss – en met een beetje geluk marmotten in hun natuurlijke omgeving."
+  },
+  "winter": {
+    "title": "Wintervakantie op de Heidi-Alm",
+    "description": "Het gezinsvriendelijke skigebied biedt drie liften, een toverkleed en gevarieerde pistes voor beginners tot gevorderden.",
+    "activities": {
+      "skiing": "Ontspannen skiën zonder wachtrijen",
+      "crossCountry": "Langlaufen op goed onderhouden loipes",
+      "skating": "Schaatsen op de Falkertsee",
+      "snowshoe": "Begeleide sneeuwschoenwandelingen",
+      "skiSchool": "Skischool van Peter voor kinderen en volwassenen",
+      "tours": "Skitochten en fakkeltochten"
+    }
+  },
+  "ferienhaus": {
+    "title": "De Sechszirbenhütte – authentieke romantiek met modern comfort",
+    "intro": "Gun uzelf een onvergetelijke berghuttenvakantie in onze meer dan 250 jaar oude berghut in afgelegen ligging – direct aan Nationaal Park Nockberge en slechts 800 m van de schilderachtige Falkertsee.",
+    "details": {
+      "grundstueck": "1.200 m² alpenweide",
+      "wohnflaeche": "85 m²",
+      "hoehe": "1.700 m boven zeeniveau",
+      "personen": "tot 5 personen"
+    },
+    "rooms": {
+      "title": "Slaapkamers",
+      "bedroom1": "Slaapkamer 1: tweepersoonsbed",
+      "bedroom2": "Slaapkamer 2: tweepersoons- en eenpersoonsbed",
+      "living": "Woonkamer met pelletkachel"
+    },
+    "kitchen": {
+      "title": "Keuken",
+      "items": [
+        "Volledig uitgeruste keuken",
+        "Vaatwasser",
+        "Koelkast met vriesvak",
+        "Koffiezetapparaat",
+        "Waterkoker",
+        "Broodrooster"
+      ]
+    },
+    "bathroom": {
+      "title": "Badkamers",
+      "items": ["2 badkamers", "Apart toilet", "Vloerverwarming"]
+    },
+    "sauna": {
+      "title": "Sauna",
+      "items": [
+        "Eigen sauna in de aanbouw",
+        "Finse sauna",
+        "Rustruimte met ligbedden",
+        "Regendouche",
+        "Saunaterras"
+      ]
+    },
+    "living": {
+      "title": "Woongedeelte",
+      "items": [
+        "Woonkamer met houtpelletkachel",
+        "Gezellige zithoek",
+        "Eettafel",
+        "Satelliet-tv",
+        "Wifi"
+      ]
+    },
+    "outdoor": {
+      "title": "Buiten",
+      "items": [
+        "Groot rondlopend balkon",
+        "Eigen alpentuin (1.200 m²)",
+        "Tuinmeubelen en barbecue",
+        "Parkeerplaats bij de hut"
+      ]
+    }
+  },
+  "umgebung": {
+    "title": "Het hele jaar door een vakantiebestemming voor het hele gezin",
+    "subtitle": "Zuid-Oostenrijk: ski- & natuurvakantie onder de beste klimaatomstandigheden",
+    "intro": "Ontdek het idyllische skidorp Falkertsee in het zuiden van Oostenrijk, waar ski- en natuurliefhebbers perfecte klimaatomstandigheden vinden. Beleef van december tot april prachtige sneeuwcondities en in de zomer sappige groene weiden in het hoogstgelegen skidorp van Karinthië.",
+    "features": {
+      "central": {
+        "title": "Sechszirbenhütte: centrale uitvalsbasis voor alle activiteiten",
+        "description": "De Sechszirbenhütte is de ideale accommodatie voor uw vakantie aan de Falkertsee. Dankzij de centrale ligging bereikt u gemakkelijk alle skigebieden, wandelpaden, Nationaal Park Nockberge en de schilderachtige meren van Karinthië."
+      },
+      "nationalpark": {
+        "title": "Nationaal Park Nockberge & aangrenzende skigebieden",
+        "description": "Verken het indrukwekkende Nationaal Park Nockberge in de directe omgeving van de Sechszirbenhütte. Profiteer bovendien van de nabijheid van de uitstekende skigebieden Turracher Höhe en Bad Kleinkirchheim voor nog meer afwisseling."
+      },
+      "dreilaendereck": {
+        "title": "Drielandenpunt: Italië, Slovenië & Oostenrijk",
+        "description": "Dankzij de centrale ligging van de Sechszirbenhütte kunt u gemakkelijk het drielandenpunt van Italië, Slovenië en Oostenrijk verkennen en de culturele hoogtepunten van de regio ontdekken."
+      },
+      "activities": {
+        "title": "Activiteiten voor het hele gezin, het hele jaar door",
+        "description": "In elk seizoen zijn er rond de Sechszirbenhütte talloze activiteiten voor het hele gezin. Beleef onvergetelijke momenten tijdens het skiën, wandelen, golfen of een bezoek aan de schilderachtige meren van Karinthië."
+      },
+      "heidiAlm": {
+        "title": "Heidi-Alm, golfen, wandelen & meer",
+        "description": "Verken de gevarieerde bergwereld rond de Sechszirbenhütte of maak gebruik van de golfmogelijkheden (18 holes) in Bad Kleinkirchheim. De bekende Heidi-Alm lokt vooral jonge bezoekers de berg op."
+      },
+      "kaerntenCard": {
+        "title": "Besparen met de Kärnten Card",
+        "description": "Informeer naar de aantrekkelijke Kärnten Card, waarmee u tijdens uw verblijf flink kunt besparen. Vooral voor gezinnen geweldig – meestal is hij al vanaf de tweede gondelrit voordelig."
+      }
+    },
+    "dogTrips": {
+      "title": "De 5 mooiste uitstapjes met de hond in Karinthië",
+      "trips": [
+        {
+          "title": "Falkert en Falkertsee",
+          "description": "Een wandeling rond de Falkertsee hoort bij elk verblijf op de berg en is ook voor oudere honden goed te doen. Een tocht naar de top van de Falkert mag natuurlijk niet ontbreken. Afhankelijk van uw conditie duurt die 1 tot 3 uur. Er is een steile en een geleidelijke route omhoog en omlaag. De hond moet bergervaring hebben en fit zijn.",
+          "difficulty": "makkelijk tot gemiddeld",
+          "duration": "1-3 uur"
+        },
+        {
+          "title": "Wandeling Rodresnock/Moschelitzen/Murmeltiertal",
+          "description": "Een lange, deels sportieve en meestal behoorlijk winderige rondwandeling. Onze stille favoriet – vaak komt u geen mens tegen en hebt u de Nockberge voor uzelf.",
+          "difficulty": "zwaar",
+          "tip": "Hondenjas voor de top"
+        },
+        {
+          "title": "Drie-merenwandeling op de Turracher Höhe",
+          "description": "Een rustige wandeling langs drie meren. Geschikt voor elk niveau en goed bereikbaar met de auto. Ga zeker even langs bij de Karl-Hütte voor een Kaiserschmarrn.",
+          "difficulty": "makkelijk",
+          "tip": "Kaiserschmarrn in de Karl-Hütte"
+        },
+        {
+          "title": "Panoramaweg Hochrindl",
+          "description": "Hier beginnen verschillende wandelpaden, onder meer een mooie panoramawandeling met veel mogelijkheden voor vers water. Perfect voor honden.",
+          "difficulty": "makkelijk tot gemiddeld"
+        },
+        {
+          "title": "Strandbad Tschinder aan de Millstätter See",
+          "description": "Wie in de zomer verkoeling zoekt en de viervoeter wil meenemen, kan terecht in het Strandbad Tschinder aan de Millstätter See. Daar is een gedeelte voor honden, uiteraard aangelijnd!",
+          "difficulty": "makkelijk",
+          "tip": "Hondengedeelte met lijnplicht"
+        }
+      ]
+    },
+    "kidsTrips": {
+      "title": "De 7 mooiste uitstapjes met kinderen in Karinthië",
+      "featured": {
+        "title": "De Heidi-Alm aan de Falkert",
+        "description": "De Heidi-Alm aan de Falkert ligt om de hoek en biedt een sprookjesachtige wandeling door de wereld van Heidi met uitzicht op de omliggende bergen. Een grote glijbaan en een moderne speeltuin maken het uitstapje compleet. Op het meer van de Heidi-Alm kunt u bovendien vissen. Spreek hiervoor vooraf het team van de Heidi-Alm aan. Na de Heidi-Alm kunt u op krachten komen in de direct aangrenzende horeca van de Seehütte of de Bogi Alm. Volwassenen komen aan hun trekken met een wandeling rond de Falkertsee.",
+        "distance": "5 minuten lopen",
+        "age": "Alle leeftijden"
+      },
+      "trips": [
+        {
+          "title": "Turracher Höhe en Nocky-Flitzer",
+          "description": "De Turracher Höhe is een prachtig skigebied voor beginners en gevorderden. Het schilderachtige landschap tussen dennen en bergtoppen, de sneeuwzekerheid en 43 pistekilometers zijn perfect voor gezinnen. Buiten het winterseizoen is de alpenachtbaan Nockyflitzer een absoluut hoogtepunt. Vanaf 3 jaar gaat het in vaart de berg af, natuurlijk samen met een volwassene. De Nockyflitzer is vanaf juni geopend. Mooie speeltuinen en Nockys Almzeit (een ontdekkingswandeling voor kinderen met stempelkaart) laten de dag voorbijvliegen. Bij ons gaat geen vakantie in de Sechszirbenhütte voorbij zonder een bezoek aan de Turracher Höhe.",
+          "distance": "15 minuten met de auto",
+          "age": "Vanaf 3 jaar"
+        },
+        {
+          "title": "Ossiacher See en Familywald",
+          "description": "De Ossiacher See ligt op ongeveer 30 minuten rijden van de Sechszirbenhütte. Direct aan het meer ligt het avonturen- en klimbos Familywald. Hier komen kleine en grote kinderen volledig aan hun trekken. Het terrein is liefdevol ingericht, in elke boom valt iets te ontdekken: klankreizen, balanceerparcours, een fly-line en een klimpark – hier kunt u echt uren doorbrengen. Met het Tree-Net heeft het Familywald een absoluut hoogtepunt gecreëerd. Klein en groot lopen hier over netten door de boomtoppen, glijden van boom naar boom en kunnen daarbij niet vallen.",
+          "distance": "30 minuten met de auto",
+          "age": "Vanaf 4 jaar"
+        },
+        {
+          "title": "Panoramaweg St. Oswald (met de Brunnachbahn)",
+          "description": "Onze vaste wandeling als we aan de Falkert zijn. Met de Brunnachbahn in Bad Kleinkirchheim gaat u naar de panoramaweg St. Oswald. De wandeling is geschikt voor kinderen en niet te steil, zodat ook de kleintjes in een draagrugzak mee kunnen. Het uitzicht is prachtig en er zijn veel afslagen voor langere tochten, bijvoorbeeld als een van de ouders alleen verder wil. Halverwege ligt de Bockhütte, een perfecte rustplek als uit een prentenboek. Terug bij de biosfeerparkbaan Brunnachbahn wachten een actiefpark en een waterspeeltuin: hier kunnen vermoeide benen afkoelen, de kinderen vlotvaren en de volwassenen even uitrusten op de ligstoelen.",
+          "distance": "16 minuten met de auto",
+          "age": "Alle leeftijden"
+        },
+        {
+          "title": "Dierenpark Feld am See",
+          "description": "Het Alpen Tierpark Feld am See is een wildpark aan de voet van een berg. Hier zijn diverse inheemse dieren te zien en is er een kleine kinderboerderij. Twee speeltuinen zorgen voor afwisseling. De route is geschikt voor kinderwagens, er zijn maar een paar kleine hellingen.",
+          "distance": "25 minuten met de auto",
+          "age": "Alle leeftijden"
+        },
+        {
+          "title": "Bergbaan Gerlitzen-Alpe",
+          "description": "De Gerlitzen-Alpe is een bekend startpunt voor paragliders. Bij goede omstandigheden is er dus altijd veel te zien. Bij de stations van de bergbanen (boven en halverwege) wachten verschillende speeltuinen. Helemaal boven op de berg kunnen de kinderen schommelen met een geweldig panorama en dankzij de geringe hellingen ontspannen een korte wandeling maken met hun ouders.",
+          "distance": "40 minuten met de auto",
+          "age": "Alle leeftijden"
+        },
+        {
+          "title": "Panoramaweg Nockalm",
+          "description": "De Nockberge hebben een unieke schoonheid. Als warme groene reuzen liggen deze natuurwonderen in het landschap. Bijzonder indrukwekkend zijn ze te zien vanaf de panoramaweg Nockalm. Ouders plannen dit het best rond het middagslaapje en genieten zo van de rust en het uitzicht. Maar let op: de weg is bochtig, gevoelige magen kunnen zich laten gelden.",
+          "distance": "15 minuten met de auto",
+          "age": "Alle leeftijden"
+        }
+      ]
+    },
+    "directions": {
+      "title": "Wandelen – wintersport – ontspanning: zo vindt u ons",
+      "description": "Komend over de Tauernautobahn A10 neemt u de afrit Spittal/Millstätter See en rijdt u in oostelijke richting langs het meer tot Radenthein. Daar neemt u aan het einde van het dorp bij de rotonde de afslag richting Bad Kleinkirchheim. U rijdt door Bad Kleinkirchheim en slaat na ca. 2 km bij de volgende kruising linksaf richting Turrach en Falkertsee. Na ca. 500 m wijst een Heidi-figuur de bergweg omhoog (ca. 8 km) naar de Falkertsee. In het dorp vindt u borden met de huisnummers.",
+      "note": "Neem van november tot april sneeuwkettingen mee voor de rit met de auto."
+    }
+  },
+  "buchung": {
+    "title": "Direct boeken",
+    "subtitle": "Beschikbaarheid controleren en direct boeken – rechtstreeks bij ons tegen de beste prijs.",
+    "direct": {
+      "title": "Boek nu en verzeker u van de beste prijs – zonder provisie of extra kosten."
+    },
+    "search": {
+      "title": "Periode kiezen",
+      "arrival": "Aankomst",
+      "departure": "Vertrek",
+      "adults": "Volwassenen",
+      "children": "Kinderen",
+      "guests": "Personen",
+      "submit": "Prijs en beschikbaarheid controleren",
+      "short": "Controleren",
+      "nights": "nachten",
+      "night": "nacht",
+      "invalid": "De vertrekdatum moet na de aankomstdatum liggen.",
+      "maxGuests": "De hut biedt plaats aan maximaal 5 personen.",
+      "required": "Kies een aankomst- en vertrekdatum.",
+      "hint": "Opent het boekingsformulier met prijsoverzicht in een nieuw venster.",
+      "calendar": {
+        "placeholder": "Datum kiezen",
+        "dialog": "Kalender met vrije periodes",
+        "free": "Vrij",
+        "booked": "Bezet",
+        "selected": "Uw periode",
+        "changeover": "Wisseldag",
+        "chooseArrival": "Kies uw aankomstdag",
+        "chooseDeparture": "Kies uw vertrekdag",
+        "minStay": "Minimaal verblijf vanaf deze dag: {n} nachten",
+        "bookableUntil": "Te boeken tot {date}",
+        "loading": "Beschikbaarheid wordt geladen …",
+        "unavailable": "Beschikbaarheid is nu niet op te vragen – het boekingsformulier controleert die.",
+        "prev": "Vorige maand",
+        "next": "Volgende maand",
+        "jump": "Maand kiezen",
+        "reset": "Wissen",
+        "done": "Klaar",
+        "close": "Sluiten",
+        "dayFree": "vrij",
+        "dayBooked": "bezet",
+        "dayArrivalOnly": "alleen aankomst",
+        "dayDepartureOnly": "alleen vertrek",
+        "tooShort": "Minimaal verblijf {n} nachten – kies een latere vertrekdag."
+      }
+    },
+    "form": {
+      "title": "Boekingsaanvraag",
+      "salutation": "Aanhef",
+      "mr": "De heer",
+      "mrs": "Mevrouw",
+      "diverse": "Anders",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "email": "E-mail",
+      "phone": "Telefoon",
+      "street": "Straat & huisnummer",
+      "zip": "Postcode",
+      "city": "Plaats",
+      "country": "Land",
+      "arrival": "Aankomst",
+      "departure": "Vertrek",
+      "adults": "Volwassenen",
+      "children": "Kinderen",
+      "childrenAge": "Leeftijd van de kinderen",
+      "dogs": "Honden",
+      "laundryPackage": "Linnenpakket",
+      "laundryCount": "Aantal linnenpakketten",
+      "message": "Bericht",
+      "agb": "Ik accepteer de algemene voorwaarden",
+      "datenschutz": "Ik accepteer de privacyverklaring",
+      "submit": "Aanvraag versturen",
+      "success": "Hartelijk dank! Uw aanvraag is verstuurd.",
+      "error": "Er is een fout opgetreden. Probeert u het later opnieuw."
+    },
+    "secure": "Veilig boeken via Beds24"
+  },
+  "bewertungen": {
+    "title": "Beoordelingen van gasten",
+    "subtitle": "Wat onze gasten zeggen",
+    "intro": "Hebt u genoten van uw verblijf in de Sechszirbenhütte aan de Falkert? Help ons om nog beter te worden! We nodigen u van harte uit om uw ervaringen en mooie momenten in de Nockberge met andere gasten te delen.",
+    "cta": "Beoordeling schrijven op Google",
+    "thankYou": "We zijn blij met lof, kritiek en suggesties! Hartelijk dank voor uw steun!"
+  },
+  "reviews": {
+    "source": "Beoordeling op",
+    "basedOn": "gebaseerd op beoordelingen van gasten",
+    "alsoBookableOn": "Ook te boeken op",
+    "and": "en",
+    "commissionFree": "Hier direct en zonder provisie aanvragen!",
+    "swipe": "vegen",
+    "goToReview": "Naar de beoordeling",
+    "quotes": [
+      {
+        "quote": "Een droomplek om te ontspannen! De hut is prachtig ingericht en de sauna is een absoluut hoogtepunt. We komen terug!",
+        "author": "Familie M.",
+        "date": "januari 2025"
+      },
+      {
+        "quote": "Perfect voor gezinnen met hond. De afgelegen ligging is uniek en het uitzicht op de bergen onbetaalbaar.",
+        "author": "Thomas R.",
+        "date": "december 2024"
+      },
+      {
+        "quote": "Uitstekende voorzieningen, gezellige sfeer en zeer vriendelijke verhuurders. Een absolute aanrader!",
+        "author": "Sandra K.",
+        "date": "november 2024"
+      }
+    ]
+  },
+  "footer": {
+    "contact": "Contact",
+    "legal": "Juridisch",
+    "followUs": "Volg ons",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "address": "Adres",
+    "copyright": "© {year} Sechszirbenhütte. Alle rechten voorbehouden."
+  },
+  "common": {
+    "learnMore": "Meer informatie",
+    "bookNow": "Nu boeken",
+    "contactUs": "Contact",
+    "back": "Terug",
+    "close": "Sluiten",
+    "loading": "Laden...",
+    "persons": "Personen",
+    "nights": "Nachten",
+    "perNight": "per nacht"
+  },
+  "ui": {
+    "withDogs": "Met honden",
+    "withKids": "Met kinderen",
+    "note": "Let op",
+    "swipeHint": "Veeg om te bladeren",
+    "addImageInAdmin": "Afbeelding toevoegen in de beheeromgeving",
+    "onRequest": "op aanvraag",
+    "perStay": "per verblijf",
+    "perPerson": "per persoon",
+    "perAnimal": "per dier",
+    "checkAvailability": "Beschikbaarheid controleren",
+    "loadingBooking": "Boekingssysteem wordt geladen...",
+    "floorPlan": "Plattegrond",
+    "floorPlanDesc": "Op 85 m² woonoppervlak: woonkamer met pelletkachel, volledig uitgeruste keuken, twee slaapkamers voor maximaal 5 personen, twee badkamers en een apart toilet – plus een eigen sauna met rustruimte en het grote rondlopende balkon.",
+    "livingSpace": "85 m² woonoppervlak",
+    "floors": "2 verdiepingen",
+    "previousReview": "Vorige beoordeling",
+    "nextReview": "Volgende beoordeling",
+    "review": "Beoordeling",
+    "previousImage": "Vorige afbeelding",
+    "nextImage": "Volgende afbeelding",
+    "expandGallery": "Galerij uitklappen",
+    "collapseGallery": "Galerij inklappen",
+    "noImagesInCategory": "Geen afbeeldingen in deze categorie",
+    "imagesLoading": "Afbeeldingen worden geladen...",
+    "translatedFromGerman": "Vertaald uit het Duits"
+  },
+  "galerie": {
+    "categories": {
+      "all": "Alle",
+      "aussen": "Buiten",
+      "wohnen": "Woongedeelte",
+      "schlafen": "Slaapkamers",
+      "kueche": "Keuken",
+      "bad": "Badkamer & sauna",
+      "umgebung": "Omgeving",
+      "extras": "Extra's"
+    },
+    "innen": "Binnen",
+    "aussen": "Buiten",
+    "more": "Meer foto's",
+    "less": "Minder foto's",
+    "open": "Afbeelding vergroten",
+    "close": "Sluiten",
+    "prev": "Vorige afbeelding",
+    "next": "Volgende afbeelding",
+    "empty": "Geen afbeeldingen in deze categorie",
+    "loading": "Afbeeldingen worden geladen …",
+    "label": "Galerij"
+  },
+  "amenities": {
+    "living": {
+      "title": "Woonkamer",
+      "items": ["Houtpelletkachel", "Zithoek en eettafel", "Satelliet-tv", "Wifi"]
+    },
+    "kitchen": {
+      "title": "Keuken",
+      "items": [
+        "Volledig uitgerust",
+        "Vaatwasser",
+        "Fornuis en oven",
+        "Koffiezetapparaat en waterkoker"
+      ]
+    },
+    "rooms": {
+      "title": "Slaapkamers",
+      "items": [
+        "Slaapkamer 1: tweepersoonsbed",
+        "Slaapkamer 2: tweepersoons- en eenpersoonsbed",
+        "Plaats voor maximaal 5 personen"
+      ],
+      "hint": "Neem beddengoed en handdoeken mee of boek het linnenpakket (€ 25 per persoon)"
+    },
+    "sauna": {
+      "title": "Sauna & rustruimte",
+      "items": ["Eigen Finse sauna", "Rustruimte met ligbedden", "Regendouche", "Saunaterras"]
+    },
+    "bathroom": {
+      "title": "Badkamers",
+      "items": ["2 badkamers", "Apart toilet", "Vloerverwarming"]
+    },
+    "outdoor": {
+      "title": "Buiten",
+      "items": [
+        "Groot rondlopend balkon",
+        "Eigen alpentuin (1.200 m²)",
+        "Tuinmeubelen en barbecue",
+        "Parkeerplaats bij de hut"
+      ]
+    },
+    "equipment": {
+      "title": "Voorzieningen",
+      "items": ["Wifi", "Satelliet-tv", "Wasmachine en droger", "Honden welkom"]
+    },
+    "location": {
+      "title": "Ligging",
+      "items": [
+        "Afgelegen ligging op 1.700 m",
+        "Falkertsee 800 m",
+        "Heidi Alm 800 m met de auto",
+        "Bad Kleinkirchheim en Turracher Höhe ca. 20 min."
+      ]
+    }
+  },
+  "blog": {
+    "intro": "Ontdek onze reistips en verhalen uit de Nockberge",
+    "articleLabel": "Blogartikel",
+    "kaerntenTitle": "Uitstapjes in Karinthië",
+    "kaerntenSubtitle": "De mooiste uitstapjes met honden en kinderen",
+    "kaerntenIntro": "Ontdek de mooiste uitstapjes in Karinthië voor het hele gezin – perfect voor een vakantie met honden en kinderen.",
+    "bannerTitle": "Ontdek meer in onze blog",
+    "bannerDescription": "Uitgebreide reistips, wandelroutes en de mooiste bestemmingen in de Nockberge en Karinthië.",
+    "ctaButton": "Naar de blog"
+  },
+  "brand": {
+    "place": "Falkert / Karinthië",
+    "claim": "Boven zijn.",
+    "claimHand": "Bij jezelf zijn.",
+    "heroText": "Een meer dan 250 jaar oude berghut in afgelegen ligging op 1.700 m – direct aan Nationaal Park Nockberge, 800 m van de Falkertsee.",
+    "book": "Aanvragen",
+    "videoPause": "Video pauzeren",
+    "videoPlay": "Video afspelen",
+    "videoLabel": "Film over de Sechszirbenhütte aan de Falkert",
+    "factsTitle": "De hut in het kort",
+    "facts": [
+      {
+        "value": "1.700 m",
+        "label": "hoogte, afgelegen ligging"
+      },
+      {
+        "value": "tot 5",
+        "label": "personen, 2 slaapkamers"
+      },
+      {
+        "value": "85 m²",
+        "label": "woonoppervlak, plus 1.200 m² alpentuin"
+      },
+      {
+        "value": "Sauna",
+        "label": "eigen sauna met rustruimte"
+      },
+      {
+        "value": "Honden",
+        "label": "zijn welkom"
+      }
+    ],
+    "chaptersLabel": "De hut",
+    "chaptersTitle": "Buiten de bergen. Binnen helemaal bij jezelf.",
+    "chapters": [
+      {
+        "title": "Buiten",
+        "text": "De hut staat alleen tussen alpendennen en lariksen, direct aan Nationaal Park Nockberge, 800 m van de Falkertsee. In de zomer wandelt u in de Nockberge, in de winter skiet u in het skigebied van de Heidi Alm.",
+        "alt": "De Sechszirbenhütte in de zomer met balkon en houtstapel tussen sparren"
+      },
+      {
+        "title": "Binnen",
+        "text": "Oud hout, een woonkamer met pelletkachel en een volledig uitgeruste keuken. Twee slaapkamers – een met tweepersoonsbed, een met tweepersoons- en eenpersoonsbed – bieden plaats aan maximaal vijf personen, plus twee badkamers en een apart toilet.",
+        "alt": "Woonkamer met houten plafond, hoekbank en groene bank, een hond ligt op het tapijt"
+      },
+      {
+        "title": "Tijd voor uzelf",
+        "text": "De eigen sauna met rustruimte en saunaterras is helemaal voor u. 's Ochtends wacht de koffie op het grote rondlopende balkon.",
+        "alt": "Koffiekop in de sneeuw op de balkonleuning"
+      }
+    ],
+    "greetingLabel": "Uw gastheren",
+    "greetingHand": "Welkom bij ons.",
+    "greetingText": "We hebben de Sechszirbenhütte zo ingericht dat u boven aankomt en tijd voor elkaar hebt. Met vragen over de reis of de hut helpen we u graag.",
+    "reduceMotion": "Beweging beperken",
+    "motionReduced": "Beweging beperkt",
+    "motionSystem": "Beweging beperkt (systeeminstelling)"
+  },
+  "instagram": {
+    "label": "Instagram",
+    "title": "Nieuws van de hut",
+    "text": "Actuele foto's en reels uit de Sechszirbenhütte en de Nockberge.",
+    "follow": "Volg ons op Instagram",
+    "video": "Video",
+    "album": "Meerdere foto's",
+    "post": "Bericht op Instagram"
+  },
+  "lage": {
+    "label": "Route",
+    "title": "Zo vindt u ons",
+    "intro": "Afgelegen ligging op 1.700 m aan de Falkertsee – met de auto tot aan de hut. Bad Kleinkirchheim en de Turracher Höhe bereikt u in ongeveer 20 minuten.",
+    "maps": "Openen in Google Maps",
+    "address": "Adres",
+    "route": "Route",
+    "steps": [
+      "A10 Tauernautobahn, afrit Spittal/Millstätter See",
+      "Via Bad Kleinkirchheim richting Falkertsee",
+      "De Heidi-figuur volgen (ca. 8 km bergweg)"
+    ],
+    "snow": "November tot april: sneeuwkettingen aanbevolen",
+    "contact": "Contact",
+    "checkin": "Inchecken vanaf 15.00 uur, uitchecken tot 10.00 uur",
+    "tapMap": "Tik om de kaart te bewegen",
+    "lockMap": "Kaart vergrendelen",
+    "mapTitle": "Kaart naar de Sechszirbenhütte"
+  },
+  "blogTeaser": {
+    "label": "Blog",
+    "title": "Tips voor uw dagen aan de Falkert",
+    "intro": "Wandelen vanaf de deur van de hut, vakantie met de hond en uitstapjes in Karinthië – het belangrijkste uit onze blog.",
+    "all": "Alle berichten",
+    "read": "Verder lezen",
+    "list": "Geselecteerde berichten uit de blog"
+  }
+}

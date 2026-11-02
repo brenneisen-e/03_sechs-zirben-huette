@@ -23,8 +23,14 @@ import {
   Flame,
   Wifi,
   Key,
+  ClipboardCheck,
+  Bus,
+  ExternalLink,
+  CheckCircle2,
   type LucideIcon,
 } from 'lucide-react';
+
+import { CHECKIN_URL, PRECHECKIN_URL } from '@/lib/registration';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   info: Info,
@@ -296,6 +302,113 @@ function SingleCard({ card }: { card: Card }) {
   );
 }
 
+// ======== ANMELDUNG BEI DER GEMEINDE (Feratel/Deskline) ========
+// Seit 1.11.2026 müssen in Kärnten alle Gäste digital gemeldet werden. Vor der
+// Anreise füllt eine Person den Pre-Check-in für alle aus; ab dem Anreisetag
+// führt der Knopf zum Check-in vor Ort. „Erledigt“ klappt die Karte nur auf
+// diesem Gerät zusammen (localStorage).
+const REGISTRATION_DONE_KEY = 'szh_registration_done';
+
+function localIsoDate(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function RegistrationCard({ guest }: { guest: GuestInfo | null }) {
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    try {
+      setDone(localStorage.getItem(REGISTRATION_DONE_KEY) === '1');
+    } catch {
+      /* ohne Speicher bleibt die Karte offen */
+    }
+  }, []);
+
+  const toggleDone = (value: boolean) => {
+    setDone(value);
+    try {
+      if (value) localStorage.setItem(REGISTRATION_DONE_KEY, '1');
+      else localStorage.removeItem(REGISTRATION_DONE_KEY);
+    } catch {
+      /* ignorieren */
+    }
+  };
+
+  const today = localIsoDate(new Date());
+  const arrival = guest?.arrival_date?.slice(0, 10) || '';
+  const departure = guest?.departure_date?.slice(0, 10) || '';
+  if (departure && today > departure) return null;
+  const arrivalDay = !!arrival && today >= arrival;
+  const url = arrivalDay ? CHECKIN_URL : PRECHECKIN_URL;
+
+  if (done) {
+    return (
+      <div className="mt-4 bg-white rounded-2xl shadow-sm px-5 py-3 flex items-center gap-3 text-sm">
+        <CheckCircle2 size={18} className="text-[#2d5a27] flex-shrink-0" />
+        <span className="flex-1 text-gray-600">Anmeldung bei der Gemeinde erledigt</span>
+        <button
+          onClick={() => toggleDone(false)}
+          className="text-[#2d5a27] font-medium hover:underline"
+        >
+          Anzeigen
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 bg-white rounded-2xl shadow-md border-2 border-[#2d5a27] overflow-hidden">
+      <div className="bg-[#2d5a27] text-white px-5 py-3 flex items-center gap-2">
+        <ClipboardCheck size={18} />
+        <h3 className="font-bold text-sm uppercase tracking-wide">
+          Wichtig: Anmeldung {arrivalDay ? 'am Anreisetag' : 'vor der Anreise'}
+        </h3>
+      </div>
+      <div className="p-5 space-y-3 text-sm text-gray-700 leading-relaxed">
+        <p>
+          Seit dem 1. November 2026 müssen in Kärnten alle Gäste digital bei der Gemeinde angemeldet
+          werden.{' '}
+          {arrivalDay
+            ? 'Falls Sie den Pre-Check-in noch nicht ausgefüllt haben, erledigen Sie das bitte jetzt – es dauert nur ein paar Minuten.'
+            : 'Bitte tragen Sie Ihre Daten vor der Anreise über unseren Pre-Check-in ein – das dauert nur ein paar Minuten.'}
+        </p>
+        <p>
+          Eine Person trägt alle ein. Benötigt werden unter anderem Name, Adresse, Nationalität,
+          Geburtsdatum und E-Mail-Adresse sowie die Mitreisenden.
+        </p>
+        <div className="flex gap-3 bg-[#2d5a27]/5 rounded-xl p-3">
+          <Bus size={18} className="text-[#2d5a27] flex-shrink-0 mt-0.5" />
+          <p>
+            Im Tausch erhalten Sie eine digitale Gästekarte. Sie ist zugleich Ihr Fahrschein: Damit
+            fahren Sie während des ganzen Aufenthalts, inklusive An- und Abreisetag, mit fast allen
+            Bussen und Zügen in Kärnten kostenlos. Nach dem Pre-Check-in kommt die Karte per Link
+            aufs Handy. Kinder unter 6 Jahren fahren gratis, für Hunde und Fahrräder braucht es ein
+            eigenes Ticket.
+          </p>
+        </div>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full py-3 bg-[#2d5a27] text-white rounded-xl font-semibold hover:bg-[#244a20] transition flex items-center justify-center gap-2"
+        >
+          {arrivalDay ? 'Zum Check-in' : 'Zum Pre-Check-in'}
+          <ExternalLink size={16} />
+        </a>
+        <button
+          onClick={() => toggleDone(true)}
+          className="w-full text-center text-[#2d5a27] font-medium hover:underline"
+        >
+          Schon erledigt
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ======== DASHBOARD ========
 function Dashboard() {
   const [guest, setGuest] = useState<GuestInfo | null>(null);
@@ -382,6 +495,8 @@ function Dashboard() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
             >
+              <RegistrationCard guest={guest} />
+
               {/* Booking Info Card */}
               {guest?.arrival_date && (
                 <div className="mt-4 bg-white rounded-2xl shadow-sm p-5">

@@ -67,7 +67,7 @@ export function readBookingQuery(params: URLSearchParams): BookingQuery {
   return query;
 }
 
-const BEDS24_LANGS = new Set(['de', 'en', 'it', 'sl']);
+const BEDS24_LANGS = new Set(['de', 'en', 'it', 'sl', 'nl']);
 
 /** Direktlink ins Beds24-Buchungsformular; null ohne vollständigen Zeitraum */
 export function beds24FormUrl(query: BookingQuery, language: string): string | null {

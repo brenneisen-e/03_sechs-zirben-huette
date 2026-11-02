@@ -51,11 +51,20 @@ const FlagSL = () => (
   </svg>
 );
 
+const FlagNL = () => (
+  <svg viewBox="0 0 9 6" className="w-6 h-4 rounded-sm shadow-sm">
+    <rect width="9" height="2" y="0" fill="#AE1C28" />
+    <rect width="9" height="2" y="2" fill="#fff" />
+    <rect width="9" height="2" y="4" fill="#21468B" />
+  </svg>
+);
+
 const languages: { code: Language; flag: React.ReactNode; label: string }[] = [
   { code: 'de', flag: <FlagDE />, label: 'Deutsch' },
   { code: 'en', flag: <FlagEN />, label: 'English' },
   { code: 'it', flag: <FlagIT />, label: 'Italiano' },
   { code: 'sl', flag: <FlagSL />, label: 'Slovenščina' },
+  { code: 'nl', flag: <FlagNL />, label: 'Nederlands' },
 ];
 
 interface LanguageSwitcherProps {

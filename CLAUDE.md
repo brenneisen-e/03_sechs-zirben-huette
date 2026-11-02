@@ -65,6 +65,12 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - Server liest aus Beds24 nur (Kalender mit price1–16, Mindestaufenthalt, Verfügbarkeit, Buchungen des Zimmers über `resolveRoom`); API `src/app/api/admin/dashboard/route.ts`, Partner-Aktionen `dashboardData` (ohne Gastnamen) und `savePlatformConfig`
 - Plattformpreise: Kanal-Multiplikatoren gibt Beds24 nicht über die API heraus → `settings.platform_prices` je Hütte (Preisfeld, Faktor, ± €/Nacht, Rundung), einstellbar über „Plattformpreise“
 
+## Anmeldung bei der Gemeinde (Pre-Check-in)
+
+- Seit 1.11.2026 Pflicht in Kärnten: Gäste melden sich über Feratel/Deskline an. Links in `src/lib/registration.ts` (`PRECHECKIN_URL` vor der Anreise, `CHECKIN_URL` ab Anreisetag)
+- Gäste-App `src/app/gaeste/page.tsx`: Karte „Wichtig: Anmeldung …“ ganz oben (`RegistrationCard`), „Schon erledigt“ klappt sie auf dem Gerät zusammen
+- Nachrichten (`src/lib/guestTemplates.ts`): kurzer Absatz in den Willkommensvorlagen DE/EN, ausführliche Vorlage `buildPreCheckinText` (Text von Malte, du/ihr) im Beds24-Cockpit „Vorlage Pre-Check-in“
+
 ## Instagram
 
 - Kanal @sechszirbenhuette auf der Startseite (`src/components/sections/Instagram.tsx`), Daten von `/api/instagram` (öffentlich, zwischengespeichert in `settings.instagram_feed_cache`, stündlich neu, nach Fehlschlag frühestens nach 15 Min.)
@@ -77,6 +83,7 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - Grundlage: Corporate Design „Zirbenzweig und Fassadenbraun“ V3 + Claude-Code-Briefing (15.10.2026)
 - Tokens/Bausteine: `src/styles/brand.css`, Tailwind-Farben `zirbe`, `leinen`, `fassadenbraun` (nicht mehr verwendet), `fensterladenrot`, `on-red`, `rinde`, `moos`, `holz`
 - Komponenten: `src/components/brand/*` (BrandLogo, BookingCTA, HutChapters = M2, ZirbenMark/HostGreeting = M3, MotionToggle), Bewegungspräferenz `src/contexts/MotionContext.tsx`
+- Sprachen: de, en, it, sl, nl (Niederländisch seit 02.11.2026) — `src/locales/*.json`, Umschalter `src/components/layout/LanguageSwitcher.tsx`
 - Ansprache auf der Website durchgehend „Sie“ (Briefing 18.10.2026), auch in Alt-Texten, Buttons, Fehlermeldungen; Fakten (85 m², 2 Schlafzimmer, 2 Bäder + WC …) in den Sprachdateien `src/locales/*.json` (`brand`, `amenities`, `buchung`)
 - Regeln: Schrift nie rot; Rot nur als Hintergrund des Buchen-Buttons (Beschriftung „Anfragen“); kein Braun auf der Website (Fassadenband und Fensterläden entfernt, 30.10.2026); keine Herzen; Northwell nur kurz, Grün/Leinen, nie über Video/Fotos; Hero-Video bleibt
 - Platzhalter bis zum Designpaket: Gill Sans Nova (lokale Gill Sans/Systemschrift), Northwell (Autography), Fugenband-Geometrie, Logo/Zweig aus `public/images/logo.svg` abgeleitet

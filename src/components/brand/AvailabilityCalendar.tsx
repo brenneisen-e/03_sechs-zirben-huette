@@ -37,6 +37,7 @@ const LOCALES: Record<string, string> = {
   en: 'en-GB',
   it: 'it-IT',
   sl: 'sl-SI',
+  nl: 'nl-NL',
 };
 
 type DayState = 'past' | 'free' | 'booked' | 'arrival-only' | 'departure-only';
