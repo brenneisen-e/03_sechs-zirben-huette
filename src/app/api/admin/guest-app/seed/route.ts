@@ -39,6 +39,11 @@ const SEED_DATA = [
 <p>Bitte nehmen Sie vorab Kontakt zu unserer Verwalterin <strong>Manuela Knallnig</strong> auf, um eine persönliche Einweisung in die Hütte zu verabreden.</p>`,
       },
       {
+        title: 'Kaution',
+        content: `<p>Bitte bringen Sie <strong>200 € Kaution</strong> bei Anreise in bar mit. Unsere Verwaltung wird die Kaution während Ihres Aufenthaltes sicher verwahren und bei schadenfreier Abreise selbstverständlich direkt wieder an Sie auszahlen.</p>
+<p>Leider mussten wir in der Vergangenheit die Erfahrung machen, dass mit unserer Sechszirbenhütte nicht so liebevoll umgegangen wurde, wie es selbstverständlich sein sollte. Daher mussten wir die Kaution einführen. Wir hoffen auf Ihr Verständnis.</p>`,
+      },
+      {
         title: 'Kontakt',
         content: `<p>Für Fragen erreichen Sie uns unter:</p>
 <p>📞 <strong>+49 176 60030373</strong><br/>per Anruf, WhatsApp, Telegram oder Signal</p>

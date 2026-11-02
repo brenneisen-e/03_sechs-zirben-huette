@@ -6,6 +6,10 @@ import { BEDS24_BOOKING_COLUMNS } from '@/lib/server/beds24Columns';
 import { ensureCoreTables } from '@/lib/server/coreTables';
 import { ensureImageVariants } from '@/lib/server/imageVariants';
 
+// Kachel „Kaution“ der Gäste-App (Text von Eike, 03.11.2026)
+const KAUTION_CARD_HTML = `<p>Bitte bringen Sie <strong>200 € Kaution</strong> bei Anreise in bar mit. Unsere Verwaltung wird die Kaution während Ihres Aufenthaltes sicher verwahren und bei schadenfreier Abreise selbstverständlich direkt wieder an Sie auszahlen.</p>
+<p>Leider mussten wir in der Vergangenheit die Erfahrung machen, dass mit unserer Sechszirbenhütte nicht so liebevoll umgegangen wurde, wie es selbstverständlich sein sollte. Daher mussten wir die Kaution einführen. Wir hoffen auf Ihr Verständnis.</p>`;
+
 interface D1PreparedStatement {
   bind(...values: unknown[]): D1PreparedStatement;
   run(): Promise<unknown>;
@@ -394,6 +398,56 @@ export async function POST() {
     } catch (e) {
       const msg = e instanceof Error ? e.message : '';
       errors.push(`blog_posts:sie_ansprache: ${msg}`);
+    }
+
+    // Gäste-App: Kachel „Kaution“ im Punkt Anreise (Wunsch 03.11.2026).
+    // Einmalig — gelöscht oder geändert im Admin Center bleibt sie so.
+    try {
+      const done = await db
+        .prepare("SELECT value FROM settings WHERE key = 'guest_app_kaution_card'")
+        .first<{ value: string }>()
+        .catch(() => null);
+      if (!done) {
+        const category =
+          (await db
+            .prepare(
+              `SELECT id FROM guest_app_categories
+                ORDER BY CASE
+                  WHEN title LIKE '%Anreise%' THEN 0
+                  WHEN title LIKE 'Check-In%' THEN 1
+                  WHEN title LIKE 'Anfahrt%' THEN 2
+                  ELSE 3 END, display_order ASC, id ASC
+                LIMIT 1`,
+            )
+            .first<{ id: number }>()) ?? null;
+        const existing = await db
+          .prepare("SELECT id FROM guest_app_cards WHERE title = 'Kaution' LIMIT 1")
+          .first<{ id: number }>();
+        if (category && !existing) {
+          const first = await db
+            .prepare('SELECT MIN(display_order) AS m FROM guest_app_cards WHERE category_id = ?')
+            .bind(category.id)
+            .first<{ m: number | null }>();
+          await db
+            .prepare(
+              `INSERT INTO guest_app_cards (category_id, title, content, display_order, is_active)
+               VALUES (?, 'Kaution', ?, ?, 1)`,
+            )
+            .bind(category.id, KAUTION_CARD_HTML, (first?.m ?? 0) - 1)
+            .run();
+          migrated.push('guest_app_cards:kaution');
+        }
+        if (category) {
+          await db
+            .prepare(
+              "INSERT OR REPLACE INTO settings (key, value) VALUES ('guest_app_kaution_card', ?)",
+            )
+            .bind(new Date().toISOString())
+            .run();
+        }
+      }
+    } catch (e) {
+      errors.push(`guest_app_cards:kaution: ${e instanceof Error ? e.message : String(e)}`);
     }
 
     // Bildgrößen in Cloudflare Images (thumb/medium/large/hero) einmalig anlegen
