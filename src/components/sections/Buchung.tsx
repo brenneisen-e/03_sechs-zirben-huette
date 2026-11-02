@@ -8,7 +8,9 @@ import { BookingSearch } from '@/components/brand/BookingSearch';
 // Buchungsbereich: grüner Satz und die Suche (Anreise, Abreise, Personen).
 // „Anfragen“ öffnet direkt das Beds24-Buchungsformular mit Preisaufstellung
 // in einem neuen Fenster (lib/booking.ts) — kein eingebetteter Beds24-Kalender
-// mehr. Preise, Mindestaufenthalt und Zusatzkosten zeigt nur Beds24.
+// mehr. Der Belegungskalender steht hier fest im Kästchen (aktueller und
+// Folgemonat, blättern bis „Buchbar bis“). Preise, Mindestaufenthalt und
+// Zusatzkosten zeigt nur Beds24.
 
 export function Buchung() {
   const { t } = useLanguage();
@@ -21,7 +23,7 @@ export function Buchung() {
         <h2 id="buchung-title" data-text-key="buchung_title" className="sr-only">
           {getText('buchung_title')}
         </h2>
-        <div className="on-zirbe flex flex-col justify-between gap-4 rounded-[4px] bg-zirbe p-5 text-leinen md:p-6 lg:col-span-5">
+        <div className="on-zirbe flex flex-col justify-between gap-4 rounded-[4px] bg-zirbe p-5 text-leinen md:p-6 lg:col-span-5 lg:self-start">
           <p className="text-[1.25rem] leading-snug md:text-[1.5rem]">{b.direct.title}</p>
           <p className="flex items-center gap-2 text-[0.9375rem] text-leinen/85">
             <ShieldCheck size={18} aria-hidden />

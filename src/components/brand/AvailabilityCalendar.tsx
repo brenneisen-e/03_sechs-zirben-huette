@@ -16,12 +16,16 @@ import { type Availability, isNightOpen, latestDeparture, minStayFor } from '@/l
 //
 // Liegt per Portal über der Seite (der Hero schneidet mit overflow-hidden ab):
 // ab 640 px als Aufklapper am Suchfeld, schmaler als Blatt von unten.
+// `inline` (Buchungsbereich): steht fest im Kästchen, immer sichtbar, ohne
+// Schließen/Fertig — angefragt wird über den Knopf der Suche darunter.
 
 export type CalendarTarget = 'arrival' | 'departure';
 
 interface Props {
   open: boolean;
   anchor: HTMLElement | null;
+  /** fest im Buchungsbereich statt als Aufklapper */
+  inline?: boolean;
   availability: Availability;
   arrival?: string;
   departure?: string;
@@ -74,6 +78,7 @@ function fill(template: string, values: Record<string, string | number>): string
 export function AvailabilityCalendar({
   open,
   anchor,
+  inline = false,
   availability: a,
   arrival,
   departure,
@@ -119,9 +124,10 @@ export function AvailabilityCalendar({
 
   useEffect(() => setMounted(true), []);
 
-  // Beim Öffnen: Monat der Anreise (bzw. heute) zeigen
+  // Beim Öffnen: Monat der Anreise (bzw. heute) zeigen — fest eingebaut nur
+  // beim ersten Zeichnen, damit das Blättern beim Wählen stehen bleibt
   useEffect(() => {
-    if (!open) return;
+    if (!open || inline) return;
     const start = target === 'departure' && departure ? departure : (arrival ?? a.from);
     setView(clampMonth(monthKey(start)));
     setFocusDay(start < a.from ? a.from : start);
@@ -159,7 +165,7 @@ export function AvailabilityCalendar({
   }, [anchor]);
 
   useLayoutEffect(() => {
-    if (!open) return;
+    if (!open || inline) return;
     place();
     window.addEventListener('resize', place);
     window.addEventListener('scroll', place, true);
@@ -167,11 +173,11 @@ export function AvailabilityCalendar({
       window.removeEventListener('resize', place);
       window.removeEventListener('scroll', place, true);
     };
-  }, [open, place]);
+  }, [open, inline, place]);
 
   // Schließen: Escape, Klick daneben
   useEffect(() => {
-    if (!open) return;
+    if (!open || inline) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -186,16 +192,16 @@ export function AvailabilityCalendar({
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('pointerdown', onDown);
     };
-  }, [open, anchor, onClose]);
+  }, [open, inline, anchor, onClose]);
 
   // Fokus beim Öffnen in den Kalender
   useEffect(() => {
-    if (!open) return;
+    if (!open || inline) return;
     const id = window.setTimeout(() => {
       panelRef.current?.querySelector<HTMLButtonElement>('button[data-day][tabindex="0"]')?.focus();
     }, 30);
     return () => window.clearTimeout(id);
-  }, [open]);
+  }, [open, inline]);
 
   const pickingDeparture = target === 'departure' && !!arrival;
   const maxDeparture = useMemo(
@@ -321,7 +327,194 @@ export function AvailabilityCalendar({
     status = minNights > 1 ? fill(c.minStay, { n: minNights }) : c.chooseDeparture;
   else status = c.chooseArrival;
 
-  if (!open || !mounted) return null;
+  if (!open || (!inline && !mounted)) return null;
+
+  const body = (
+    <>
+      {/* Kopf: blättern und Monat wählen */}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          className="brand-cal-nav"
+          onClick={() => setView((v) => clampMonth(addMonths(v, -1)))}
+          disabled={monthDiff(firstMonth, view) <= 0}
+          aria-label={c.prev}
+        >
+          <ChevronLeft size={20} aria-hidden />
+        </button>
+        <label className="sr-only" htmlFor="brand-cal-jump">
+          {c.jump}
+        </label>
+        <select
+          id="brand-cal-jump"
+          value={view}
+          onChange={(e) => setView(clampMonth(e.target.value))}
+          className="min-h-[44px] flex-1 rounded-[4px] border border-zirbe/30 bg-white px-3 text-[1rem] text-rinde [color-scheme:light] sm:flex-none"
+        >
+          {monthOptions.map((key) => (
+            <option key={key} value={key}>
+              {monthLabel(key)}
+            </option>
+          ))}
+        </select>
+        <button
+          type="button"
+          className="brand-cal-nav"
+          onClick={() => setView((v) => clampMonth(addMonths(v, 1)))}
+          disabled={monthDiff(view, lastStart) <= 0}
+          aria-label={c.next}
+        >
+          <ChevronRight size={20} aria-hidden />
+        </button>
+        {!inline && (
+          <button
+            type="button"
+            className="brand-cal-nav ml-auto"
+            onClick={onClose}
+            aria-label={c.close}
+          >
+            <X size={20} aria-hidden />
+          </button>
+        )}
+      </div>
+
+      {/* zwei Monate */}
+      <div className="mt-4 grid gap-6 sm:grid-cols-2">
+        {months.map((key) => {
+          if (monthDiff(key, lastMonth) < 0) return null;
+          return (
+            <div key={key}>
+              <p className="mb-2 text-center text-[1rem] font-medium text-zirbe">
+                {monthLabel(key)}
+              </p>
+              <div className="grid grid-cols-7 gap-[3px]" role="grid" aria-label={monthLabel(key)}>
+                {weekdays.map((w) => (
+                  <span
+                    key={w}
+                    role="columnheader"
+                    className="pb-1 text-center text-[0.75rem] uppercase tracking-wide text-rinde/60"
+                  >
+                    {w}
+                  </span>
+                ))}
+                {monthGrid(key).map((day, i) => {
+                  if (!day) return <span key={`gap-${i}`} aria-hidden="true" />;
+                  const state = dayState(day);
+                  const isStart = day === arrival;
+                  const isEnd = day === rangeEnd;
+                  const can = state !== 'past' && selectable(day);
+                  const label = [longDate(day), stateLabel[state]].filter(Boolean).join(', ');
+                  return (
+                    <button
+                      key={day}
+                      type="button"
+                      data-day={day}
+                      data-state={state}
+                      data-range={isStart || isEnd ? 'edge' : inRange(day) ? 'inside' : undefined}
+                      tabIndex={day === focusDay ? 0 : -1}
+                      aria-disabled={!can}
+                      aria-pressed={isStart || isEnd}
+                      aria-label={label}
+                      className="brand-cal-day"
+                      onClick={() => can && choose(day)}
+                      onMouseEnter={() => setHover(day)}
+                      onMouseLeave={() => setHover(null)}
+                      onFocus={() => setFocusDay(day)}
+                      onKeyDown={(e) => onDayKey(e, day)}
+                    >
+                      {Number(day.slice(8))}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Legende */}
+      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[0.875rem] text-rinde/80">
+        <li className="flex items-center gap-2">
+          <span className="brand-cal-swatch" data-state="free" aria-hidden="true" />
+          {c.free}
+        </li>
+        <li className="flex items-center gap-2">
+          <span className="brand-cal-swatch" data-state="booked" aria-hidden="true" />
+          {c.booked}
+        </li>
+        <li className="flex items-center gap-2">
+          <span className="brand-cal-swatch" data-state="arrival-only" aria-hidden="true" />
+          {c.changeover}
+        </li>
+        <li className="flex items-center gap-2">
+          <span className="brand-cal-swatch" data-range="edge" aria-hidden="true" />
+          {c.selected}
+        </li>
+      </ul>
+      {a.status === 'error' && (
+        <p className="mt-2 text-[0.875rem] text-rinde/75">{c.unavailable}</p>
+      )}
+      {a.status === 'ready' && (
+        <p className="mt-2 text-[0.875rem] text-rinde/65">
+          {fill(c.bookableUntil, {
+            date: new Intl.DateTimeFormat(locale, {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              timeZone: 'UTC',
+            }).format(new Date(`${a.to}T12:00:00Z`)),
+          })}
+        </p>
+      )}
+
+      {/* Fuß: Status, zurücksetzen, anfragen */}
+      <div
+        className={
+          inline
+            ? 'mt-4 flex flex-wrap items-center gap-3 border-t border-zirbe/15 pt-4'
+            : 'sticky bottom-0 -mx-4 -mb-4 mt-4 flex flex-wrap items-center gap-3 border-t border-zirbe/15 bg-leinen px-4 pb-4 pt-4 sm:-mx-5 sm:-mb-5 sm:px-5 sm:pb-5'
+        }
+      >
+        <p className="min-w-0 flex-1 text-[0.9375rem] text-rinde" aria-live="polite">
+          {status}
+        </p>
+        {(arrival || departure) && (
+          <button
+            type="button"
+            className="min-h-[44px] px-2 text-[0.9375rem] text-zirbe underline underline-offset-4 hover:no-underline"
+            onClick={() => {
+              setMessage('');
+              onChange(undefined, undefined);
+              onTargetChange('arrival');
+            }}
+          >
+            {c.reset}
+          </button>
+        )}
+        {inline ? null : arrival && departure ? (
+          <button type="button" className="brand-cta brand-cta--compact" onClick={onBook}>
+            {t.brand.book}
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="min-h-[44px] rounded-[4px] bg-zirbe px-4 text-[0.9375rem] text-leinen hover:bg-[#2f4a41]"
+            onClick={onClose}
+          >
+            {c.done}
+          </button>
+        )}
+      </div>
+    </>
+  );
+
+  if (inline) {
+    return (
+      <div ref={panelRef} aria-label={c.dialog} className="brand-cal text-rinde">
+        {body}
+      </div>
+    );
+  }
 
   const panel = (
     <>
@@ -344,180 +537,7 @@ export function AvailabilityCalendar({
           maxHeight: pos.maxHeight,
         }}
       >
-        <div className="p-4 sm:p-5">
-          {/* Kopf: blättern und Monat wählen */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="brand-cal-nav"
-              onClick={() => setView((v) => clampMonth(addMonths(v, -1)))}
-              disabled={monthDiff(firstMonth, view) <= 0}
-              aria-label={c.prev}
-            >
-              <ChevronLeft size={20} aria-hidden />
-            </button>
-            <label className="sr-only" htmlFor="brand-cal-jump">
-              {c.jump}
-            </label>
-            <select
-              id="brand-cal-jump"
-              value={view}
-              onChange={(e) => setView(clampMonth(e.target.value))}
-              className="min-h-[44px] flex-1 rounded-[4px] border border-zirbe/30 bg-white px-3 text-[1rem] text-rinde [color-scheme:light] sm:flex-none"
-            >
-              {monthOptions.map((key) => (
-                <option key={key} value={key}>
-                  {monthLabel(key)}
-                </option>
-              ))}
-            </select>
-            <button
-              type="button"
-              className="brand-cal-nav"
-              onClick={() => setView((v) => clampMonth(addMonths(v, 1)))}
-              disabled={monthDiff(view, lastStart) <= 0}
-              aria-label={c.next}
-            >
-              <ChevronRight size={20} aria-hidden />
-            </button>
-            <button
-              type="button"
-              className="brand-cal-nav ml-auto"
-              onClick={onClose}
-              aria-label={c.close}
-            >
-              <X size={20} aria-hidden />
-            </button>
-          </div>
-
-          {/* zwei Monate */}
-          <div className="mt-4 grid gap-6 sm:grid-cols-2">
-            {months.map((key) => {
-              if (monthDiff(key, lastMonth) < 0) return null;
-              return (
-                <div key={key}>
-                  <p className="mb-2 text-center text-[1rem] font-medium text-zirbe">
-                    {monthLabel(key)}
-                  </p>
-                  <div
-                    className="grid grid-cols-7 gap-[3px]"
-                    role="grid"
-                    aria-label={monthLabel(key)}
-                  >
-                    {weekdays.map((w) => (
-                      <span
-                        key={w}
-                        role="columnheader"
-                        className="pb-1 text-center text-[0.75rem] uppercase tracking-wide text-rinde/60"
-                      >
-                        {w}
-                      </span>
-                    ))}
-                    {monthGrid(key).map((day, i) => {
-                      if (!day) return <span key={`gap-${i}`} aria-hidden="true" />;
-                      const state = dayState(day);
-                      const isStart = day === arrival;
-                      const isEnd = day === rangeEnd;
-                      const can = state !== 'past' && selectable(day);
-                      const label = [longDate(day), stateLabel[state]].filter(Boolean).join(', ');
-                      return (
-                        <button
-                          key={day}
-                          type="button"
-                          data-day={day}
-                          data-state={state}
-                          data-range={
-                            isStart || isEnd ? 'edge' : inRange(day) ? 'inside' : undefined
-                          }
-                          tabIndex={day === focusDay ? 0 : -1}
-                          aria-disabled={!can}
-                          aria-pressed={isStart || isEnd}
-                          aria-label={label}
-                          className="brand-cal-day"
-                          onClick={() => can && choose(day)}
-                          onMouseEnter={() => setHover(day)}
-                          onMouseLeave={() => setHover(null)}
-                          onFocus={() => setFocusDay(day)}
-                          onKeyDown={(e) => onDayKey(e, day)}
-                        >
-                          {Number(day.slice(8))}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Legende */}
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[0.875rem] text-rinde/80">
-            <li className="flex items-center gap-2">
-              <span className="brand-cal-swatch" data-state="free" aria-hidden="true" />
-              {c.free}
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="brand-cal-swatch" data-state="booked" aria-hidden="true" />
-              {c.booked}
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="brand-cal-swatch" data-state="arrival-only" aria-hidden="true" />
-              {c.changeover}
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="brand-cal-swatch" data-range="edge" aria-hidden="true" />
-              {c.selected}
-            </li>
-          </ul>
-          {a.status === 'error' && (
-            <p className="mt-2 text-[0.875rem] text-rinde/75">{c.unavailable}</p>
-          )}
-          {a.status === 'ready' && (
-            <p className="mt-2 text-[0.875rem] text-rinde/65">
-              {fill(c.bookableUntil, {
-                date: new Intl.DateTimeFormat(locale, {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-                  timeZone: 'UTC',
-                }).format(new Date(`${a.to}T12:00:00Z`)),
-              })}
-            </p>
-          )}
-
-          {/* Fuß: Status, zurücksetzen, anfragen */}
-          <div className="sticky bottom-0 -mx-4 -mb-4 mt-4 flex flex-wrap items-center gap-3 border-t border-zirbe/15 bg-leinen px-4 pb-4 pt-4 sm:-mx-5 sm:-mb-5 sm:px-5 sm:pb-5">
-            <p className="min-w-0 flex-1 text-[0.9375rem] text-rinde" aria-live="polite">
-              {status}
-            </p>
-            {(arrival || departure) && (
-              <button
-                type="button"
-                className="min-h-[44px] px-2 text-[0.9375rem] text-zirbe underline underline-offset-4 hover:no-underline"
-                onClick={() => {
-                  setMessage('');
-                  onChange(undefined, undefined);
-                  onTargetChange('arrival');
-                }}
-              >
-                {c.reset}
-              </button>
-            )}
-            {arrival && departure ? (
-              <button type="button" className="brand-cta brand-cta--compact" onClick={onBook}>
-                {t.brand.book}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="min-h-[44px] rounded-[4px] bg-zirbe px-4 text-[0.9375rem] text-leinen hover:bg-[#2f4a41]"
-                onClick={onClose}
-              >
-                {c.done}
-              </button>
-            )}
-          </div>
-        </div>
+        <div className="p-4 sm:p-5">{body}</div>
       </div>
     </>
   );

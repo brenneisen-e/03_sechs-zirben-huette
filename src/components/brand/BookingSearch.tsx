@@ -20,7 +20,9 @@ import {
 // Beds24 über /api/availability). „Anfragen“ (roter Knopf) öffnet
 // direkt das Beds24-Buchungsformular mit Preisaufstellung in einem neuen
 // Fenster (lib/booking.ts). Hero auf Grün (schmal untereinander, „bar“ als
-// Leiste in einer Zeile im Aufmacher), Buchungsbereich auf Leinen.
+// Leiste in einer Zeile im Aufmacher), Buchungsbereich auf Leinen. Im
+// Buchungsbereich steht der Kalender fest im Kästchen (inline), sonst öffnet
+// er sich am Datumsfeld.
 
 interface Props {
   variant: 'hero' | 'bar' | 'section';
@@ -51,8 +53,14 @@ export function BookingSearch({ variant, className = '' }: Props) {
   // Leiste und Hero stehen auf Grün
   const onHero = variant !== 'section';
   const bar = variant === 'bar';
+  const inline = variant === 'section';
 
   const openCalendar = (which: CalendarTarget, trigger: HTMLButtonElement) => {
+    if (inline) {
+      // Kalender steht schon da: nur festlegen, was der nächste Klick wählt
+      setTarget(which === 'departure' && !query.arrival ? 'arrival' : which);
+      return;
+    }
     triggerRef.current = trigger;
     // Kalender am ganzen Feldraster ausrichten
     setAnchor(datesRef.current?.parentElement ?? trigger);
@@ -147,7 +155,7 @@ export function BookingSearch({ variant, className = '' }: Props) {
         <div ref={datesRef} className="contents">
           {(['arrival', 'departure'] as const).map((which) => {
             const value = which === 'arrival' ? query.arrival : query.departure;
-            const active = calendarOpen && target === which;
+            const active = (inline || calendarOpen) && target === which;
             return (
               <div key={which} className={`text-[0.9375rem] ${label}`}>
                 <span id={`${id}-${which}-label`}>
@@ -155,8 +163,8 @@ export function BookingSearch({ variant, className = '' }: Props) {
                 </span>
                 <button
                   type="button"
-                  aria-haspopup="dialog"
-                  aria-expanded={calendarOpen}
+                  aria-haspopup={inline ? undefined : 'dialog'}
+                  aria-expanded={inline ? undefined : calendarOpen}
                   aria-labelledby={`${id}-${which}-label ${id}-${which}-value`}
                   onClick={(e) => openCalendar(which, e.currentTarget)}
                   className={`${field} flex items-center gap-2 text-left ${
@@ -219,6 +227,24 @@ export function BookingSearch({ variant, className = '' }: Props) {
         )}
       </div>
 
+      {inline && (
+        <div className="mt-4 rounded-[4px] border border-zirbe/15 bg-leinen p-4 sm:p-5">
+          <AvailabilityCalendar
+            open
+            inline
+            anchor={null}
+            availability={availability}
+            arrival={query.arrival}
+            departure={query.departure}
+            target={target}
+            onTargetChange={setTarget}
+            onChange={changeDates}
+            onClose={() => undefined}
+            onBook={book}
+          />
+        </div>
+      )}
+
       {bar ? (
         // Leiste: Nächte bzw. Hinweis und Erklärung in einer Zeile darunter
         <div className="mt-2 flex items-baseline justify-between gap-6">
@@ -227,25 +253,37 @@ export function BookingSearch({ variant, className = '' }: Props) {
         </div>
       ) : (
         <>
-          {status}
-          <button type="submit" className={`brand-cta mt-2 w-full ${onHero ? 'sm:w-auto' : ''}`}>
+          {/* fest eingebauter Kalender zeigt Nächte und Hinweise selbst */}
+          {inline
+            ? error && (
+                <p className="mt-2 text-[0.9375rem] text-rinde" aria-live="polite">
+                  {error}
+                </p>
+              )
+            : status}
+          <button
+            type="submit"
+            className={`brand-cta ${inline ? 'mt-4' : 'mt-2'} w-full ${onHero ? 'sm:w-auto' : ''}`}
+          >
             {t.brand.book}
           </button>
           {hint}
         </>
       )}
-      <AvailabilityCalendar
-        open={calendarOpen}
-        anchor={anchor}
-        availability={availability}
-        arrival={query.arrival}
-        departure={query.departure}
-        target={target}
-        onTargetChange={setTarget}
-        onChange={changeDates}
-        onClose={closeCalendar}
-        onBook={book}
-      />
+      {!inline && (
+        <AvailabilityCalendar
+          open={calendarOpen}
+          anchor={anchor}
+          availability={availability}
+          arrival={query.arrival}
+          departure={query.departure}
+          target={target}
+          onTargetChange={setTarget}
+          onChange={changeDates}
+          onClose={closeCalendar}
+          onBook={book}
+        />
+      )}
     </form>
   );
 }
