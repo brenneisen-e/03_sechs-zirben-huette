@@ -1,7 +1,11 @@
 // Öffentliche Verfügbarkeit für den Kalender der Website (BookingSearch).
 //
 // Liest aus Beds24 nur, welche Nächte gesperrt/belegt sind und den
-// Mindestaufenthalt — keine Preise, keine Gastdaten. Zeitraum: heute bis zum
+// Mindestaufenthalt — keine Preise, keine Gastdaten. Dazu kommen als belegt:
+// Buchungen aus den iCal-Kalendern der Portale (icalSources.ts — dort stehen
+// Portal-Buchungen, die bei Beds24 noch frei sein können) und aus der eigenen
+// Gästedatenbank (nicht stornierte Buchungen), damit der Kalender dieselbe
+// Belegung zeigt wie das Admin Center. Zeitraum: heute bis zum
 // „Buchbar bis“-Datum (bookingHorizon.ts), sonst bis zum Ende des
 // Beds24-Fensters (rund zwei Jahre). Zwischengespeichert in
 // settings.public_availability_cache; der Beds24-Webhook leert den Speicher
@@ -9,6 +13,7 @@
 
 import { addDaysIso, fetchBeds24Availability, getSetting, setSetting } from '@/lib/server/beds24';
 import { todayVienna } from '@/lib/server/bookingCutoff';
+import { fetchAllIcalPeriods } from '@/lib/server/icalSources';
 
 const KEY_CACHE = 'public_availability_cache';
 const KEY_LAST_ATTEMPT = 'public_availability_last_attempt';
@@ -66,19 +71,64 @@ function parseCache(raw: string | null): PublicAvailability | null {
   }
 }
 
+/** Nächte [Anreise, Abreise) eines Zeitraums innerhalb [from, to] */
+function addNights(target: Set<string>, start: string, end: string, from: string, to: string) {
+  if (!ISO_DATE.test(start) || !ISO_DATE.test(end) || end <= start) return;
+  let night = start < from ? from : start;
+  let guard = 0;
+  while (night < end && night <= to && guard < 800) {
+    target.add(night);
+    night = addDaysIso(night, 1);
+    guard++;
+  }
+}
+
+/** Belegte Nächte aus iCal der Portale und der Gästedatenbank */
+async function extraClosedNights(db: D1Database, from: string, to: string): Promise<Set<string>> {
+  const nights = new Set<string>();
+  const [ical, own] = await Promise.all([
+    fetchAllIcalPeriods(db).catch(() => ({ periods: [] })),
+    db
+      .prepare(
+        `SELECT arrival_date, departure_date FROM bookings
+          WHERE COALESCE(status, '') <> 'cancelled'
+            AND departure_date > ? AND arrival_date <= ?`,
+      )
+      .bind(from, to)
+      .all<{ arrival_date: string | null; departure_date: string | null }>()
+      .then((r) => r.results ?? [])
+      .catch(() => []),
+  ]);
+  for (const p of ical.periods) addNights(nights, p.start, p.end, from, to);
+  for (const b of own) {
+    addNights(
+      nights,
+      (b.arrival_date ?? '').slice(0, 10),
+      (b.departure_date ?? '').slice(0, 10),
+      from,
+      to,
+    );
+  }
+  return nights;
+}
+
 async function refresh(db: D1Database): Promise<PublicAvailability> {
   const today = todayVienna();
   const horizon = await getSetting(db, KEY_HORIZON).catch(() => null);
   const windowEnd = addDaysIso(today, WINDOW_DAYS);
   const to = horizon && ISO_DATE.test(horizon) && horizon < windowEnd ? horizon : windowEnd;
 
-  const { availability, error } = await fetchBeds24Availability(db, today, to);
+  const [{ availability, error }, extra] = await Promise.all([
+    fetchBeds24Availability(db, today, to),
+    extraClosedNights(db, today, to),
+  ]);
   if (!availability) throw new Error(error || 'Beds24 nicht erreichbar');
+  const closedNights = [...new Set([...availability.closedNights, ...extra])].sort();
 
   const result: PublicAvailability = {
     from: today,
     to,
-    closed: toRuns(availability.closedNights),
+    closed: toRuns(closedNights),
     minStay: minStayRuns(availability.minStay),
     fetchedAt: new Date().toISOString(),
   };

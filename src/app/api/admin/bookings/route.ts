@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
+import { invalidatePublicAvailability } from '@/lib/server/publicAvailability';
 
 interface Env {
   DB: D1Database;
@@ -190,6 +191,8 @@ export async function POST(request: NextRequest) {
       .bind(result.meta.last_row_id)
       .first<Booking>();
 
+    // Belegungskalender der Website neu berechnen lassen
+    await invalidatePublicAvailability(db);
     return NextResponse.json({ booking });
   } catch (error) {
     console.error('Error creating booking:', error);
@@ -290,6 +293,8 @@ export async function PUT(request: NextRequest) {
       .bind(data.id)
       .first<Booking>();
 
+    // Belegungskalender der Website neu berechnen lassen
+    await invalidatePublicAvailability(db);
     return NextResponse.json({ booking });
   } catch (error) {
     console.error('Error updating booking:', error);
@@ -313,6 +318,8 @@ export async function DELETE(request: NextRequest) {
 
     await db.prepare('DELETE FROM bookings WHERE id = ?').bind(id).run();
 
+    // Belegungskalender der Website neu berechnen lassen
+    await invalidatePublicAvailability(db);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting booking:', error);
