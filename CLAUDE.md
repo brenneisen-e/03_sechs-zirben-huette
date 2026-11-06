@@ -74,6 +74,7 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 ## Webcam
 
 - „So finden Sie zu uns“ (`src/components/sections/Location.tsx`): darunter `FalkertWebcam.tsx` — Kamera „Falkert Nord“ von foto-webcam.eu (wie heidialm.at). Einbinden laut foto-webcam.eu erlaubt bis 720 × 405 px mit Link auf die Kameraseite → nur `current/720.jpg`, verlinkt, Quelle genannt; neu laden alle 5 Min. Texte `lage.webcam` in allen Sprachen
+- Gäste-App: Karte „Wetter-Check am Falkert“ unter „Ihr Aufenthalt“ (`src/components/guest/WebcamCheck.tsx`, Wunsch 06.11.2026) — alle drei Heidi-Alm-Kameras von foto-webcam.eu (falkert-nord, heidi-hotel, heidi-chalets) zum Wischen, gleiche Regeln (720 px, verlinkt, Quelle)
 
 ## Instagram
 
