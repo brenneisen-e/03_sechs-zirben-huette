@@ -5,13 +5,15 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { SocialLinks } from './SocialLinks';
 import { BrandLogo } from '@/components/brand/BrandLogo';
 import { BookingCTA } from '@/components/brand/BookingCTA';
 
 // Navigation der öffentlichen Seiten im früheren Aufbau, mit dem neuen
 // Schriftbild: Logo-Schild (Dunkelgrün, weißes Original-Logo in Mindestgröße
 // 240 px) in der Mitte, links und rechts davon die Ziele; außen links die
-// Sprache, außen rechts „Anfragen“ (roter Knopf).
+// Sprache, außen rechts Instagram/Google (ab 1280 px) und „Anfragen“ (roter
+// Knopf); schmaler stehen Instagram/Google im Menü.
 //
 // Startseite: liegt durchsichtig über dem Film des Aufmachers. Ab 1024 px
 // steht sie oben fest und bekommt beim Scrollen eine Leinenfläche; schmaler
@@ -120,7 +122,13 @@ export function Header() {
           <nav aria-label="Hauptnavigation rechts">
             <ul className="flex items-center gap-6 xl:gap-8">{RIGHT_ITEMS.map(navLink)}</ul>
           </nav>
-          <BookingCTA compact />
+          <div className="flex items-center gap-3">
+            <SocialLinks
+              className="hidden xl:flex"
+              linkClassName={`${navColor} ${desktopOnFilm ? 'hover:bg-leinen/10' : 'hover:bg-zirbe/10'}`}
+            />
+            <BookingCTA compact />
+          </div>
         </div>
       </div>
 
@@ -169,6 +177,7 @@ export function Header() {
                 </li>
               ))}
             </ul>
+            <SocialLinks className="mt-2 -ml-2" linkClassName="text-zirbe hover:bg-zirbe/10" />
             <div className="mt-4 pb-2">
               <BookingCTA compact className="w-full" onClick={() => setMenuOpen(false)} />
             </div>

@@ -20,6 +20,9 @@ export const SITE_CONFIG = {
   },
   social: {
     instagram: '@sechszirbenhuette',
+    instagramUrl: 'https://www.instagram.com/sechszirbenhuette/',
+    // Google-Unternehmensprofil (derselbe Eintrag wie der Bewertungslink)
+    googleUrl: 'https://g.page/r/CSYqzFakCmSsEBM',
   },
   owners: 'Malte + Mareike Brenneisen',
 };

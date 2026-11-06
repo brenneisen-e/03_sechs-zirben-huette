@@ -101,7 +101,7 @@ export function Footer() {
                 {getText('footer_social_title') || t.footer.followUs}
               </h4>
               <a
-                href={`https://instagram.com/${SITE_CONFIG.social.instagram.replace('@', '')}`}
+                href={SITE_CONFIG.social.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-leinen brand-link brand-link--light"
