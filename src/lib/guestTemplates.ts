@@ -127,11 +127,15 @@ function registrationParagraph(lang: 'de' | 'en'): string {
   if (lang === 'en') {
     return `Important: since 1 November 2026, all guests in Carinthia must be registered digitally with the municipality. Please complete our short pre-check-in before you arrive (one person can register everyone). In return you receive the guest card, which lets you use almost all buses and trains in Carinthia free of charge:
 
-${PRECHECKIN_URL}`;
+${PRECHECKIN_URL}
+
+You will also find this link at the top of your guest app.`;
   }
   return `Wichtig: Seit 1. November 2026 müssen in Kärnten alle Gäste digital bei der Gemeinde angemeldet werden. Bitte füllen Sie vor der Anreise kurz unseren Pre-Check-in aus (eine Person trägt alle ein). Dafür erhalten Sie die Gästekarte, mit der Sie fast alle Busse und Züge in Kärnten kostenlos nutzen:
 
-${PRECHECKIN_URL}`;
+${PRECHECKIN_URL}
+
+Den Link finden Sie auch ganz oben in Ihrer Gäste-App.`;
 }
 
 /**
@@ -149,6 +153,8 @@ in wenigen Tagen geht es los – wir freuen uns schon sehr auf euch in der Sechs
 Eine kurze Bitte vorab: Seit dem 1. November 2026 müssen in Kärnten alle Gäste digital bei der Gemeinde angemeldet werden. Bitte tragt eure Daten vor der Anreise über unseren Pre-Check-in ein – das dauert nur ein paar Minuten:
 
 ${PRECHECKIN_URL}
+
+Den Link findet ihr auch ganz oben in eurer Gäste-App.
 
 Benötigt werden unter anderem Name, Adresse, Nationalität, Geburtsdatum und eure E-Mail-Adresse sowie die Anzahl der Mitreisenden.
 
