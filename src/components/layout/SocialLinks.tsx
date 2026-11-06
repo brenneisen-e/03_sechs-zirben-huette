@@ -25,9 +25,10 @@ function GoogleMark({ size = 20 }: { size?: number }) {
 interface Props {
   className?: string;
   linkClassName?: string;
+  tabIndex?: number;
 }
 
-export function SocialLinks({ className = '', linkClassName = '' }: Props) {
+export function SocialLinks({ className = '', linkClassName = '', tabIndex }: Props) {
   const link = `inline-flex h-10 w-10 items-center justify-center rounded-[4px] transition-colors ${linkClassName}`;
   return (
     <ul className={`flex items-center gap-1 ${className}`}>
@@ -37,6 +38,7 @@ export function SocialLinks({ className = '', linkClassName = '' }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           className={link}
+          tabIndex={tabIndex}
           aria-label={`Instagram ${SITE_CONFIG.social.instagram}`}
           title="Instagram"
         >
@@ -49,6 +51,7 @@ export function SocialLinks({ className = '', linkClassName = '' }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           className={link}
+          tabIndex={tabIndex}
           aria-label="Sechszirbenhütte auf Google"
           title="Google"
         >

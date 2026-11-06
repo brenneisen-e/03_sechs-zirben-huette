@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useMotion } from '@/contexts/MotionContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { SocialLinks } from './SocialLinks';
 import { BrandLogo } from '@/components/brand/BrandLogo';
@@ -21,6 +22,10 @@ import { BookingCTA } from '@/components/brand/BookingCTA';
 // über die Leiste am unteren Rand erreichbar. Unterseiten: Leinenfläche von
 // Anfang an. Logo und Navigation werden beim Scrollen weder skaliert noch
 // verformt.
+//
+// Schmaler als 1024 px: Beim Scrollen gleitet oben eine schmale Leiste ein
+// (CompactBar: Instagram | kleines Zeichen | Google), passend zum Scrollweg,
+// während das große Logo-Schild nach oben verschwindet.
 //
 // Ziele sind echte Links (/#abschnitt) — funktionieren auch ohne JavaScript
 // und von Unterseiten aus.
@@ -148,7 +153,7 @@ export function Header() {
         </button>
         <a
           href="/"
-          className="brand-logo-sign justify-self-center"
+          className="brand-logo-sign brand-mobile-logo justify-self-center"
           aria-label="Sechszirbenhütte – Startseite"
         >
           <BrandLogo />
@@ -157,6 +162,8 @@ export function Header() {
           <LanguageSwitcher isScrolled={!isHome} />
         </div>
       </div>
+
+      <CompactBar />
 
       {menuOpen && (
         <div
@@ -185,6 +192,83 @@ export function Header() {
         </div>
       )}
     </header>
+  );
+}
+
+// Schmale Leiste oben (nur unter 1024 px): erscheint mit dem Scrollweg
+// zwischen START und END px — Einblenden und Hereingleiten folgen dem Finger
+// (nur transform/opacity, per requestAnimationFrame), bei reduzierter Bewegung
+// schaltet sie ohne Übergang um. Das kleine Zeichen ist der Zirbenzweig aus dem
+// Logo auf Zirbengrün (wie das Favicon) und führt nach oben.
+const COMPACT_START = 30;
+const COMPACT_END = 110;
+
+function CompactBar() {
+  const { reduced } = useMotion();
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const raw = (y - COMPACT_START) / (COMPACT_END - COMPACT_START);
+      const p = reduced ? (y > COMPACT_END ? 1 : 0) : Math.min(1, Math.max(0, raw));
+      // am Wurzelelement, damit auch das große Logo-Schild mitläuft
+      document.documentElement.style.setProperty('--compact-p', String(p));
+      setShown(p > 0.5);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+      document.documentElement.style.removeProperty('--compact-p');
+    };
+  }, [reduced]);
+
+  return (
+    <div
+      aria-hidden={!shown}
+      className="brand-compact-bar fixed inset-x-0 top-0 z-[55] bg-leinen/95 shadow-[0_1px_0_rgba(38,61,53,0.14)] backdrop-blur-sm lg:hidden"
+    >
+      <div className="brand-container grid h-14 grid-cols-[1fr_auto_1fr] items-center">
+        <SocialLinks
+          className="justify-self-start [&_li:last-child]:hidden"
+          linkClassName="text-zirbe hover:bg-zirbe/10"
+          tabIndex={shown ? 0 : -1}
+        />
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+          }}
+          className="brand-compact-mark inline-flex h-10 w-10 items-center justify-center rounded-[6px] bg-zirbe"
+          aria-label="Sechszirbenhütte – nach oben"
+          tabIndex={shown ? 0 : -1}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- kleines SVG-Zeichen */}
+          <img
+            src="/images/brand/zirbenzweig.svg"
+            alt=""
+            width={22}
+            height={25}
+            className="h-[25px] w-auto invert"
+          />
+        </a>
+        <SocialLinks
+          className="justify-self-end [&_li:first-child]:hidden"
+          linkClassName="text-zirbe hover:bg-zirbe/10"
+          tabIndex={shown ? 0 : -1}
+        />
+      </div>
+    </div>
   );
 }
 
