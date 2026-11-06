@@ -13,7 +13,9 @@ import { BookingSearch } from '@/components/brand/BookingSearch';
 // über Film oder Fotos). Buchen: ab 1024 px eine Suchleiste auf deckendem Grün
 // im Bild, schmaler die kompakte Suche auf Grün unter dem Film.
 //
-// Wiedergabe: stumm, inline, in Schleife, unabhängig vom Scrollen. Automatischer
+// Wiedergabe: stumm, inline, in Schleife, unabhängig vom Scrollen. Start und
+// jede Wiederholung erst bei FILM_START_S — davor wackelt die Drohne kurz
+// (Wunsch 06.11.2026); das Standbild stammt aus derselben Sekunde. Automatischer
 // Start nur ohne reduzierte Bewegung. Außerhalb des Sichtbereichs oder bei
 // verdecktem Tab pausiert der Film; eine bewusste Pause wird nie automatisch
 // aufgehoben. Das Standbild aus genau diesem Film liegt als Bild mit srcset
@@ -26,6 +28,8 @@ const STILL_SRC = '/api/hero-poster?w=1920';
 const STILL_SRCSET =
   '/api/hero-poster?w=640 640w, /api/hero-poster?w=960 960w, /api/hero-poster?w=1280 1280w, /api/hero-poster?w=1920 1920w';
 const STILL_SIZES = '100vw';
+/** Sekunde, ab der der Film läuft (auch in der Schleife), wie in /api/hero-poster */
+const FILM_START_S = 2;
 
 export function Hero() {
   const { t } = useLanguage();
@@ -85,7 +89,7 @@ export function Hero() {
     const onReady = () => {
       if (cancelled) return;
       setReady(true);
-      if (video.currentTime < 1) video.currentTime = 1;
+      if (video.currentTime < FILM_START_S) video.currentTime = FILM_START_S;
       tryAutoplay();
     };
 
@@ -211,7 +215,6 @@ export function Hero() {
           ref={videoRef}
           id="hero-video"
           muted
-          loop
           playsInline
           disablePictureInPicture
           preload="metadata"
@@ -222,6 +225,12 @@ export function Hero() {
             setStarted(true);
           }}
           onPause={() => setPlaying(false)}
+          onEnded={(e) => {
+            // Schleife selbst: zurück an den ruhigen Anfang statt auf 0
+            const video = e.currentTarget;
+            video.currentTime = FILM_START_S;
+            video.play().catch(() => {});
+          }}
           onError={() => setFailed(true)}
         />
         {!stillFailed && (

@@ -34,7 +34,7 @@ async function findSource(db: D1Database, width: number, base: string): Promise<
     .first<{ url: string }>();
   const match = video?.url.match(/^https:\/\/([^/]+\.cloudflarestream\.com)\/([a-f0-9]+)\//);
   if (match) {
-    return `https://${match[1]}/${match[2]}/thumbnails/thumbnail.jpg?time=1s&width=${width}&height=${height}`;
+    return `https://${match[1]}/${match[2]}/thumbnails/thumbnail.jpg?time=2s&width=${width}&height=${height}`;
   }
   const image = await db
     .prepare(
