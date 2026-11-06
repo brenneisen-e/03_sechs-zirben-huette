@@ -575,7 +575,15 @@
     "checkin": "Check-in ab 15 Uhr, Check-out bis 10 Uhr",
     "tapMap": "Tippen, um die Karte zu bewegen",
     "lockMap": "Karte sperren",
-    "mapTitle": "Karte zur Sechszirbenhütte"
+    "mapTitle": "Karte zur Sechszirbenhütte",
+    "webcam": {
+      "title": "Live vom Falkert",
+      "text": "Das aktuelle Bild der Webcam an der Heidi Alm – Blick vom Falkert nach Nordosten. So sehen Sie vor der Anreise, wie viel Schnee liegt und wie das Wetter am Berg ist.",
+      "refresh": "Das Bild erneuert sich automatisch alle paar Minuten.",
+      "credit": "Webcam: foto-webcam.eu",
+      "open": "Zeitraffer und Archiv öffnen",
+      "alt": "Aktuelles Webcam-Bild vom Falkert, Blick nach Nordosten"
+    }
   },
   "blogTeaser": {
     "label": "Blog",

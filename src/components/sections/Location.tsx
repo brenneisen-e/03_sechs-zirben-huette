@@ -5,11 +5,13 @@ import { AlertTriangle, Clock, Hand, Lock, Mail, MapPin, Navigation, Phone } fro
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SectionHeader } from '@/components/brand/SectionHeader';
 import { SITE_CONFIG } from '@/lib/constants';
+import { FalkertWebcam } from './FalkertWebcam';
 
 // Anfahrt: Karte (OpenStreetMap) und daneben Adresse, Weg und Kontakt.
 // Desktop 12 Spalten (Karte 7, Angaben 5), Tablet zwei Spalten, Handy
 // untereinander. Auf Touch-Geräten ist die Karte gesperrt, bis man sie antippt,
-// damit sie beim Scrollen nicht mitwandert.
+// damit sie beim Scrollen nicht mitwandert. Darunter das aktuelle Bild der
+// Webcam am Falkert (FalkertWebcam).
 
 const MAPS_URL = 'https://maps.app.goo.gl/CaaeUUnQQjHCyhz68';
 
@@ -137,6 +139,8 @@ export function Location() {
             </div>
           </div>
         </div>
+
+        <FalkertWebcam />
       </div>
     </section>
   );

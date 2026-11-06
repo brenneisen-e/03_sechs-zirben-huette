@@ -581,7 +581,15 @@
     "checkin": "Inchecken vanaf 15.00 uur, uitchecken tot 10.00 uur",
     "tapMap": "Tik om de kaart te bewegen",
     "lockMap": "Kaart vergrendelen",
-    "mapTitle": "Kaart naar de Sechszirbenhütte"
+    "mapTitle": "Kaart naar de Sechszirbenhütte",
+    "webcam": {
+      "title": "Live vanaf de Falkert",
+      "text": "Het actuele beeld van de webcam bij de Heidi Alm – uitzicht vanaf de Falkert naar het noordoosten. Zo ziet u voor vertrek hoeveel sneeuw er ligt en hoe het weer op de berg is.",
+      "refresh": "Het beeld wordt elke paar minuten automatisch vernieuwd.",
+      "credit": "Webcam: foto-webcam.eu",
+      "open": "Timelapse en archief openen",
+      "alt": "Actueel webcambeeld vanaf de Falkert, uitzicht naar het noordoosten"
+    }
   },
   "blogTeaser": {
     "label": "Blog",

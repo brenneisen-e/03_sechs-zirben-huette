@@ -571,7 +571,15 @@
     "checkin": "Prihod od 15. ure, odhod do 10. ure",
     "tapMap": "Tapnite za premikanje zemljevida",
     "lockMap": "Zakleni zemljevid",
-    "mapTitle": "Zemljevid do koče Sechszirbenhütte"
+    "mapTitle": "Zemljevid do koče Sechszirbenhütte",
+    "webcam": {
+      "title": "V živo s Falkerta",
+      "text": "Trenutna slika spletne kamere pri Heidi Alm – pogled s Falkerta proti severovzhodu. Pred prihodom vidite, koliko je snega in kakšno je vreme v gorah.",
+      "refresh": "Slika se samodejno osveži vsakih nekaj minut.",
+      "credit": "Spletna kamera: foto-webcam.eu",
+      "open": "Odpri časovni zamik in arhiv",
+      "alt": "Trenutna slika spletne kamere s Falkerta, pogled proti severovzhodu"
+    }
   },
   "blogTeaser": {
     "label": "Blog",

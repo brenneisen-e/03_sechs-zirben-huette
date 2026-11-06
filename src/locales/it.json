@@ -571,7 +571,15 @@
     "checkin": "Check-in dalle 15, check-out entro le 10",
     "tapMap": "Toccare per muovere la mappa",
     "lockMap": "Blocca mappa",
-    "mapTitle": "Mappa per la Sechszirbenhütte"
+    "mapTitle": "Mappa per la Sechszirbenhütte",
+    "webcam": {
+      "title": "In diretta dal Falkert",
+      "text": "L'immagine attuale della webcam alla Heidi Alm – vista dal Falkert verso nord-est. Prima di partire potete vedere quanta neve c'è e com'è il tempo in montagna.",
+      "refresh": "L'immagine si aggiorna automaticamente ogni pochi minuti.",
+      "credit": "Webcam: foto-webcam.eu",
+      "open": "Apri time-lapse e archivio",
+      "alt": "Immagine attuale della webcam dal Falkert, vista verso nord-est"
+    }
   },
   "blogTeaser": {
     "label": "Blog",
