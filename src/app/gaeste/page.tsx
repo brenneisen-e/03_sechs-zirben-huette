@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 
 import { CHECKIN_URL, PRECHECKIN_URL } from '@/lib/registration';
+import { WebcamCheck } from '@/components/guest/WebcamCheck';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   info: Info,
@@ -528,6 +529,8 @@ function Dashboard() {
                   </div>
                 </div>
               )}
+
+              <WebcamCheck />
 
               {/* Category List - grouped */}
               <div className="mt-6 space-y-6">
