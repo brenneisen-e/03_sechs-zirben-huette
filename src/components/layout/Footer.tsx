@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 import { MotionToggle } from '@/components/brand/MotionToggle';
+import { CONSENT_OPEN_EVENT, GA_MEASUREMENT_ID } from '@/lib/analytics';
 
 export function Footer() {
   const pathname = usePathname();
@@ -124,6 +125,17 @@ export function Footer() {
             <div className="mt-4 flex justify-center">
               <MotionToggle />
             </div>
+            {GA_MEASUREMENT_ID && (
+              <p className="mt-4">
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event(CONSENT_OPEN_EVENT))}
+                  className="brand-link brand-link--light text-xs"
+                >
+                  {t.consent.settings}
+                </button>
+              </p>
+            )}
             <p className="mt-4">
               <Link href="/admin" className="brand-link brand-link--light text-xs">
                 Admin

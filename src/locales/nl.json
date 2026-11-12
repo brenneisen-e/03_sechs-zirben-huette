@@ -598,5 +598,13 @@
     "all": "Alle berichten",
     "read": "Verder lezen",
     "list": "Geselecteerde berichten uit de blog"
+  },
+  "consent": {
+    "title": "Mogen we bezoeken tellen?",
+    "text": "We willen graag begrijpen hoe onze site wordt gebruikt en haar voor u verbeteren. Met uw toestemming gebruiken we daarvoor Google Analytics, dat hiervoor cookies plaatst. U kunt uw keuze op elk moment wijzigen onderaan de pagina onder „Cookie-instellingen“.",
+    "accept": "Akkoord",
+    "decline": "Nee, bedankt",
+    "settings": "Cookie-instellingen",
+    "more": "Meer in de privacyverklaring"
   }
 }

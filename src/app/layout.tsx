@@ -6,6 +6,7 @@ import { SITE_URL } from '@/lib/site';
 import { ContentTextsProvider } from '@/contexts/ContentTextsContext';
 import { Header, MobileBookingButton } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AnalyticsConsent } from '@/components/layout/AnalyticsConsent';
 import { MobileScrollProgress } from '@/components/ui/MobileScrollProgress';
 import { MotionProvider } from '@/contexts/MotionContext';
 import '@/styles/globals.css';
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <MobileBookingButton />
                 <main className="relative z-10">{children}</main>
                 <Footer />
+                <AnalyticsConsent />
               </MotionProvider>
             </ContentTextsProvider>
           </LanguageProvider>

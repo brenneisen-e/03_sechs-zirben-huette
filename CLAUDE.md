@@ -71,6 +71,10 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - Gäste-App `src/app/gaeste/page.tsx`: Karte „Wichtig: Anmeldung …“ ganz oben (`RegistrationCard`), „Schon erledigt“ klappt sie auf dem Gerät zusammen
 - Nachrichten (`src/lib/guestTemplates.ts`): kurzer Absatz in den Willkommensvorlagen DE/EN, ausführliche Vorlage `buildPreCheckinText` (Text von Malte, du/ihr) im Beds24-Cockpit „Vorlage Pre-Check-in“
 
+## Google Analytics
+
+- Google Analytics 4 (Wunsch 12.11.2026, gleicher Aufbau wie im Repo `natbergerhuette`): `src/lib/analytics.ts` — Mess-ID in `GA_MEASUREMENT_ID` (öffentlich, kein Geheimnis); leer = nichts lädt, kein Banner. Geladen wird erst nach Einwilligung: Banner `src/components/layout/AnalyticsConsent.tsx` (im Root-Layout, nicht unter `/admin` und `/gaeste`; Wahl in localStorage `analytics_consent`), Widerruf über „Cookie-Einstellungen“ im Fuß, Abschnitt in `src/app/datenschutz/page.tsx` (nur mit gesetzter ID). Texte `consent.*` in allen Sprachen. Ohne Einwilligung darf keine Anfrage an Google Analytics gehen
+
 ## Webcam
 
 - „So finden Sie zu uns“ (`src/components/sections/Location.tsx`): darunter `FalkertWebcam.tsx` — Kamera „Falkert Nord“ von foto-webcam.eu (wie heidialm.at). Einbinden laut foto-webcam.eu erlaubt bis 720 × 405 px mit Link auf die Kameraseite → nur `current/720.jpg`, verlinkt, Quelle genannt; neu laden alle 5 Min. Texte `lage.webcam` in allen Sprachen

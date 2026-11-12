@@ -588,5 +588,13 @@
     "all": "Vsi prispevki",
     "read": "Preberi več",
     "list": "Izbrani prispevki iz bloga"
+  },
+  "consent": {
+    "title": "Ali smemo šteti obiske?",
+    "text": "Radi bi razumeli, kako se naša stran uporablja, in jo za vas izboljšali. Z vašo privolitvijo uporabljamo Google Analytics, ki za to uporablja piškotke. Svojo izbiro lahko kadar koli spremenite na dnu strani pod »Nastavitve piškotkov«.",
+    "accept": "Strinjam se",
+    "decline": "Ne, hvala",
+    "settings": "Nastavitve piškotkov",
+    "more": "Več v izjavi o varstvu podatkov"
   }
 }

@@ -590,5 +590,13 @@
     "all": "All posts",
     "read": "Read more",
     "list": "Selected posts from the blog"
+  },
+  "consent": {
+    "title": "May we count visits?",
+    "text": "We would like to understand how our site is used and improve it for you. With your consent we use Google Analytics, which uses cookies for this. You can change your choice at any time under “Cookie settings” at the bottom of the page.",
+    "accept": "I agree",
+    "decline": "No, thanks",
+    "settings": "Cookie settings",
+    "more": "More in our privacy policy"
   }
 }

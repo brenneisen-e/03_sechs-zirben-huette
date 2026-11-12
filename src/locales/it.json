@@ -588,5 +588,13 @@
     "all": "Tutti gli articoli",
     "read": "Continua a leggere",
     "list": "Articoli selezionati dal blog"
+  },
+  "consent": {
+    "title": "Possiamo contare le visite?",
+    "text": "Vorremmo capire come viene utilizzato il nostro sito e migliorarlo per voi. Con il vostro consenso utilizziamo Google Analytics, che a tal fine impiega dei cookie. Potete modificare la vostra scelta in qualsiasi momento in fondo alla pagina alla voce «Impostazioni dei cookie».",
+    "accept": "Accetto",
+    "decline": "No, grazie",
+    "settings": "Impostazioni dei cookie",
+    "more": "Maggiori informazioni nell’informativa sulla privacy"
   }
 }

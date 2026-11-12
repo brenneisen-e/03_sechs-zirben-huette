@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SITE_CONFIG } from '@/lib/constants';
+import { GA_MEASUREMENT_ID } from '@/lib/analytics';
 
 export default function DatenschutzPage() {
   const { language } = useLanguage();
@@ -95,6 +96,17 @@ export default function DatenschutzPage() {
               ? 'Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Textdateien und richten auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert.'
               : 'Our website uses so-called "cookies". Cookies are small text files and do not cause any damage to your device. They are either stored temporarily for the duration of a session (session cookies) or permanently (permanent cookies) on your device.'}
           </p>
+
+          {GA_MEASUREMENT_ID && (
+            <>
+              <h2>Google Analytics</h2>
+              <p>
+                {isDE
+                  ? 'Mit Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG) nutzen wir Google Analytics 4, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google setzt dafür Cookies und verarbeitet Nutzungsdaten (z. B. aufgerufene Seiten, ungefährer Standort, Geräteangaben); IP-Adressen werden von Google Analytics 4 nicht gespeichert. Daten können auch in die USA übermittelt werden; Google ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Ohne Ihre Einwilligung wird Google Analytics nicht geladen. Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen“ am Seitenende widerrufen. Weitere Informationen: https://policies.google.com/privacy'
+                  : 'With your consent (Art. 6(1)(a) GDPR, Sec. 25(1) TDDDG) we use Google Analytics 4, a web analytics service of Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Google sets cookies for this purpose and processes usage data (e.g. pages viewed, approximate location, device information); Google Analytics 4 does not store IP addresses. Data may also be transferred to the USA; Google is certified under the EU-U.S. Data Privacy Framework. Without your consent, Google Analytics is not loaded. You can withdraw your consent at any time via “Cookie settings” at the bottom of the page. Further information: https://policies.google.com/privacy'}
+              </p>
+            </>
+          )}
 
           <h2>{isDE ? 'Kontaktformular' : 'Contact Form'}</h2>
           <p>

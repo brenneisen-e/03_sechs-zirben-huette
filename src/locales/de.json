@@ -592,5 +592,13 @@
     "all": "Alle Beiträge",
     "read": "Weiterlesen",
     "list": "Ausgewählte Beiträge aus dem Blog"
+  },
+  "consent": {
+    "title": "Dürfen wir Besuche zählen?",
+    "text": "Wir möchten verstehen, wie unsere Seite genutzt wird, und sie für Sie verbessern. Dafür setzen wir mit Ihrer Einwilligung Google Analytics ein, das dazu Cookies verwendet. Ihre Wahl können Sie jederzeit unten auf der Seite unter „Cookie-Einstellungen“ ändern.",
+    "accept": "Einverstanden",
+    "decline": "Nein, danke",
+    "settings": "Cookie-Einstellungen",
+    "more": "Mehr dazu in der Datenschutzerklärung"
   }
 }
