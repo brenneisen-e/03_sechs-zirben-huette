@@ -3,7 +3,8 @@
 // Liest aus Beds24 nur, welche Nächte gesperrt/belegt sind und den
 // Mindestaufenthalt — keine Preise, keine Gastdaten. Dazu kommen als belegt:
 // Buchungen aus den iCal-Kalendern der Portale (icalSources.ts — dort stehen
-// Portal-Buchungen, die bei Beds24 noch frei sein können) und aus der eigenen
+// Portal-Buchungen, die bei Beds24 noch frei sein können; Platzhalter wie
+// „CLOSED“ zählen nicht) und aus der eigenen
 // Gästedatenbank (nicht stornierte Buchungen), damit der Kalender dieselbe
 // Belegung zeigt wie das Admin Center. Zeitraum: heute bis zum
 // „Buchbar bis“-Datum (bookingHorizon.ts), sonst bis zum Ende des
@@ -13,7 +14,7 @@
 
 import { addDaysIso, fetchBeds24Availability, getSetting, setSetting } from '@/lib/server/beds24';
 import { todayVienna } from '@/lib/server/bookingCutoff';
-import { fetchAllIcalPeriods } from '@/lib/server/icalSources';
+import { fetchAllIcalPeriods, isIcalPlaceholder } from '@/lib/server/icalSources';
 
 const KEY_CACHE = 'public_availability_cache';
 const KEY_LAST_ATTEMPT = 'public_availability_last_attempt';
@@ -99,7 +100,12 @@ async function extraClosedNights(db: D1Database, from: string, to: string): Prom
       .then((r) => r.results ?? [])
       .catch(() => []),
   ]);
-  for (const p of ical.periods) addNights(nights, p.start, p.end, from, to);
+  for (const p of ical.periods) {
+    // „CLOSED“ & Co. der Portale sind keine Buchungen (13.11.2026: Feratel
+    // sperrte so über 200 Nächte, der Kalender der Website zeigte alles belegt)
+    if (isIcalPlaceholder(p)) continue;
+    addNights(nights, p.start, p.end, from, to);
+  }
   for (const b of own) {
     addNights(
       nights,

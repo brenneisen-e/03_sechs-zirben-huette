@@ -35,6 +35,22 @@ export interface BookedPeriod {
   source?: string;
 }
 
+/**
+ * Platzhalter in den Portal-Kalendern („CLOSED“, „Blocked“ …) sind keine
+ * Buchungen: Die Portale spiegeln damit fremde Belegung und eigene Sperren
+ * zurück — Feratel etwa sperrt ganze Monate, in denen die Hütte dort nicht
+ * buchbar ist. Für die Belegung zählen nur echte Reservierungen; was wirklich
+ * belegt ist, steht in Beds24 und in der Gästedatenbank. Gleiche Regel wie im
+ * Beds24-Cockpit der Natberger Hütte (`ICAL_PLACEHOLDER`).
+ */
+const ICAL_PLACEHOLDER = /^(closed|blocked|geschlossen|gesperrt|not available|nicht verfügbar)\b/i;
+
+/** true, wenn der Eintrag nur ein Platzhalter des Portals ist (summary: „[Quelle] Text“) */
+export function isIcalPlaceholder(period: BookedPeriod): boolean {
+  const text = (period.summary ?? '').replace(/^\[[^\]]*\]\s*/, '');
+  return ICAL_PLACEHOLDER.test(text.trim());
+}
+
 // Parse iCal data to extract VEVENT entries
 export function parseICalData(icalData: string, sourceName: string): BookedPeriod[] {
   const events: BookedPeriod[] = [];
