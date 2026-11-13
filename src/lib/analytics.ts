@@ -7,7 +7,7 @@
 // (src/components/layout/AnalyticsConsent.tsx); ohne Einwilligung geht keine
 // Anfrage an Google.
 
-export const GA_MEASUREMENT_ID: string = '';
+export const GA_MEASUREMENT_ID: string = 'G-WNXMKFGZ33';
 
 /** localStorage: 'granted' | 'denied' — fehlt der Eintrag, wird gefragt */
 export const CONSENT_KEY = 'analytics_consent';
