@@ -101,7 +101,7 @@ export const FACTS: Record<FactKey, { label: string; value: string }> = {
   zeiten: { label: 'Check-in / Check-out', value: 'ab 15 Uhr / bis 10 Uhr' },
   preise: {
     label: 'Preise und Mindestaufenthalt',
-    value: 'tagesaktuell im Buchungskalender, mit allen Pflichtgebühren',
+    value: 'im Buchungskalender und im Buchungsformular, mit allen Pflichtgebühren',
   },
   parken: { label: 'Parken', value: 'eigener Parkplatz an der Hütte' },
 };
@@ -297,7 +297,10 @@ export const PAGES: ContentPage[] = [
         ],
         links: [
           { href: '/sauna', label: 'Die Sauna der Hütte' },
-          { href: '/blog', label: 'Blog: Tipps für Ihre Tage am Falkert' },
+          {
+            href: '/blog/workation-in-den-nockbergen-arbeiten-auf-1-700-m-mit-sauna-zum-feierabend',
+            label: 'Blog: Workation in den Nockbergen',
+          },
         ],
       },
     ],
@@ -647,10 +650,10 @@ export const PAGES: ContentPage[] = [
     name: 'Preise & Buchen',
     title: 'Preise & Verfügbarkeit · Sechszirbenhütte am Falkert',
     description:
-      'Aktuelle Preise und freie Termine, inkl. aller Pflichtgebühren. Direkt buchen ohne Portalgebühren über unseren Buchungskalender.',
+      'Freie Termine im Buchungskalender, vollständige Preisaufstellung mit allen Pflichtgebühren im Buchungsformular. Direkt buchen ohne Portalgebühren.',
     h1: 'Preise und freie Termine',
     label: 'Buchen',
-    lead: 'Preise und freie Termine der Sechszirbenhütte sehen Sie tagesaktuell im Buchungskalender auf dieser Seite. Die Preisaufstellung enthält alle Pflichtgebühren; bei der Direktbuchung fallen keine Portalgebühren an.',
+    lead: 'Freie Termine der Sechszirbenhütte sehen Sie tagesaktuell im Buchungskalender auf dieser Seite. Den Preis für Ihren Zeitraum zeigt das Buchungsformular mit allen Pflichtgebühren; bei der Direktbuchung fallen keine Portalgebühren an.',
     updated: UPDATED,
     image: img(
       'huette-herbst',
@@ -848,7 +851,7 @@ export const PAGES: ContentPage[] = [
       {
         question: 'Wo finde ich Preise und freie Termine?',
         answer:
-          'Im Buchungskalender unter „Preise & Buchen“. Die Preisaufstellung nennt alle Pflichtgebühren.',
+          'Freie Termine zeigt der Buchungskalender unter „Preise & Buchen“. Die Preisaufstellung im Buchungsformular nennt alle Pflichtgebühren.',
       },
       {
         question: 'Ist die Sechszirbenhütte die Zirbenhütte am Falkertsee?',
