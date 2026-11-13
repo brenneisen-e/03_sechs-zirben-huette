@@ -14,7 +14,19 @@
     "bewertungen": "Recensioni",
     "impressum": "Impronta",
     "datenschutz": "Privacy",
-    "agb": "Condizioni"
+    "agb": "Condizioni",
+    "sauna": "Sauna",
+    "hund": "Con il cane",
+    "winter": "Inverno",
+    "sommer": "Estate",
+    "workation": "Workation",
+    "preise": "Prezzi e prenotazione",
+    "anreise": "Come arrivare",
+    "faq": "Domande",
+    "huetten": "Baite al Falkertsee",
+    "ratgeber": "Falkert e Falkertsee",
+    "zirbenhuette": "Zirbenhütte al Falkert",
+    "main": "Navigazione principale"
   },
   "hero": {
     "welcome": "Benvenuti",
@@ -355,7 +367,8 @@
     "phone": "Telefono",
     "email": "Email",
     "address": "Indirizzo",
-    "copyright": "© {year} Sechszirbenhütte. Tutti i diritti riservati."
+    "copyright": "© {year} Sechszirbenhütte. Tutti i diritti riservati.",
+    "discover": "Scoprire"
   },
   "common": {
     "learnMore": "Scopri di Più",
@@ -543,7 +556,9 @@
     "greetingText": "Abbiamo preparato la Sechszirbenhütte perché possiate arrivare quassù e avere tempo l'uno per l'altro. Per domande sull'arrivo o sulla baita siamo a vostra disposizione.",
     "reduceMotion": "Riduci le animazioni",
     "motionReduced": "Animazioni ridotte",
-    "motionSystem": "Animazioni ridotte (impostazione di sistema)"
+    "motionSystem": "Animazioni ridotte (impostazione di sistema)",
+    "h1": "Sechszirbenhütte: baita di 250 anni con sauna al Falkert",
+    "heroAlt": "La Sechszirbenhütte al Falkert nei monti Nockberge, Carinzia"
   },
   "instagram": {
     "label": "Instagram",

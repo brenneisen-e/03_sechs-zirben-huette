@@ -15,24 +15,11 @@ import '@/styles/brand.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Sechszirbenhütte am Falkert | Premium-Hüttenurlaub in den Nockbergen',
+    default: 'Hütte mit Sauna am Falkertsee, Kärnten · Sechszirbenhütte',
     template: '%s | Sechszirbenhütte',
   },
   description:
-    'Historische Berghütte mit Sauna in Alleinlage auf 1.700m. Wandern, Skifahren & Erholung in Kärnten. Familien & Hunde willkommen.',
-  keywords: [
-    'Ferienhütte Kärnten',
-    'Berghütte Nockberge',
-    'Hüttenurlaub Österreich',
-    'Skiurlaub Falkert',
-    'Wandern Alpen',
-    'Sauna Berghütte',
-    'Sechszirbenhütte',
-    'Falkertsee',
-    'Heidi Alm',
-    'Ferienhaus Kärnten',
-    'Familienurlaub Berge',
-  ],
+    '250 Jahre alte Berghütte in Alleinlage auf 1.700 m: eigene Sauna mit Ruheraum, 2 Schlafzimmer, 2 Bäder, bis 5 Personen, Hunde willkommen. Direkt buchen.',
   authors: [{ name: 'Sechszirbenhütte' }],
   creator: 'Sechszirbenhütte',
   publisher: 'Sechszirbenhütte',

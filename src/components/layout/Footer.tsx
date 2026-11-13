@@ -8,6 +8,7 @@ import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 import { MotionToggle } from '@/components/brand/MotionToggle';
 import { CONSENT_OPEN_EVENT, GA_MEASUREMENT_ID } from '@/lib/analytics';
+import { PAGES } from '@/content/seiten';
 
 export function Footer() {
   const pathname = usePathname();
@@ -26,6 +27,27 @@ export function Footer() {
     <>
       <footer className="brand-footer on-zirbe bg-zirbe text-leinen relative z-10">
         <div className="brand-container py-12 md:py-16">
+          {/* Alle Unterseiten als echte Links — für Gäste und Suchmaschinen */}
+          <nav aria-labelledby="footer-discover" className="mb-10 border-b border-leinen/25 pb-10">
+            <h4 id="footer-discover" className="mb-4 text-holz">
+              {t.footer.discover}
+            </h4>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-3 lg:grid-cols-4">
+              {PAGES.map((page) => (
+                <li key={page.slug}>
+                  <Link href={`/${page.slug}`} className="brand-link brand-link--light">
+                    {page.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/blog" className="brand-link brand-link--light">
+                  {t.navigation.blog}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Logo & Description */}
             <div className="lg:col-span-1">
@@ -136,11 +158,7 @@ export function Footer() {
                 </button>
               </p>
             )}
-            <p className="mt-4">
-              <Link href="/admin" className="brand-link brand-link--light text-xs">
-                Admin
-              </Link>
-            </p>
+            {/* Kein Link zum Admin Center (Aufruf direkt über /admin) */}
           </div>
         </div>
       </footer>

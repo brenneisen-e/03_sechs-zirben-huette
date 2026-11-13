@@ -128,7 +128,7 @@ export function Ferienhaus() {
       >
         <Image
           src="/images/grundriss.jpg"
-          alt=""
+          alt={`${t.ui.floorPlan} – Sechszirbenhütte`}
           width={1024}
           height={550}
           sizes="(min-width: 1024px) 32vw, (min-width: 768px) 36rem, 92vw"

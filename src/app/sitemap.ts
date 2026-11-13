@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { listPublishedPosts } from '@/lib/server/blog';
+import { HOME_UPDATED, PAGES } from '@/content/seiten';
 import { SITE_URL, parseDbDate } from '@/lib/site';
 
 // Bei jedem Abruf aus D1, damit neue Beiträge sofort drinstehen. Ausgeliefert
@@ -16,7 +17,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .sort((a, b) => b.getTime() - a.getTime())[0];
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, changeFrequency: 'weekly', priority: 1 },
+    // lastmod: echter Stand der Inhalte (src/content/seiten.ts), kein Abrufdatum
+    { url: `${SITE_URL}/`, lastModified: HOME_UPDATED, changeFrequency: 'weekly', priority: 1 },
+    ...PAGES.map((page) => ({
+      url: `${SITE_URL}/${page.slug}`,
+      lastModified: page.updated,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+      images: [`${SITE_URL}${page.image.src}`],
+    })),
     {
       url: `${SITE_URL}/blog`,
       ...(newestPost ? { lastModified: newestPost } : {}),

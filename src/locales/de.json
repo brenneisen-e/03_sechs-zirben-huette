@@ -14,7 +14,19 @@
     "bewertungen": "Bewertungen",
     "impressum": "Impressum",
     "datenschutz": "Datenschutz",
-    "agb": "AGB"
+    "agb": "AGB",
+    "sauna": "Sauna",
+    "hund": "Mit Hund",
+    "winter": "Winter",
+    "sommer": "Sommer",
+    "workation": "Workation",
+    "preise": "Preise & Buchen",
+    "anreise": "Anreise",
+    "faq": "Fragen",
+    "huetten": "Hütten am Falkertsee",
+    "ratgeber": "Falkert & Falkertsee",
+    "zirbenhuette": "Zirbenhütte am Falkert",
+    "main": "Hauptnavigation"
   },
   "hero": {
     "welcome": "Herzlich Willkommen in der Sechszirbenhütte",
@@ -364,7 +376,8 @@
     "phone": "Telefon",
     "email": "E-Mail",
     "address": "Adresse",
-    "copyright": "© {year} Sechszirbenhütte. Alle Rechte vorbehalten."
+    "copyright": "© {year} Sechszirbenhütte. Alle Rechte vorbehalten.",
+    "discover": "Entdecken"
   },
   "common": {
     "learnMore": "Mehr erfahren",
@@ -547,7 +560,9 @@
     "greetingText": "Wir haben die Sechszirbenhütte so hergerichtet, dass Sie oben ankommen und Zeit füreinander haben. Bei Fragen zur Anreise oder zur Hütte sind wir gern für Sie da.",
     "reduceMotion": "Bewegung reduzieren",
     "motionReduced": "Bewegung reduziert",
-    "motionSystem": "Bewegung reduziert (Systemeinstellung)"
+    "motionSystem": "Bewegung reduziert (Systemeinstellung)",
+    "h1": "Sechszirbenhütte: 250 Jahre alte Berghütte mit Sauna am Falkert",
+    "heroAlt": "Die Sechszirbenhütte am Falkert in den Kärntner Nockbergen"
   },
   "instagram": {
     "label": "Instagram",

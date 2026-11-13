@@ -239,8 +239,7 @@ export function Hero() {
             src={STILL_SRC}
             srcSet={STILL_SRCSET}
             sizes={STILL_SIZES}
-            alt=""
-            aria-hidden="true"
+            alt={t.brand.heroAlt}
             fetchPriority="high"
             decoding="async"
             onError={() => setStillFailed(true)}
@@ -260,10 +259,18 @@ export function Hero() {
           <p className="brand-label text-holz [text-shadow:0_1px_8px_rgba(0,0,0,0.4)]">
             {t.brand.place}
           </p>
-          <h1 id="hero-title" className="mt-5 [text-shadow:0_2px_18px_rgba(0,0,0,0.35)] md:mt-6">
+          {/* H1 sagt sachlich, was die Seite ist; die Leitidee bleibt groß als
+              Unterzeile darunter (SEO-Todo 13.11.2026) */}
+          <h1
+            id="hero-title"
+            className="mt-4 max-w-[40rem] text-[1.125rem] leading-snug [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:text-[1.375rem]"
+          >
+            {t.brand.h1}
+          </h1>
+          <p className="mt-5 [text-shadow:0_2px_18px_rgba(0,0,0,0.35)] md:mt-6">
             <span className="brand-hero-title block">{t.brand.claim}</span>
             <span className="brand-hero-title block">{t.brand.claimHand}</span>
-          </h1>
+          </p>
           <p className="mt-6 max-w-[38rem] text-leinen [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] md:mt-8">
             {t.brand.heroText}
           </p>

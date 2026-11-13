@@ -14,7 +14,19 @@
     "bewertungen": "Beoordelingen",
     "impressum": "Colofon",
     "datenschutz": "Privacy",
-    "agb": "Algemene voorwaarden"
+    "agb": "Algemene voorwaarden",
+    "sauna": "Sauna",
+    "hund": "Met hond",
+    "winter": "Winter",
+    "sommer": "Zomer",
+    "workation": "Workation",
+    "preise": "Prijzen & boeken",
+    "anreise": "Route",
+    "faq": "Vragen",
+    "huetten": "Hutten aan de Falkertsee",
+    "ratgeber": "Falkert & Falkertsee",
+    "zirbenhuette": "Zirbenhütte aan de Falkert",
+    "main": "Hoofdnavigatie"
   },
   "hero": {
     "welcome": "Hartelijk welkom in de Sechszirbenhütte",
@@ -370,7 +382,8 @@
     "phone": "Telefoon",
     "email": "E-mail",
     "address": "Adres",
-    "copyright": "© {year} Sechszirbenhütte. Alle rechten voorbehouden."
+    "copyright": "© {year} Sechszirbenhütte. Alle rechten voorbehouden.",
+    "discover": "Ontdekken"
   },
   "common": {
     "learnMore": "Meer informatie",
@@ -553,7 +566,9 @@
     "greetingText": "We hebben de Sechszirbenhütte zo ingericht dat u boven aankomt en tijd voor elkaar hebt. Met vragen over de reis of de hut helpen we u graag.",
     "reduceMotion": "Beweging beperken",
     "motionReduced": "Beweging beperkt",
-    "motionSystem": "Beweging beperkt (systeeminstelling)"
+    "motionSystem": "Beweging beperkt (systeeminstelling)",
+    "h1": "Sechszirbenhütte: 250 jaar oude berghut met sauna aan de Falkert",
+    "heroAlt": "De Sechszirbenhütte aan de Falkert in de Nockberge, Karinthië"
   },
   "instagram": {
     "label": "Instagram",

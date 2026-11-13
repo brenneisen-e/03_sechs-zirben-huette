@@ -139,7 +139,7 @@ export function HutChapters() {
                     key={chapter.title}
                     {...chapterSource(IMAGES[i], variants)}
                     sizes="62vw"
-                    alt={i === active ? chapter.alt : ''}
+                    alt={chapter.alt}
                     aria-hidden={i === active ? undefined : true}
                     width={1400}
                     height={1050}

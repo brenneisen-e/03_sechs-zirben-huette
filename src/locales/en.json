@@ -14,7 +14,19 @@
     "bewertungen": "Reviews",
     "impressum": "Imprint",
     "datenschutz": "Privacy Policy",
-    "agb": "Terms"
+    "agb": "Terms",
+    "sauna": "Sauna",
+    "hund": "With your dog",
+    "winter": "Winter",
+    "sommer": "Summer",
+    "workation": "Workation",
+    "preise": "Prices & booking",
+    "anreise": "Getting here",
+    "faq": "FAQ",
+    "huetten": "Huts at Lake Falkert",
+    "ratgeber": "Falkert & Lake Falkert",
+    "zirbenhuette": "Zirbenhütte at Falkert",
+    "main": "Main navigation"
   },
   "hero": {
     "welcome": "Welcome to the Sechszirbenhütte",
@@ -366,7 +378,8 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
-    "copyright": "© {year} Sechszirbenhütte. All rights reserved."
+    "copyright": "© {year} Sechszirbenhütte. All rights reserved.",
+    "discover": "Discover"
   },
   "common": {
     "learnMore": "Learn More",
@@ -545,7 +558,9 @@
     "greetingText": "We have set up the Sechszirbenhütte so you can arrive up here and have time for each other. If you have questions about getting here or about the hut, we are happy to help.",
     "reduceMotion": "Reduce motion",
     "motionReduced": "Motion reduced",
-    "motionSystem": "Motion reduced (system setting)"
+    "motionSystem": "Motion reduced (system setting)",
+    "h1": "Sechszirbenhütte: 250-year-old mountain hut with sauna at Falkert",
+    "heroAlt": "The Sechszirbenhütte at Falkert in the Nockberge mountains, Carinthia"
   },
   "instagram": {
     "label": "Instagram",

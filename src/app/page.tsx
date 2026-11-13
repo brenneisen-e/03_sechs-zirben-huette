@@ -22,8 +22,29 @@ import { Orientation } from '@/components/brand/Orientation';
 import { HutChapters } from '@/components/brand/HutChapters';
 import { HostGreeting } from '@/components/brand/HostGreeting';
 
+const title = 'Hütte mit Sauna am Falkertsee, Kärnten · Sechszirbenhütte';
+const description =
+  '250 Jahre alte Berghütte in Alleinlage auf 1.700 m: eigene Sauna mit Ruheraum, 2 Schlafzimmer, 2 Bäder, bis 5 Personen, Hunde willkommen. Direkt buchen.';
+
 export const metadata: Metadata = {
+  title: { absolute: title },
+  description,
   alternates: { canonical: `${SITE_URL}/` },
+  openGraph: {
+    type: 'website',
+    url: `${SITE_URL}/`,
+    title,
+    description,
+    siteName: 'Sechszirbenhütte',
+    locale: 'de_DE',
+    images: ['/images/fallback/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/fallback/og-image.jpg'],
+  },
 };
 
 export default function HomePage() {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Mountain, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { formatGermanDate } from '@/lib/site';
+import { plainTitle } from '@/lib/site';
 
 interface BlogPost {
   id: string;
@@ -57,7 +58,7 @@ export function BlogPostsGrid({ posts, fallbackImages = [] }: BlogPostsGridProps
               {post.cover_image_url || fallbackImages[postIndex] ? (
                 <Image
                   src={post.cover_image_url || fallbackImages[postIndex]?.url || ''}
-                  alt={post.cover_image_alt || post.title}
+                  alt={post.cover_image_alt || plainTitle(post.title)}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -74,7 +75,8 @@ export function BlogPostsGrid({ posts, fallbackImages = [] }: BlogPostsGridProps
                 className="text-xl text-logo-green mb-2 group-hover:text-logo-green/80 transition-colors"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                {post.title}
+                {/* Bildzeichen nur im Beitrag selbst, nicht in der Übersicht */}
+                {plainTitle(post.title)}
               </h3>
               {post.subtitle && (
                 <p className="text-sm text-logo-green/70 font-medium mb-2">{post.subtitle}</p>

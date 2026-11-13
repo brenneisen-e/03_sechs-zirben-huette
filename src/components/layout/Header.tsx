@@ -27,20 +27,36 @@ import { BookingCTA } from '@/components/brand/BookingCTA';
 // (CompactBar: Instagram | kleines Zeichen | Google), passend zum Scrollweg,
 // während das große Logo-Schild nach oben verschwindet.
 //
-// Ziele sind echte Links (/#abschnitt) — funktionieren auch ohne JavaScript
-// und von Unterseiten aus.
+// Ziele sind echte Links auf eigene Seiten (Sauna, Hund, Winter, Preise) —
+// sie funktionieren ohne JavaScript, und Google zeigt sie als Sitelinks unter
+// der Marke (vorher standen dort Impressum und AGB; die bleiben im Fuß).
+// Neben dem Logo ist Platz für je zwei Ziele; das Menü auf schmalen Ansichten
+// führt zusätzlich die übrigen Seiten.
 
 const LEFT_ITEMS = [
-  { key: 'ferienhaus', href: '/#huette' },
-  { key: 'galerie', href: '/#galerie' },
+  { key: 'sauna', href: '/sauna' },
+  { key: 'hund', href: '/huette-mit-hund' },
 ] as const;
 
 const RIGHT_ITEMS = [
-  { key: 'umgebung', href: '/#umgebung' },
-  { key: 'blog', href: '/blog' },
+  { key: 'winter', href: '/winter-skiurlaub' },
+  { key: 'preise', href: '/preise-buchen' },
 ] as const;
 
 const NAV_ITEMS = [...LEFT_ITEMS, ...RIGHT_ITEMS];
+
+// Nur im aufklappbaren Menü (unter 1024 px)
+const MENU_ITEMS = [
+  { key: 'ferienhaus', href: '/#huette' },
+  ...LEFT_ITEMS,
+  RIGHT_ITEMS[0],
+  { key: 'sommer', href: '/sommer-wandern' },
+  { key: 'workation', href: '/workation' },
+  RIGHT_ITEMS[1],
+  { key: 'anreise', href: '/anreise' },
+  { key: 'faq', href: '/faq' },
+  { key: 'blog', href: '/blog' },
+] as const;
 
 export function Header() {
   const pathname = usePathname();
@@ -71,7 +87,6 @@ export function Header() {
 
   if (pathname?.startsWith('/admin')) return null;
 
-  const isBlog = pathname?.startsWith('/blog');
   // Über dem Film (Startseite, ganz oben): helle Schrift; sonst Grün auf Leinen
   const desktopOnFilm = isHome && !scrolled;
 
@@ -88,7 +103,7 @@ export function Header() {
   const mobileColor = isHome ? 'text-leinen' : 'text-zirbe';
 
   const navLink = (item: (typeof NAV_ITEMS)[number]) => {
-    const current = item.key === 'blog' && isBlog;
+    const current = pathname === item.href;
     return (
       <li key={item.key}>
         <a
@@ -172,10 +187,11 @@ export function Header() {
         >
           <nav aria-label="Hauptnavigation mobil" className="brand-container py-4">
             <ul className="flex flex-col">
-              {NAV_ITEMS.map((item) => (
+              {MENU_ITEMS.map((item) => (
                 <li key={item.key}>
                   <a
                     href={item.href}
+                    aria-current={pathname === item.href ? 'page' : undefined}
                     onClick={() => setMenuOpen(false)}
                     className="brand-nav-link block py-3 text-zirbe underline-offset-[0.45em] hover:underline"
                   >

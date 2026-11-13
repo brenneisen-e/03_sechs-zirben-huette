@@ -21,7 +21,28 @@ const publisher: JsonLd = {
   logo: { '@type': 'ImageObject', url: absoluteUrl('/images/logo.svg') },
 };
 
-/** Die Hütte als Ferienunterkunft (Startseite) */
+// Profile der Hütte auf anderen Seiten (sameAs) — nur gesicherte Adressen.
+// Noch offen: Eintrag bei heidialm.at, Airbnb und Booking.com (Malte liefert
+// die Adressen); einfach hier ergänzen.
+const SAME_AS: string[] = [SITE_CONFIG.social.instagramUrl, SITE_CONFIG.social.googleUrl];
+
+const AMENITIES = [
+  'Private Sauna mit Ruheraum',
+  'Sauna-Terrasse',
+  'WLAN (220 Mbit/s)',
+  'Pelletofen',
+  'Voll ausgestattete Küche',
+  'Umlaufender Balkon',
+  'Almgarten (1.200 m²)',
+  'Waschmaschine und Trockner',
+  'Eigener Parkplatz',
+].map((name) => ({ '@type': 'LocationFeatureSpecification', name, value: true }));
+
+/**
+ * Die Hütte als Ferienunterkunft (Startseite). Keine Bewertungssterne
+ * (aggregateRating) aus eigenen Bewertungen — Google wertet das als
+ * selbstbezogen.
+ */
 export function lodgingJsonLd(): JsonLd {
   return {
     '@context': 'https://schema.org',
@@ -29,8 +50,8 @@ export function lodgingJsonLd(): JsonLd {
     '@id': `${SITE_URL}/#huette`,
     name: 'Sechszirbenhütte am Falkert',
     description:
-      'Historische Berghütte in Alleinlage auf 1.700 m am Falkert in den Kärntner Nockbergen: 85 m² Wohnfläche, zwei Schlafzimmer für bis zu 5 Personen, zwei Bäder und separates WC, eigene Sauna mit Ruheraum, großer umlaufender Balkon. Hunde willkommen.',
-    url: SITE_URL,
+      '250 Jahre alte Berghütte in Alleinlage auf 1.700 m am Falkert in Kärnten, mit eigener Sauna, für bis zu 5 Personen. Hunde willkommen.',
+    url: `${SITE_URL}/`,
     image: [absoluteUrl(DEFAULT_OG_IMAGE)],
     email: SITE_CONFIG.email,
     telephone: SITE_CONFIG.phone.replace(/[()\s]/g, '').replace('+490', '+49'),
@@ -38,15 +59,24 @@ export function lodgingJsonLd(): JsonLd {
       '@type': 'PostalAddress',
       streetAddress: SITE_CONFIG.address.street,
       postalCode: SITE_CONFIG.address.zip,
-      addressLocality: SITE_CONFIG.address.city,
+      addressLocality: 'Falkertsee',
       addressRegion: 'Kärnten',
       addressCountry: 'AT',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: SITE_CONFIG.coordinates.lat,
-      longitude: SITE_CONFIG.coordinates.lng,
+      latitude: 46.8565463,
+      longitude: 13.8461459,
     },
+    checkinTime: '15:00',
+    checkoutTime: '10:00',
+    numberOfRooms: 2,
+    numberOfBedrooms: 2,
+    numberOfBathroomsTotal: 2,
+    floorSize: { '@type': 'QuantitativeValue', value: 85, unitCode: 'MTK' },
+    occupancy: { '@type': 'QuantitativeValue', maxValue: 5 },
+    amenityFeature: AMENITIES,
+    sameAs: SAME_AS,
     containsPlace: {
       '@type': 'Accommodation',
       additionalType: 'https://schema.org/House',
@@ -56,13 +86,7 @@ export function lodgingJsonLd(): JsonLd {
       numberOfBathroomsTotal: 2,
       occupancy: { '@type': 'QuantitativeValue', maxValue: 5 },
       petsAllowed: true,
-      amenityFeature: [
-        { '@type': 'LocationFeatureSpecification', name: 'Sauna', value: true },
-        { '@type': 'LocationFeatureSpecification', name: 'Ruheraum', value: true },
-        { '@type': 'LocationFeatureSpecification', name: 'Balkon', value: true },
-        { '@type': 'LocationFeatureSpecification', name: 'WLAN', value: true },
-        { '@type': 'LocationFeatureSpecification', name: 'Pelletofen', value: true },
-      ],
+      amenityFeature: AMENITIES,
     },
     petsAllowed: true,
     publicAccess: false,

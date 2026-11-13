@@ -14,7 +14,19 @@
     "bewertungen": "Ocene",
     "impressum": "Impresum",
     "datenschutz": "Zasebnost",
-    "agb": "Pogoji"
+    "agb": "Pogoji",
+    "sauna": "Savna",
+    "hund": "S psom",
+    "winter": "Zima",
+    "sommer": "Poletje",
+    "workation": "Workation",
+    "preise": "Cene in rezervacija",
+    "anreise": "Prihod",
+    "faq": "Vprašanja",
+    "huetten": "Koče ob Falkertseeju",
+    "ratgeber": "Falkert in Falkertsee",
+    "zirbenhuette": "Zirbenhütte na Falkertu",
+    "main": "Glavna navigacija"
   },
   "hero": {
     "welcome": "Dobrodošli",
@@ -355,7 +367,8 @@
     "phone": "Telefon",
     "email": "E-pošta",
     "address": "Naslov",
-    "copyright": "© {year} Sechszirbenhütte. Vse pravice pridržane."
+    "copyright": "© {year} Sechszirbenhütte. Vse pravice pridržane.",
+    "discover": "Odkrijte"
   },
   "common": {
     "learnMore": "Več Informacij",
@@ -543,7 +556,9 @@
     "greetingText": "Kočo Sechszirbenhütte smo uredili tako, da lahko prispete sem gor in imate čas drug za drugega. Za vprašanja o prihodu ali koči smo vam na voljo.",
     "reduceMotion": "Zmanjšaj gibanje",
     "motionReduced": "Gibanje zmanjšano",
-    "motionSystem": "Gibanje zmanjšano (sistemska nastavitev)"
+    "motionSystem": "Gibanje zmanjšano (sistemska nastavitev)",
+    "h1": "Sechszirbenhütte: 250 let stara planinska koča s savno na Falkertu",
+    "heroAlt": "Koča Sechszirbenhütte na Falkertu v Nockih na Koroškem"
   },
   "instagram": {
     "label": "Instagram",
