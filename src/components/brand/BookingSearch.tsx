@@ -5,6 +5,7 @@ import { CalendarDays } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { AvailabilityCalendar, type CalendarTarget } from '@/components/brand/AvailabilityCalendar';
 import { useAvailability } from '@/lib/availability';
+import { trackEvent } from '@/lib/analytics';
 import {
   beds24FormUrl,
   type BookingQuery,
@@ -106,6 +107,12 @@ export function BookingSearch({ variant, className = '' }: Props) {
     if (!url) return;
     setError('');
     setCalendarOpen(false);
+    // Google Analytics: „Buchung begonnen“ — nur mit Einwilligung (sonst
+    // wirkungslos). Die Buchung selbst entsteht bei Beds24.
+    trackEvent('generate_lead', {
+      lead_source: 'buchungssuche',
+      nights: nightsBetween(query.arrival, query.departure),
+    });
     openBeds24Form(url);
   };
 
