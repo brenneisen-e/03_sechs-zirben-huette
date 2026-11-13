@@ -173,7 +173,6 @@ export const PAGES: ContentPage[] = [
         answer: 'Ja, die Sauna gehört in jeder Jahreszeit zur Hütte.',
       },
     ],
-    sister: true,
     related: ['winter-skiurlaub', 'preise-buchen', 'faq'],
   },
   {
@@ -256,7 +255,6 @@ export const PAGES: ContentPage[] = [
           'Die Hundegebühr steht in der Preisaufstellung des Buchungsformulars, zusammen mit allen anderen Kosten.',
       },
     ],
-    sister: true,
     related: ['sommer-wandern', 'preise-buchen', 'faq'],
   },
   {
@@ -457,7 +455,6 @@ export const PAGES: ContentPage[] = [
           'Der Weg um den Falkertsee ist leicht. Für die Gipfeltour auf den Falkert gibt es eine gemäßigte und eine steile Variante.',
       },
     ],
-    sister: true,
     related: ['huette-mit-hund', 'falkert-falkertsee', 'preise-buchen'],
   },
   {
