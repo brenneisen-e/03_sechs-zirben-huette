@@ -48,3 +48,21 @@ export function loadGoogleAnalytics(): void {
 export function trackEvent(name: string, params?: Record<string, string | number>): void {
   if (typeof window !== 'undefined' && window.gtag) window.gtag('event', name, params || {});
 }
+
+/**
+ * Buchungsanfrage melden (Schlüsselereignis generate_lead in Analytics).
+ * Ohne Einwilligung ist gtag nicht geladen — dann passiert nichts.
+ * WICHTIG: keine personenbezogenen Daten mitsenden (Name, E-Mail, Telefon,
+ * Nachrichtentext) — das verbietet Google.
+ */
+export function trackLead(params: {
+  arrival?: string;
+  departure?: string;
+  nights?: number;
+  guests?: number;
+  dogs?: number;
+  form?: string;
+}): void {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+  window.gtag('event', 'generate_lead', { ...params, currency: 'EUR' });
+}
