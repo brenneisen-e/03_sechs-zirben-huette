@@ -29,8 +29,12 @@ export function loadGoogleAnalytics(): void {
   if (loaded || !GA_MEASUREMENT_ID || typeof window === 'undefined') return;
   loaded = true;
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer?.push(args);
+  // WICHTIG: klassische Funktion mit `arguments` — Google wertet im dataLayer
+  // nur das arguments-Objekt aus. Eine normale Liste (Pfeilfunktion, ...args)
+  // wird stillschweigend ignoriert, dann kommt kein Besuch an (13.11.2026).
+  window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
   };
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID);
