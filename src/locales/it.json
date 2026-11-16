@@ -92,7 +92,7 @@
   },
   "ferienhaus": {
     "title": "La Sechszirbenhütte – Romanticismo Rustico con Comfort Moderno",
-    "intro": "Concediti una vacanza indimenticabile nel nostro rifugio di montagna di oltre 250 anni in posizione isolata – direttamente al Parco Nazionale Nockberge.",
+    "intro": "Concediti una vacanza indimenticabile nel nostro rifugio di montagna di oltre 250 anni in posizione isolata – direttamente al Parco della biosfera Nockberge.",
     "details": {
       "grundstueck": "1.200 m² di terreno alpino",
       "wohnflaeche": "85 m²",
@@ -161,8 +161,8 @@
         "description": "La Sechszirbenhütte è l'alloggio ideale per la tua vacanza a Falkertsee."
       },
       "nationalpark": {
-        "title": "Parco Nazionale Nockberge e Comprensori Sciistici Adiacenti",
-        "description": "Esplora l'impressionante Parco Nazionale Nockberge nelle immediate vicinanze."
+        "title": "Parco della biosfera Nockberge e Comprensori Sciistici Adiacenti",
+        "description": "Esplora l'impressionante Parco della biosfera Nockberge nelle immediate vicinanze."
       },
       "dreilaendereck": {
         "title": "Triangolo dei Tre Paesi: Italia, Slovenia e Austria",
@@ -507,7 +507,7 @@
     "place": "Falkert / Carinzia",
     "claim": "Stare in alto.",
     "claimHand": "Stare insieme.",
-    "heroText": "Una baita di montagna di oltre 250 anni, isolata a 1.700 m – accanto al Parco Nazionale Nockberge, a 800 m dal lago Falkertsee.",
+    "heroText": "Una baita di montagna di oltre 250 anni, isolata a 1.700 m – accanto al Parco della biosfera Nockberge, a 800 m dal lago Falkertsee.",
     "book": "Richiedi",
     "videoPause": "Metti in pausa il video",
     "videoPlay": "Riproduci il video",
@@ -540,7 +540,7 @@
     "chapters": [
       {
         "title": "Fuori",
-        "text": "La baita sorge isolata tra pini cembri e larici, accanto al Parco Nazionale Nockberge, a 800 m dal lago Falkertsee. D'estate si cammina nei Nockberge, d'inverno si scia nel comprensorio Heidi Alm.",
+        "text": "La baita sorge isolata tra pini cembri e larici, accanto al Parco della biosfera Nockberge, a 800 m dal lago Falkertsee. D'estate si cammina nei Nockberge, d'inverno si scia nel comprensorio Heidi Alm.",
         "alt": "La Sechszirbenhütte d'estate con balcone e legna accatastata tra gli abeti"
       },
       {

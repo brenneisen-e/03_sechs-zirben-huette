@@ -201,7 +201,7 @@ const defaultTexts: Record<string, ContentText> = {
   location_title: createText('location_title', 'So finden Sie uns', 'location', 'heading'),
   location_subtitle: createText(
     'location_subtitle',
-    'Die Sechszirbenhütte liegt auf 1.700 m direkt am Nationalpark Nockberge',
+    'Die Sechszirbenhütte liegt auf 1.700 m direkt am Biosphärenpark Nockberge',
     'location',
     'body',
   ),

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sechszirbenhütte – Ihr Traumurlaub am Falkert',
     description:
-      'Über 250 Jahre alte Berghütte mit modernem Komfort und Sauna. Direkt am Nationalpark Nockberge.',
+      'Über 250 Jahre alte Berghütte mit modernem Komfort und Sauna. Direkt am Biosphärenpark Nockberge.',
     images: ['/images/fallback/og-image.jpg'],
     locale: 'de_DE',
     type: 'website',

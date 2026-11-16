@@ -92,7 +92,7 @@
   },
   "ferienhaus": {
     "title": "Sechszirbenhütte – Rustikalna Romantika z Modernim Udobjem",
-    "intro": "Privoščite si nepozabne počitnice v naši več kot 250 let stari gorski koči na samotni lokaciji – neposredno ob Narodnem parku Nockberge.",
+    "intro": "Privoščite si nepozabne počitnice v naši več kot 250 let stari gorski koči na samotni lokaciji – neposredno ob Biosfernem parku Nockberge.",
     "details": {
       "grundstueck": "1.200 m² alpskega zemljišča",
       "wohnflaeche": "85 m²",
@@ -161,8 +161,8 @@
         "description": "Sechszirbenhütte je idealna nastanitev za vaše počitnice v Falkertsee."
       },
       "nationalpark": {
-        "title": "Narodni Park Nockberge in Sosednja Smučišča",
-        "description": "Raziskujte impresiven Narodni park Nockberge v neposredni bližini."
+        "title": "Biosferni park Nockberge in Sosednja Smučišča",
+        "description": "Raziskujte impresiven Biosferni park Nockberge v neposredni bližini."
       },
       "dreilaendereck": {
         "title": "Tromeja: Italija, Slovenija in Avstrija",
@@ -507,7 +507,7 @@
     "place": "Falkert / Koroška",
     "claim": "Biti zgoraj.",
     "claimHand": "Biti skupaj.",
-    "heroText": "Več kot 250 let stara gorska koča na samem na 1.700 m – tik ob Narodnem parku Nockberge, 800 m od jezera Falkertsee.",
+    "heroText": "Več kot 250 let stara gorska koča na samem na 1.700 m – tik ob Biosfernem parku Nockberge, 800 m od jezera Falkertsee.",
     "book": "Povpraševanje",
     "videoPause": "Ustavi video",
     "videoPlay": "Predvajaj video",
@@ -540,7 +540,7 @@
     "chapters": [
       {
         "title": "Zunaj",
-        "text": "Koča stoji sama med cemprini in macesni, tik ob Narodnem parku Nockberge, 800 m od jezera Falkertsee. Poleti pohodi po Nockbergih, pozimi smučanje na smučišču Heidi Alm.",
+        "text": "Koča stoji sama med cemprini in macesni, tik ob Biosfernem parku Nockberge, 800 m od jezera Falkertsee. Poleti pohodi po Nockbergih, pozimi smučanje na smučišču Heidi Alm.",
         "alt": "Koča Sechszirbenhütte poleti z balkonom in drvmi med smrekami"
       },
       {

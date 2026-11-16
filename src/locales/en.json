@@ -92,7 +92,7 @@
   },
   "ferienhaus": {
     "title": "The Sechszirbenhütte – Rustic Romance with Modern Comfort",
-    "intro": "Treat yourself to an unforgettable cabin vacation in our over 250-year-old mountain cabin in secluded location – right at the Nockberge National Park and just 800m from the picturesque Falkertsee.",
+    "intro": "Treat yourself to an unforgettable cabin vacation in our over 250-year-old mountain cabin in secluded location – right at the Nockberge Biosphere Reserve and just 800m from the picturesque Falkertsee.",
     "details": {
       "grundstueck": "1,200 m² alpine property",
       "wohnflaeche": "85 m²",
@@ -153,11 +153,11 @@
     "features": {
       "central": {
         "title": "Sechszirbenhütte: Central Accommodation for All Activities",
-        "description": "The Sechszirbenhütte is the ideal accommodation for your vacation in Falkertsee. Thanks to its central location, you have easy access to all ski areas, hiking trails, the Nockberge National Park, and the picturesque Carinthian lakes."
+        "description": "The Sechszirbenhütte is the ideal accommodation for your vacation in Falkertsee. Thanks to its central location, you have easy access to all ski areas, hiking trails, the Nockberge Biosphere Reserve, and the picturesque Carinthian lakes."
       },
       "nationalpark": {
-        "title": "Nockberge National Park & Adjacent Ski Areas",
-        "description": "Explore the impressive Nockberge National Park in close proximity to the Sechszirbenhütte. Also benefit from the proximity to the excellent ski areas of Turracher Höhe and Bad Kleinkirchheim for even more variety."
+        "title": "Nockberge Biosphere Reserve & Adjacent Ski Areas",
+        "description": "Explore the impressive Nockberge Biosphere Reserve in close proximity to the Sechszirbenhütte. Also benefit from the proximity to the excellent ski areas of Turracher Höhe and Bad Kleinkirchheim for even more variety."
       },
       "dreilaendereck": {
         "title": "Three-Country Corner: Italy, Slovenia & Austria",
@@ -509,7 +509,7 @@
     "place": "Falkert / Carinthia",
     "claim": "Up here.",
     "claimHand": "Together.",
-    "heroText": "A mountain hut more than 250 years old, standing alone at 1,700 m – right by the Nockberge National Park, 800 m from Lake Falkert.",
+    "heroText": "A mountain hut more than 250 years old, standing alone at 1,700 m – right by the Nockberge Biosphere Reserve, 800 m from Lake Falkert.",
     "book": "Enquire",
     "videoPause": "Pause video",
     "videoPlay": "Play video",
@@ -542,7 +542,7 @@
     "chapters": [
       {
         "title": "Outside",
-        "text": "The hut stands on its own among Swiss stone pines and larches, right by the Nockberge National Park, 800 m from Lake Falkert. Hike the Nockberge in summer, ski at the Heidi Alm resort in winter.",
+        "text": "The hut stands on its own among Swiss stone pines and larches, right by the Nockberge Biosphere Reserve, 800 m from Lake Falkert. Hike the Nockberge in summer, ski at the Heidi Alm resort in winter.",
         "alt": "The Sechszirbenhütte in summer with balcony and woodpile among spruce trees"
       },
       {

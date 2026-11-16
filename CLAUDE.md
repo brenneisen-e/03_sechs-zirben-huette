@@ -97,6 +97,11 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - Regeln: Schrift nie rot; Rot nur als Hintergrund des Buchen-Buttons (Beschriftung „Anfragen“); kein Braun auf der Website (Fassadenband und Fensterläden entfernt, 30.10.2026); keine Herzen; Northwell nur kurz, Grün/Leinen, nie über Video/Fotos; Hero-Video bleibt
 - Platzhalter bis zum Designpaket: Gill Sans Nova (lokale Gill Sans/Systemschrift), Northwell (Autography), Fugenband-Geometrie, Logo/Zweig aus `public/images/logo.svg` abgeleitet
 
+## Bewertungen und Ortsangaben (16.11.2026)
+
+- **Nur echte Bewertungen.** Die sechs Texte „Familie Schneider“, „Thomas W.“ usw. waren Beispieltexte aus dem Code (früher Rückfall in `/api/reviews` und Knopf „6 Bewertungen importieren“ im Admin Center) — erfundene Bewertungen sind unlautere Werbung. `/api/reviews` liefert sie nicht mehr aus (`SAMPLE_REVIEWS`), auch wenn sie noch in der Datenbank stehen; ohne echte Bewertungen zeigt der Abschnitt nur den Verweis auf Google. Nie wieder Beispielbewertungen hinterlegen
+- Es heißt **Biosphärenpark Nockberge** (seit 2012), nicht „Nationalpark“ — in allen Sprachdateien korrigiert
+
 ## Layout der Startseite (Briefing 18.10.2026)
 
 - Menü (Wunsch 16.11.2026: zehn gleichrangige Einträge seit den SEO-Unterseiten waren unübersichtlich): unter 1024 px drei Gruppen mit Kennzeile (`MENU_GROUPS` in `Header.tsx`, Texte `navigation.gruppe*` in allen Sprachen) — „Die Hütte“ (Ferienhaus, Sauna, Preise & Buchen), „Urlaub am Falkert“ (Winter, Sommer, Mit Hund, Workation), „Gut zu wissen“ (Anreise, Fragen, Blog); neben dem Logo ab 1024 px Sauna, Winter | Sommer, Preise. „Mit Hund“ ist kein eigener Hauptpunkt. Für Suchmaschinen müssen nicht alle Seiten im Menü stehen — der Fuß verlinkt alle

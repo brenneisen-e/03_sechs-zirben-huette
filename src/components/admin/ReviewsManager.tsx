@@ -13,7 +13,6 @@ import {
   X,
   Save,
   AlertCircle,
-  Download,
 } from 'lucide-react';
 
 interface Review {
@@ -132,84 +131,6 @@ export default function ReviewsManager() {
       setError('Fehler beim Löschen');
     } finally {
       setDeleting(null);
-    }
-  };
-
-  const importHardcodedReviews = async () => {
-    const hardcoded = [
-      {
-        gast_name: 'Familie M.',
-        bewertung: 5,
-        titel: 'Traumhafter Urlaub',
-        text: 'Die Sechszirbenhütte ist ein absoluter Traum! Die Lage ist einzigartig, die Ausstattung top und die Sauna perfekt nach einem Tag auf der Piste. Wir kommen definitiv wieder!',
-        aufenthalt_von: '2024-02-10',
-        quelle: 'Google',
-      },
-      {
-        gast_name: 'Stefan & Anna',
-        bewertung: 5,
-        titel: 'Perfekte Auszeit',
-        text: 'Endlich mal richtig abschalten können. Die Hütte ist liebevoll eingerichtet, sehr sauber und die Umgebung ist einfach wunderschön. Ein Highlight war die private Sauna!',
-        aufenthalt_von: '2024-01-15',
-        quelle: 'Booking.com',
-      },
-      {
-        gast_name: 'Hundefamilie K.',
-        bewertung: 5,
-        titel: 'Perfekt mit Hund',
-        text: 'Endlich eine Unterkunft, in der unser Hund wirklich willkommen ist! Die Wandermöglichkeiten direkt vor der Tür sind fantastisch. Die Hütte ist gemütlich und hat alles was man braucht.',
-        aufenthalt_von: '2023-08-20',
-        quelle: 'FeWo-direkt',
-      },
-      {
-        gast_name: 'Familie Schneider',
-        bewertung: 5,
-        titel: 'Wie im Bilderbuch',
-        text: 'Die Hütte sieht genauso aus wie auf den Fotos - sogar noch schöner! Unsere Kinder haben die Heidi-Alm geliebt und wir die Ruhe am Abend. Absolute Empfehlung!',
-        aufenthalt_von: '2024-07-05',
-        quelle: 'Google',
-      },
-      {
-        gast_name: 'Thomas W.',
-        bewertung: 5,
-        titel: 'Wintertraum',
-        text: 'Perfekte Lage für Skifahrer und Langläufer. Die Pisten sind schnell erreichbar und nach einem aktiven Tag gibt es nichts Besseres als die private Sauna. Top Ausstattung, sehr sauber!',
-        aufenthalt_von: '2024-01-28',
-        quelle: 'Booking.com',
-      },
-      {
-        gast_name: 'Maria & Peter',
-        bewertung: 5,
-        titel: 'Romantischer Rückzugsort',
-        text: 'Der perfekte Ort für eine Auszeit zu zweit. Die Alleinlage ist wunderbar ruhig, die Ausstattung hochwertig. Besonders der Pelletofen sorgt für eine tolle Atmosphäre.',
-        aufenthalt_von: '2024-03-15',
-        quelle: 'FeWo-direkt',
-      },
-    ];
-
-    setSaving(true);
-    setError('');
-    let imported = 0;
-
-    for (const review of hardcoded) {
-      try {
-        const res = await fetch('/api/admin/reviews', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...review, sichtbar: true }),
-        });
-        const data = (await res.json()) as { success?: boolean };
-        if (data.success) imported++;
-      } catch {
-        // continue with next
-      }
-    }
-
-    setSaving(false);
-    await loadReviews();
-    if (imported > 0) {
-      setError(''); // clear any errors
-      alert(`${imported} Bewertungen erfolgreich importiert!`);
     }
   };
 
@@ -445,35 +366,14 @@ export default function ReviewsManager() {
         </div>
       )}
 
-      {/* Import Button - show when empty or always as option */}
-      {reviews.length === 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-          <p className="text-sm text-blue-800 mb-3">
-            Es sind noch keine Bewertungen in der Datenbank. Sie können die vorhandenen Bewertungen
-            importieren.
-          </p>
-          <button
-            onClick={importHardcodedReviews}
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm font-medium"
-          >
-            {saving ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Download className="w-4 h-4" />
-            )}
-            6 Bewertungen importieren
-          </button>
-        </div>
-      )}
-
       {/* Reviews List */}
       {reviews.length === 0 ? (
         <div className="text-center py-16 text-gray-500">
           <Star className="w-12 h-12 mx-auto mb-3 text-gray-300" />
           <p className="font-medium">Keine Bewertungen vorhanden</p>
           <p className="text-sm mt-1">
-            Erstellen Sie die erste Bewertung oder importieren Sie die vorhandenen.
+            Tragen Sie nur echte Bewertungen ein – wortgetreu und mit Quelle (Google, Booking.com,
+            FeWo-direkt).
           </p>
         </div>
       ) : (

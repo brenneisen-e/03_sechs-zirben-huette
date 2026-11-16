@@ -92,7 +92,7 @@
   },
   "ferienhaus": {
     "title": "Die Sechszirbenhütte – Urige Romantik mit modernem Komfort",
-    "intro": "Gönnen Sie sich einen unvergesslichen Hüttenurlaub in unserer über 250 Jahre alten Berghütte in Alleinlage – direkt am Nationalpark Nockberge und nur 800 m vom malerischen Falkertsee entfernt.",
+    "intro": "Gönnen Sie sich einen unvergesslichen Hüttenurlaub in unserer über 250 Jahre alten Berghütte in Alleinlage – direkt am Biosphärenpark Nockberge und nur 800 m vom malerischen Falkertsee entfernt.",
     "details": {
       "grundstueck": "1.200 m² Almgrundstück",
       "wohnflaeche": "85 m²",
@@ -151,11 +151,11 @@
     "features": {
       "central": {
         "title": "Sechszirbenhütte: Zentrale Unterkunft für alle Aktivitäten",
-        "description": "Die Sechszirbenhütte ist die ideale Unterkunft für Ihren Urlaub in Falkertsee. Dank ihrer zentralen Lage haben Sie bequemen Zugang zu allen Skigebieten, Wanderwegen, dem Nationalpark Nockberge und den malerischen Kärntner Seen."
+        "description": "Die Sechszirbenhütte ist die ideale Unterkunft für Ihren Urlaub in Falkertsee. Dank ihrer zentralen Lage haben Sie bequemen Zugang zu allen Skigebieten, Wanderwegen, dem Biosphärenpark Nockberge und den malerischen Kärntner Seen."
       },
       "nationalpark": {
-        "title": "Nationalpark Nockberge & angrenzende Skigebiete",
-        "description": "Erkunden Sie den beeindruckenden Nationalpark Nockberge in unmittelbarer Nähe zur Sechszirbenhütte. Profitieren Sie zudem von der Nähe zu den erstklassigen Skigebieten Turracher Höhe und Bad Kleinkirchheim für noch mehr Abwechslung."
+        "title": "Biosphärenpark Nockberge & angrenzende Skigebiete",
+        "description": "Erkunden Sie den beeindruckenden Biosphärenpark Nockberge in unmittelbarer Nähe zur Sechszirbenhütte. Profitieren Sie zudem von der Nähe zu den erstklassigen Skigebieten Turracher Höhe und Bad Kleinkirchheim für noch mehr Abwechslung."
       },
       "dreilaendereck": {
         "title": "Dreiländereck: Italien, Slowenien & Österreich",
@@ -511,7 +511,7 @@
     "place": "Falkert / Kärnten",
     "claim": "Oben sein.",
     "claimHand": "Bei sich sein.",
-    "heroText": "Eine über 250 Jahre alte Berghütte in Alleinlage auf 1.700 m – direkt am Nationalpark Nockberge, 800 m vom Falkertsee.",
+    "heroText": "Eine über 250 Jahre alte Berghütte in Alleinlage auf 1.700 m – direkt am Biosphärenpark Nockberge, 800 m vom Falkertsee.",
     "book": "Anfragen",
     "videoPause": "Video pausieren",
     "videoPlay": "Video abspielen",
@@ -544,7 +544,7 @@
     "chapters": [
       {
         "title": "Draußen",
-        "text": "Die Hütte steht allein zwischen Zirben und Lärchen, direkt am Nationalpark Nockberge, 800 m vom Falkertsee. Im Sommer wandern Sie in den Nockbergen, im Winter fahren Sie im Skigebiet der Heidi Alm.",
+        "text": "Die Hütte steht allein zwischen Zirben und Lärchen, direkt am Biosphärenpark Nockberge, 800 m vom Falkertsee. Im Sommer wandern Sie in den Nockbergen, im Winter fahren Sie im Skigebiet der Heidi Alm.",
         "alt": "Die Sechszirbenhütte im Sommer mit Balkon und Holzstapel zwischen Fichten"
       },
       {
