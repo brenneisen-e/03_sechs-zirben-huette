@@ -27,35 +27,54 @@ import { BookingCTA } from '@/components/brand/BookingCTA';
 // (CompactBar: Instagram | kleines Zeichen | Google), passend zum Scrollweg,
 // während das große Logo-Schild nach oben verschwindet.
 //
-// Ziele sind echte Links auf eigene Seiten (Sauna, Hund, Winter, Preise) —
-// sie funktionieren ohne JavaScript, und Google zeigt sie als Sitelinks unter
-// der Marke (vorher standen dort Impressum und AGB; die bleiben im Fuß).
-// Neben dem Logo ist Platz für je zwei Ziele; das Menü auf schmalen Ansichten
-// führt zusätzlich die übrigen Seiten.
+// Ziele sind echte Links auf eigene Seiten — sie funktionieren ohne JavaScript,
+// und Google zeigt sie als Sitelinks unter der Marke (vorher standen dort
+// Impressum und AGB; die bleiben im Fuß). Neben dem Logo ist Platz für je zwei
+// Ziele: die Sauna, die beiden Jahreszeiten und Preise. Alle übrigen Seiten
+// verlinkt der Fuß.
 
 const LEFT_ITEMS = [
   { key: 'sauna', href: '/sauna' },
-  { key: 'hund', href: '/huette-mit-hund' },
+  { key: 'winter', href: '/winter-skiurlaub' },
 ] as const;
 
 const RIGHT_ITEMS = [
-  { key: 'winter', href: '/winter-skiurlaub' },
+  { key: 'sommer', href: '/sommer-wandern' },
   { key: 'preise', href: '/preise-buchen' },
 ] as const;
 
 const NAV_ITEMS = [...LEFT_ITEMS, ...RIGHT_ITEMS];
 
-// Nur im aufklappbaren Menü (unter 1024 px)
-const MENU_ITEMS = [
-  { key: 'ferienhaus', href: '/#huette' },
-  ...LEFT_ITEMS,
-  RIGHT_ITEMS[0],
-  { key: 'sommer', href: '/sommer-wandern' },
-  { key: 'workation', href: '/workation' },
-  RIGHT_ITEMS[1],
-  { key: 'anreise', href: '/anreise' },
-  { key: 'faq', href: '/faq' },
-  { key: 'blog', href: '/blog' },
+// Aufklappbares Menü (unter 1024 px), gegliedert in drei Gruppen statt einer
+// langen Liste (Wunsch 16.11.2026: zehn gleichrangige Einträge waren
+// unübersichtlich; „Mit Hund“ ist kein eigener Hauptpunkt, sondern steht
+// unter „Urlaub am Falkert“).
+const MENU_GROUPS = [
+  {
+    key: 'gruppeHuette',
+    items: [
+      { key: 'ferienhaus', href: '/#huette' },
+      { key: 'sauna', href: '/sauna' },
+      { key: 'preise', href: '/preise-buchen' },
+    ],
+  },
+  {
+    key: 'gruppeUrlaub',
+    items: [
+      { key: 'winter', href: '/winter-skiurlaub' },
+      { key: 'sommer', href: '/sommer-wandern' },
+      { key: 'hund', href: '/huette-mit-hund' },
+      { key: 'workation', href: '/workation' },
+    ],
+  },
+  {
+    key: 'gruppeWissen',
+    items: [
+      { key: 'anreise', href: '/anreise' },
+      { key: 'faq', href: '/faq' },
+      { key: 'blog', href: '/blog' },
+    ],
+  },
 ] as const;
 
 export function Header() {
@@ -186,21 +205,33 @@ export function Header() {
           className="absolute inset-x-0 top-full border-t border-zirbe/15 bg-leinen shadow-[0_12px_24px_rgba(32,40,36,0.18)] lg:hidden"
         >
           <nav aria-label="Hauptnavigation mobil" className="brand-container py-4">
-            <ul className="flex flex-col">
-              {MENU_ITEMS.map((item) => (
-                <li key={item.key}>
-                  <a
-                    href={item.href}
-                    aria-current={pathname === item.href ? 'page' : undefined}
-                    onClick={() => setMenuOpen(false)}
-                    className="brand-nav-link block py-3 text-zirbe underline-offset-[0.45em] hover:underline"
+            <div className="flex flex-col gap-5">
+              {MENU_GROUPS.map((group) => (
+                <section key={group.key} aria-labelledby={`menu-${group.key}`}>
+                  <h2
+                    id={`menu-${group.key}`}
+                    className="border-b border-zirbe/15 pb-1.5 text-xs font-semibold tracking-[0.14em] text-zirbe/60 uppercase"
                   >
-                    {t.navigation[item.key]}
-                  </a>
-                </li>
+                    {t.navigation[group.key]}
+                  </h2>
+                  <ul className="grid grid-cols-2 gap-x-6">
+                    {group.items.map((item) => (
+                      <li key={item.key}>
+                        <a
+                          href={item.href}
+                          aria-current={pathname === item.href ? 'page' : undefined}
+                          onClick={() => setMenuOpen(false)}
+                          className="brand-nav-link block py-2.5 text-zirbe underline-offset-[0.45em] hover:underline"
+                        >
+                          {t.navigation[item.key]}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
-            <SocialLinks className="mt-2 -ml-2" linkClassName="text-zirbe hover:bg-zirbe/10" />
+            </div>
+            <SocialLinks className="mt-3 -ml-2" linkClassName="text-zirbe hover:bg-zirbe/10" />
             <div className="mt-4 pb-2">
               <BookingCTA compact className="w-full" onClick={() => setMenuOpen(false)} />
             </div>

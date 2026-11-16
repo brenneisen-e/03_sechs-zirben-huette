@@ -26,7 +26,10 @@
     "huetten": "Hütten am Falkertsee",
     "ratgeber": "Falkert & Falkertsee",
     "zirbenhuette": "Zirbenhütte am Falkert",
-    "main": "Hauptnavigation"
+    "main": "Hauptnavigation",
+    "gruppeHuette": "Die Hütte",
+    "gruppeUrlaub": "Urlaub am Falkert",
+    "gruppeWissen": "Gut zu wissen"
   },
   "hero": {
     "welcome": "Herzlich Willkommen in der Sechszirbenhütte",

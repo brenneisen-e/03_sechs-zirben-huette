@@ -26,7 +26,10 @@
     "huetten": "Koče ob Falkertseeju",
     "ratgeber": "Falkert in Falkertsee",
     "zirbenhuette": "Zirbenhütte na Falkertu",
-    "main": "Glavna navigacija"
+    "main": "Glavna navigacija",
+    "gruppeHuette": "Koča",
+    "gruppeUrlaub": "Dopust na Falkertu",
+    "gruppeWissen": "Dobro je vedeti"
   },
   "hero": {
     "welcome": "Dobrodošli",

@@ -26,7 +26,10 @@
     "huetten": "Huts at Lake Falkert",
     "ratgeber": "Falkert & Lake Falkert",
     "zirbenhuette": "Zirbenhütte at Falkert",
-    "main": "Main navigation"
+    "main": "Main navigation",
+    "gruppeHuette": "The hut",
+    "gruppeUrlaub": "Holidays at Falkert",
+    "gruppeWissen": "Good to know"
   },
   "hero": {
     "welcome": "Welcome to the Sechszirbenhütte",

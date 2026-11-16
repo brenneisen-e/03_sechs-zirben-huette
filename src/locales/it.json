@@ -26,7 +26,10 @@
     "huetten": "Baite al Falkertsee",
     "ratgeber": "Falkert e Falkertsee",
     "zirbenhuette": "Zirbenhütte al Falkert",
-    "main": "Navigazione principale"
+    "main": "Navigazione principale",
+    "gruppeHuette": "La baita",
+    "gruppeUrlaub": "Vacanze al Falkert",
+    "gruppeWissen": "Buono a sapersi"
   },
   "hero": {
     "welcome": "Benvenuti",

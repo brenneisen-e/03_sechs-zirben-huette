@@ -26,7 +26,10 @@
     "huetten": "Hutten aan de Falkertsee",
     "ratgeber": "Falkert & Falkertsee",
     "zirbenhuette": "Zirbenhütte aan de Falkert",
-    "main": "Hoofdnavigatie"
+    "main": "Hoofdnavigatie",
+    "gruppeHuette": "De hut",
+    "gruppeUrlaub": "Vakantie aan de Falkert",
+    "gruppeWissen": "Goed om te weten"
   },
   "hero": {
     "welcome": "Hartelijk welkom in de Sechszirbenhütte",
