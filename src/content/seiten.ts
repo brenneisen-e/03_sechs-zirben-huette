@@ -709,11 +709,11 @@ export const PAGES: ContentPage[] = [
     name: 'Anreise',
     title: 'Anreise zur Sechszirbenhütte: Falkert im Sommer & Winter',
     description:
-      'So finden Sie die Hütte auf 1.700 m: Route, Parken, Zufahrt im Winter, Entfernungen zu Falkertsee, Heidi Alm, Bad Kleinkirchheim.',
+      'So finden Sie die Hütte auf 1.700 m: Route, Parken, Zufahrt im Winter, Anreise ohne Auto mit Gästekarte und Wanderbus, Entfernungen.',
     h1: 'Anreise und Lage am Falkert',
     label: 'Anreise',
     lead: 'Die Sechszirbenhütte liegt in Alleinlage auf 1.700 m am Falkertsee in Kärnten (Falkertsee 36, 9564 Patergassen). Sie fahren mit dem Auto bis vor die Hütte; im Winter sollten Schneeketten im Gepäck sein.',
-    updated: UPDATED,
+    updated: '2026-11-17',
     image: img(
       'huette-herbst-treppe',
       'Die Sechszirbenhütte im Herbst, eine Steintreppe führt vom Weg zum Eingang',
@@ -743,6 +743,32 @@ export const PAGES: ContentPage[] = [
         ),
       },
       {
+        heading: 'Ohne Auto: Gästekarte, Bus und Wanderbus',
+        paragraphs: [
+          'Seit 1. November 2026 ist die Gästekarte in Kärnten zugleich Fahrschein: Als gemeldeter Übernachtungsgast fahren Sie vom Anreisetag bis einschließlich Abreisetag kostenlos mit den Regional- und Stadtbussen und mit der Bahn innerhalb Kärntens. Die An- und Abreise nach Kärnten ist nicht enthalten. Die Karte bekommen Sie digital, sobald Sie den Pre-Check-in ausgefüllt haben.',
+          'Im Sommer und im Herbst hält der kostenlose Wanderbus Bad Kleinkirchheim – St. Oswald – Falkert an der Haltestelle „Falkertsee / Heidi Hotel“. 2026 fuhr er vom 13. Juli bis 13. September täglich, danach an einzelnen Tagen bis 1. November, jeweils sechsmal am Tag und ohne Anmeldung. Die Fahrpläne für 2027 standen im November 2026 noch nicht fest.',
+          'Mit der Bahn fahren Sie bis Feldkirchen in Kärnten, von dort mit der Buslinie 420 Richtung Turracher Höhe bis Patergassen. Von Patergassen sind es rund 8 km Bergstraße bis Falkertsee: In der Saison fährt diese Strecke der Wanderbus, sonst bestellen Sie das Rufbus-Angebot Nockmobil oder ein Taxi. Für den Winter 2026/27 ist uns kein Linienbus bis Falkertsee bekannt.',
+        ],
+        list: [
+          'Gästekarte: Kinder unter 6 Jahren fahren ohne eigene Karte mit, ab 6 Jahren braucht jede Person eine eigene.',
+          'Bei einer Kontrolle zeigen Sie die Gästekarte zusammen mit einem Lichtbildausweis.',
+          'Fahrräder brauchen ein eigenes Ticket.',
+          'Nockmobil: täglich 8 bis 20 Uhr, mindestens 60 Minuten vorher buchen (App oder Telefon); mit Gästekarte 2 € Aufpreis pro Person.',
+        ],
+        links: [
+          {
+            href: 'https://www.seeundberg.at/planen/mobilitaet/freie-fahrt-gaestekarte',
+            label:
+              'Freie Fahrt mit der Gästekarte (Region Millstätter See – Bad Kleinkirchheim – Nockberge)',
+          },
+          { href: 'https://www.nockmobil.at', label: 'Nockmobil buchen' },
+          {
+            href: 'https://routenplaner.kaerntner-linien.at',
+            label: 'Fahrplanauskunft der Kärntner Linien',
+          },
+        ],
+      },
+      {
         heading: 'Entfernungen',
         paragraphs: ['Von der Hütte aus erreichen Sie:'],
         list: [
@@ -759,6 +785,11 @@ export const PAGES: ContentPage[] = [
       {
         question: 'Kann ich bis zur Hütte fahren?',
         answer: 'Ja, Sie fahren mit dem Auto bis vor die Hütte. Dort liegt der eigene Parkplatz.',
+      },
+      {
+        question: 'Komme ich ohne Auto zur Hütte?',
+        answer:
+          'Im Sommer und Herbst ja: Mit Bahn und Bus fahren Sie bis Patergassen, von dort hält der kostenlose Wanderbus am Falkertsee. Außerhalb seiner Fahrzeiten brauchen Sie für die letzten 8 km das Nockmobil oder ein Taxi. Mit der Gästekarte fahren Sie in Kärnten kostenlos Bus und Bahn.',
       },
       {
         question: 'Wann ist Check-in?',
@@ -869,4 +900,4 @@ export function getPage(slug: string): ContentPage | undefined {
 }
 
 /** Stand der Startseite für die Sitemap — bei Änderungen an der Startseite anpassen */
-export const HOME_UPDATED = '2026-11-13';
+export const HOME_UPDATED = '2026-11-17';

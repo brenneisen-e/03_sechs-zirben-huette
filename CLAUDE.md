@@ -100,6 +100,7 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 ## Bewertungen und Ortsangaben (16.11.2026)
 
 - **Nur echte Bewertungen.** Die sechs Texte „Familie Schneider“, „Thomas W.“ usw. waren Beispieltexte aus dem Code (früher Rückfall in `/api/reviews` und Knopf „6 Bewertungen importieren“ im Admin Center) — erfundene Bewertungen sind unlautere Werbung. `/api/reviews` liefert sie nicht mehr aus (`SAMPLE_REVIEWS`), auch wenn sie noch in der Datenbank stehen; ohne echte Bewertungen zeigt der Abschnitt nur den Verweis auf Google. Nie wieder Beispielbewertungen hinterlegen
+- Anreise ohne Auto (`/anreise`, Abschnitt „Ohne Auto“, Stand 17.11.2026, Quellen: seeundberg.at, tourismusreform.at, Fahrplan-PDFs „Wanderbus Herbst 2026“ und „Nockbergebus 2026“): Gästekarte seit 1.11.2026 als Fahrschein für Busse und Bahn in Kärnten; kostenloser Wanderbus Bad Kleinkirchheim – St. Oswald – Falkert mit Halt „Falkertsee / Heidi Hotel“ (2026: 13.7.–13.9. täglich, Herbst an einzelnen Tagen bis 1.11., sechs Fahrten); Bahn bis Feldkirchen, Linie 420 bis Patergassen, sonst Nockmobil/Taxi. Die Fahrpläne gelten je Saison — im Frühjahr 2027 die neuen Zeiten prüfen und die Jahresangaben im Text anpassen. Auf heidialm.at steht dazu nichts
 - Es heißt **Biosphärenpark Nockberge** (seit 2012), nicht „Nationalpark“ — in allen Sprachdateien korrigiert
 
 ## Layout der Startseite (Briefing 18.10.2026)
