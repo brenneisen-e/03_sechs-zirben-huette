@@ -1,0 +1,429 @@
+/* ============================================================================
+   KONTOR — Erscheinungsbild des Admin Centers (20.11.2026)
+
+   Übernommen aus dem Repo natbergerhuette (app/office.css), dort für
+   Tailwind 4. Hier läuft Tailwind 3: Die Farbskalen stehen in
+   tailwind.config.ts als rgb(var(--c-gray-50, <Standardwert>) / <alpha>) —
+   ohne gesetzte Variable gilt überall der Standard von Tailwind, die Website
+   bleibt also unverändert. Der Admin-Bereich liegt in <div class="office">
+   (src/app/admin/layout.tsx); diese Datei setzt die Variablen dafür um:
+   Papierton statt Reinweiß/Kaltgrau, Zirbengrün statt Signalgrün, gedeckte
+   Töne für Kanäle und Status, kleinere Radien, Haarlinien statt Schatten.
+   Werte sind RGB-Kanäle ("246 246 241"), keine Hex-Farben. Die Variablen
+   hängen am <html>-Element, damit auch Fenster gelten, die außerhalb des
+   Bereichs eingehängt werden.
+
+   Abweichung zur Natberger Hütte: Kopf und Grünskala in Zirbengrün (#263d35)
+   statt Tannengrün — so sieht man beim Wechsel sofort, in welchem Admin
+   Center man ist.
+
+   Nur am Bildschirm — Druckansichten bleiben unverändert.
+   ============================================================================ */
+
+@media screen {
+  html:has(.office) {
+    /* Papier und Tinte */
+    --c-gray-50: 246 246 241;
+    --c-gray-100: 238 239 232;
+    --c-gray-200: 224 227 217;
+    --c-gray-300: 203 207 194;
+    --c-gray-400: 150 156 142;
+    --c-gray-500: 106 114 100;
+    --c-gray-600: 77 85 73;
+    --c-gray-700: 56 63 53;
+    --c-gray-800: 36 42 34;
+    --c-gray-900: 22 27 21;
+    --c-gray-950: 13 17 12;
+    --c-slate-50: 246 246 241;
+    --c-slate-100: 238 239 232;
+    --c-slate-200: 224 227 217;
+    --c-slate-300: 203 207 194;
+    --c-slate-400: 150 156 142;
+    --c-slate-500: 106 114 100;
+    --c-slate-600: 77 85 73;
+    --c-slate-700: 56 63 53;
+    --c-slate-800: 36 42 34;
+    --c-slate-900: 22 27 21;
+
+    /* Zirbe */
+    --c-green-50: 238 243 240;
+    --c-green-100: 221 231 226;
+    --c-green-200: 191 208 200;
+    --c-green-300: 152 179 167;
+    --c-green-400: 108 143 128;
+    --c-green-500: 71 112 97;
+    --c-green-600: 47 82 70;
+    --c-green-700: 38 61 53;
+    --c-green-800: 31 50 43;
+    --c-green-900: 23 37 32;
+    --c-emerald-50: 238 243 240;
+    --c-emerald-100: 221 231 226;
+    --c-emerald-200: 191 208 200;
+    --c-emerald-300: 152 179 167;
+    --c-emerald-400: 108 143 128;
+    --c-emerald-500: 71 112 97;
+    --c-emerald-600: 47 82 70;
+    --c-emerald-700: 38 61 53;
+    --c-emerald-800: 31 50 43;
+    --c-emerald-900: 23 37 32;
+    --c-lime-50: 242 245 230;
+    --c-lime-100: 227 234 201;
+    --c-lime-500: 123 143 58;
+    --c-lime-600: 98 115 45;
+    --c-lime-700: 76 89 37;
+    --c-teal-50: 236 244 242;
+    --c-teal-100: 214 232 228;
+    --c-teal-200: 176 209 203;
+    --c-teal-300: 132 181 173;
+    --c-teal-400: 87 150 140;
+    --c-teal-500: 61 125 115;
+    --c-teal-600: 47 101 93;
+    --c-teal-700: 39 81 75;
+    --c-teal-800: 33 66 61;
+
+    /* Lärche */
+    --c-amber-50: 251 245 234;
+    --c-amber-100: 245 232 207;
+    --c-amber-200: 236 211 162;
+    --c-amber-300: 224 185 110;
+    --c-amber-400: 211 154 63;
+    --c-amber-500: 194 127 31;
+    --c-amber-600: 163 100 20;
+    --c-amber-700: 131 77 18;
+    --c-amber-800: 106 62 19;
+    --c-amber-900: 86 51 18;
+    --c-yellow-50: 250 246 227;
+    --c-yellow-100: 244 235 191;
+    --c-yellow-200: 236 219 142;
+    --c-yellow-300: 225 199 90;
+    --c-yellow-400: 211 176 51;
+    --c-yellow-500: 184 148 31;
+    --c-yellow-600: 149 115 21;
+    --c-yellow-700: 115 87 19;
+    --c-yellow-800: 93 70 20;
+    --c-orange-50: 251 241 232;
+    --c-orange-100: 246 223 201;
+    --c-orange-200: 237 192 154;
+    --c-orange-300: 224 155 98;
+    --c-orange-400: 209 122 53;
+    --c-orange-500: 192 98 26;
+    --c-orange-600: 180 83 11;
+    --c-orange-700: 143 65 9;
+    --c-orange-800: 113 53 12;
+    --c-orange-900: 91 44 13;
+
+    /* Ziegel */
+    --c-red-50: 251 240 238;
+    --c-red-100: 246 220 216;
+    --c-red-200: 237 186 179;
+    --c-red-300: 224 145 138;
+    --c-red-400: 208 102 95;
+    --c-red-500: 189 70 63;
+    --c-red-600: 163 53 47;
+    --c-red-700: 133 42 38;
+    --c-red-800: 107 36 33;
+    --c-red-900: 86 31 29;
+    --c-rose-50: 250 240 242;
+    --c-rose-100: 244 220 226;
+    --c-rose-200: 233 188 200;
+    --c-rose-300: 218 147 166;
+    --c-rose-400: 201 108 133;
+    --c-rose-500: 180 77 107;
+    --c-rose-600: 150 59 87;
+    --c-rose-700: 122 48 71;
+    --c-pink-50: 250 240 242;
+    --c-pink-100: 244 220 226;
+    --c-pink-200: 233 188 200;
+    --c-pink-300: 218 147 166;
+    --c-pink-400: 201 108 133;
+    --c-pink-500: 180 77 107;
+    --c-pink-600: 150 59 87;
+    --c-pink-700: 122 48 71;
+    --c-pink-800: 99 40 58;
+
+    /* Bergsee */
+    --c-blue-50: 238 243 247;
+    --c-blue-100: 219 230 238;
+    --c-blue-200: 186 207 223;
+    --c-blue-300: 144 177 202;
+    --c-blue-400: 100 144 178;
+    --c-blue-500: 68 116 154;
+    --c-blue-600: 52 93 128;
+    --c-blue-700: 43 76 104;
+    --c-blue-800: 37 63 85;
+    --c-blue-900: 31 51 69;
+    --c-sky-50: 238 243 247;
+    --c-sky-100: 219 230 238;
+    --c-sky-200: 186 207 223;
+    --c-sky-500: 68 116 154;
+    --c-sky-600: 52 93 128;
+    --c-sky-700: 43 76 104;
+    --c-cyan-50: 237 245 246;
+    --c-cyan-100: 214 233 236;
+    --c-cyan-200: 175 211 217;
+    --c-cyan-300: 130 184 193;
+    --c-cyan-400: 85 153 165;
+    --c-cyan-500: 63 128 140;
+    --c-cyan-600: 50 103 114;
+    --c-cyan-700: 41 84 93;
+    --c-cyan-800: 35 69 76;
+    --c-indigo-50: 240 241 247;
+    --c-indigo-100: 223 225 238;
+    --c-indigo-200: 194 198 223;
+    --c-indigo-300: 156 162 201;
+    --c-indigo-400: 118 125 177;
+    --c-indigo-500: 90 97 153;
+    --c-indigo-600: 72 78 128;
+    --c-indigo-700: 59 64 104;
+    --c-indigo-800: 49 53 85;
+
+    /* Pflaume */
+    --c-purple-50: 245 241 246;
+    --c-purple-100: 233 223 236;
+    --c-purple-200: 213 194 218;
+    --c-purple-300: 185 155 193;
+    --c-purple-400: 155 117 166;
+    --c-purple-500: 127 87 139;
+    --c-purple-600: 104 69 114;
+    --c-purple-700: 84 56 92;
+    --c-purple-800: 68 46 74;
+    --c-purple-900: 55 38 60;
+    --c-violet-50: 245 241 246;
+    --c-violet-100: 233 223 236;
+    --c-violet-200: 213 194 218;
+    --c-violet-500: 127 87 139;
+    --c-violet-600: 104 69 114;
+    --c-violet-700: 84 56 92;
+
+    /* Kantiger: kleine Radien statt runder Kacheln */
+    --radius-sm: 3px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    --radius-xl: 8px;
+    --radius-2xl: 10px;
+    --radius-3xl: 14px;
+
+    /* Admin-Designsystem der Komponenten aus der Natberger Hütte */
+    --admin-bg: #ffffff;
+    --admin-bg-subtle: #f6f6f1;
+    --admin-text-primary: #161b15;
+    --admin-text-secondary: #6a7264;
+    --admin-text-muted: #969c8e;
+    --admin-border: #e0e3d9;
+    --admin-border-subtle: #eeefe8;
+    --admin-accent: #2f5246;
+    --admin-accent-hover: #263d35;
+    --admin-accent-light: #eef3f0;
+    --admin-success: #2f5246;
+    --admin-success-bg: #eef3f0;
+    --admin-warning: #a36414;
+    --admin-warning-bg: #fbf5ea;
+    --admin-error: #a3352f;
+    --admin-error-bg: #fbf0ee;
+
+    --office-ink: #161b15;
+    --office-paper: #f6f6f1;
+    --office-line: #e0e3d9;
+    --office-forest: #263d35;
+    --office-accent: #2f5246;
+    --office-text: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
+    --office-display:
+      'Bricolage Grotesque Variable', 'Bricolage Grotesque', 'Manrope Variable', system-ui,
+      sans-serif;
+
+    background: var(--office-paper);
+  }
+
+  /* Schrift: Manrope für alles, Bricolage Grotesque für Überschriften.
+     Fenster hängen teils außerhalb von .office am <body>, deshalb dort. */
+  html:has(.office) body,
+  html:has(.office) .admin-panel,
+  html:has(.office) .admin-panel *,
+  html:has(.office) div[class*='fixed'] {
+    font-family: var(--office-text) !important;
+  }
+  html:has(.office) body {
+    color: var(--office-ink);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Mit .admin-panel davor, sonst gewinnt die Regel für den Fließtext */
+  html:has(.office) :is(h1, h2),
+  html:has(.office) .office-display,
+  html:has(.office)
+    .admin-panel
+    :is(h1, h2, .office-display, .office-wordmark, .office-stat-value) {
+    font-family: var(--office-display) !important;
+    letter-spacing: -0.015em;
+  }
+  html:has(.office) .office-display {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Schatten: flach und kühl statt der weichen Standard-Wolken */
+  html:has(.office) :is(.shadow-sm, .shadow, .shadow-xs) {
+    --tw-shadow: 0 1px 0 0 rgb(22 27 21 / 0.05);
+  }
+  html:has(.office) :is(.shadow-md, .shadow-lg) {
+    --tw-shadow: 0 1px 0 0 rgb(22 27 21 / 0.04), 0 10px 24px -16px rgb(22 27 21 / 0.28);
+  }
+  html:has(.office) :is(.shadow-xl, .shadow-2xl) {
+    --tw-shadow: 0 0 0 1px rgb(22 27 21 / 0.06), 0 28px 56px -24px rgb(22 27 21 / 0.4);
+  }
+
+  /* Eingaben: ruhiger Fokus in Zirbengrün */
+  html:has(.office) :is(input, select, textarea):focus-visible {
+    outline: 2px solid rgb(47 82 70 / 0.35);
+    outline-offset: 1px;
+  }
+  html:has(.office) :is(button, a, [role='tab']):focus-visible {
+    outline: 2px solid rgb(47 82 70 / 0.55);
+    outline-offset: 2px;
+  }
+
+  /* Kleine Kennzeilen (VERSALIEN) etwas weiter gesperrt */
+  html:has(.office) .uppercase {
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- Kopf des Admin Centers ---------- */
+  .office-bar {
+    background: var(--office-forest);
+    color: #f5f6f2;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  }
+  .office-wordmark {
+    font-family: var(--office-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .office-kicker {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(245 246 242 / 0.55);
+  }
+  .office-nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(245 246 242 / 0.62);
+    white-space: nowrap;
+    transition: color 140ms ease;
+  }
+  .office-nav-item:hover {
+    color: #ffffff;
+  }
+  .office-nav-item[aria-current='page'] {
+    color: #ffffff;
+  }
+  .office-nav-item[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -1px;
+    height: 2px;
+    background: #f5f6f2;
+  }
+  .office-bar-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f5f6f2;
+    transition:
+      background-color 140ms ease,
+      border-color 140ms ease;
+  }
+  .office-bar-action:hover {
+    background: rgb(255 255 255 / 0.08);
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  /* Reiter eines Bereichs */
+  .office-tabs {
+    background: #ffffff;
+    border-bottom: 1px solid var(--office-line);
+  }
+  .office-tab {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 46px;
+    padding: 0 2px;
+    margin-right: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6a7264;
+    transition: color 140ms ease;
+  }
+  .office-tab:hover {
+    color: var(--office-ink);
+  }
+  .office-tab[aria-selected='true'] {
+    color: var(--office-ink);
+    font-weight: 700;
+  }
+  .office-tab[aria-selected='true']::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--office-accent);
+  }
+
+  /* Kennzahl: große Ziffer, kleine Kennzeile, Trennlinien statt Kacheln */
+  .office-stats {
+    display: grid;
+    background: #ffffff;
+    border: 1px solid var(--office-line);
+    border-radius: 10px;
+  }
+  .office-stat {
+    min-width: 0;
+    padding: 14px 12px;
+  }
+  .office-stat + .office-stat {
+    border-left: 1px solid var(--office-line);
+  }
+  .office-stat-value {
+    font-family: var(--office-display);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--office-ink);
+  }
+  .office-stat-label {
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase;
+    color: #6a7264;
+  }
+}
+
+@media screen {
+  /* Arbeitsfläche in Papierton, Inhalte liegen als weiße Flächen darauf */
+  html:has(.office) .admin-panel {
+    background: var(--office-paper);
+  }
+}

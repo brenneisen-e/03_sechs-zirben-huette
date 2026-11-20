@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Loader2, Lock } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 // Anmeldemaske des Admin Centers (Passwort). Prüfung serverseitig in
 // /api/admin/auth; alle anderen Admin-APIs verlangen danach die Session.
@@ -45,12 +45,11 @@ export default function AdminLogin({ onAuthenticated }: { onAuthenticated: () =>
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center gap-2 mb-1">
-          <Lock className="w-5 h-5 text-gray-500" />
-          <h1 className="text-lg font-semibold text-gray-900">Admin Center</h1>
-        </div>
-        <p className="text-sm text-gray-500 mb-5">Sechszirbenhütte — bitte anmelden</p>
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+        <p className="text-[10px] font-bold uppercase text-gray-500">
+          Sechszirbenhütte · Admin Center
+        </p>
+        <h1 className="mt-2 mb-6 text-3xl font-bold text-gray-900">Anmelden</h1>
 
         {setupRequired && (
           <div className="mb-4 p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900">
@@ -74,13 +73,13 @@ export default function AdminLogin({ onAuthenticated }: { onAuthenticated: () =>
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Passwort"
-            className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white"
           />
           {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             type="submit"
             disabled={loading || !password.trim()}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 transition-colors"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
             Anmelden

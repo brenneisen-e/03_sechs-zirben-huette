@@ -8,7 +8,7 @@ import {
   Euro,
   Calculator,
   Key,
-  Home,
+  Globe,
   FileText,
   Star,
   Smartphone,
@@ -19,10 +19,10 @@ import {
   Instagram,
   BadgeEuro,
   Loader2,
-  LogOut,
+  TreePine,
 } from 'lucide-react';
 import AdminLogin from '@/components/admin/AdminLogin';
-import DemoModeToggle from '@/components/admin/DemoModeToggle';
+import AdminMenu from '@/components/admin/AdminMenu';
 import HutSwitch, { hutViewUrl, readHutView } from '@/components/admin/HutSwitch';
 import type { HutView } from '@/lib/dashboard/hutDashboard';
 
@@ -93,7 +93,7 @@ const AdminAccessPanel = dynamic(() => import('@/components/admin/AdminAccessPan
 
 function FullScreenLoader() {
   return (
-    <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+    <div className="fixed inset-0 bg-gray-50 z-50 flex flex-col items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <div className="w-12 h-12 relative">
           <div className="absolute inset-0 border-3 border-gray-200 rounded-full"></div>
@@ -124,27 +124,66 @@ type AdminTab =
   | 'instagram'
   | 'system';
 
-const TABS: {
-  id: AdminTab;
-  label: string;
-  shortLabel: string;
-  icon: React.ComponentType<{ className?: string }>;
-}[] = [
-  { id: 'guests', label: 'Gäste', shortLabel: 'Gäste', icon: Users },
-  { id: 'finances', label: 'Finanzen', shortLabel: 'Finanzen', icon: Euro },
-  { id: 'utilities', label: 'Nebenkosten', shortLabel: 'NK', icon: Calculator },
-  { id: 'rental-prices', label: 'Mietpreise', shortLabel: 'Preise', icon: Tag },
-  { id: 'images', label: 'Bilder', shortLabel: 'Bilder', icon: ImageIcon },
-  { id: 'passwords', label: 'Zugang', shortLabel: 'Zugang', icon: Key },
-  { id: 'blog', label: 'Blog', shortLabel: 'Blog', icon: FileText },
-  { id: 'reviews', label: 'Bewertungen', shortLabel: 'Reviews', icon: Star },
-  { id: 'guestapp', label: 'Gäste-App', shortLabel: 'App', icon: Smartphone },
-  { id: 'beds24', label: 'Beds24', shortLabel: 'B24', icon: Link2 },
-  { id: 'platforms', label: 'Portalpreise', shortLabel: 'Portale', icon: BadgeEuro },
-  { id: 'prices', label: 'Preisübersicht', shortLabel: 'Preisüb.', icon: SlidersHorizontal },
-  { id: 'instagram', label: 'Instagram', shortLabel: 'Insta', icon: Instagram },
-  { id: 'system', label: 'System', shortLabel: 'System', icon: Settings },
+type TabIcon = React.ComponentType<{ className?: string }>;
+
+// label = Name des Reiters, hint = wofür die Seite da ist (rechts neben den Reitern)
+const TABS: { id: AdminTab; label: string; icon: TabIcon; hint: string }[] = [
+  { id: 'guests', label: 'Gästedatenbank', icon: Users, hint: 'Kalender, Gäste und Buchungen' },
+  { id: 'beds24', label: 'Beds24', icon: Link2, hint: 'Belegung, Preise und Buchungen in Beds24' },
+  { id: 'guestapp', label: 'Gäste-App', icon: Smartphone, hint: 'Inhalte und Texte der Gäste-App' },
+  { id: 'finances', label: 'Übersicht', icon: Euro, hint: 'Einnahmen, Auslastung und Bericht' },
+  { id: 'utilities', label: 'Nebenkosten', icon: Calculator, hint: 'Strom, Wasser und Abrechnung' },
+  { id: 'platforms', label: 'Portalpreise', icon: BadgeEuro, hint: 'Preise je Plattform' },
+  {
+    id: 'prices',
+    label: 'Preisübersicht',
+    icon: SlidersHorizontal,
+    hint: 'Preise und Mindestaufenthalt beider Hütten',
+  },
+  { id: 'rental-prices', label: 'Mietpreise', icon: Tag, hint: 'Saisonpreise und Nebenkosten' },
+  { id: 'images', label: 'Bilder', icon: ImageIcon, hint: 'Bilder der Website' },
+  { id: 'blog', label: 'Blog', icon: FileText, hint: 'Beiträge schreiben und veröffentlichen' },
+  { id: 'reviews', label: 'Bewertungen', icon: Star, hint: 'Echte Bewertungen der Gäste' },
+  { id: 'instagram', label: 'Instagram', icon: Instagram, hint: 'Kanal auf der Startseite' },
+  { id: 'passwords', label: 'Zugang', icon: Key, hint: 'Zugangsdaten der Portale' },
+  { id: 'system', label: 'System', icon: Settings, hint: 'Protokoll und Admin-Passwort' },
 ];
+
+// Oben nur fünf Bereiche, darunter die Reiter des gewählten Bereichs
+// (Aufbau wie im Admin Center der Natberger Hütte)
+type TabGroupId = 'gaeste' | 'finanzen' | 'preise' | 'website' | 'system';
+
+interface TabGroup {
+  id: TabGroupId;
+  label: string;
+  icon: TabIcon;
+  tabs: [AdminTab, ...AdminTab[]];
+}
+
+const FIRST_GROUP: TabGroup = {
+  // Start: Gäste mit dem Kalender (Wunsch 27.10.2026)
+  id: 'gaeste',
+  label: 'Gäste',
+  icon: Users,
+  tabs: ['guests', 'beds24', 'guestapp'],
+};
+
+const TAB_GROUPS: TabGroup[] = [
+  FIRST_GROUP,
+  { id: 'finanzen', label: 'Finanzen', icon: Euro, tabs: ['finances', 'utilities'] },
+  { id: 'preise', label: 'Preise', icon: Tag, tabs: ['platforms', 'prices', 'rental-prices'] },
+  {
+    id: 'website',
+    label: 'Website',
+    icon: Globe,
+    tabs: ['images', 'blog', 'reviews', 'instagram'],
+  },
+  { id: 'system', label: 'System', icon: Settings, tabs: ['passwords', 'system'] },
+];
+
+function groupOf(tab: AdminTab): TabGroup {
+  return TAB_GROUPS.find((g) => g.tabs.includes(tab)) ?? FIRST_GROUP;
+}
 
 function tabFromSearch(search: string): AdminTab {
   const raw = new URLSearchParams(search).get('tab');
@@ -170,6 +209,8 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [financeRefreshKey, setFinanceRefreshKey] = useState(0);
   const [isDemoMode, setIsDemoMode] = useState(false);
+  // Zuletzt geöffneter Reiter je Bereich
+  const [lastTabByGroup, setLastTabByGroup] = useState<Partial<Record<TabGroupId, AdminTab>>>({});
 
   // Auto-migrate database on admin load (adds missing columns/tables)
   useEffect(() => {
@@ -196,7 +237,7 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  // Handy: aktiven Tab in der unteren, seitlich scrollbaren Leiste sichtbar machen
+  // Handy: aktiven Reiter in der seitlich scrollbaren Leiste sichtbar machen
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       const el = document.querySelector<HTMLElement>(`[data-mobile-tab="${activeTab}"]`);
@@ -223,9 +264,13 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
     if (tab === 'finances') {
       setFinanceRefreshKey((prev) => prev + 1);
     }
+    setLastTabByGroup((prev) => ({ ...prev, [groupOf(tab).id]: tab }));
     setActiveTabState(tab);
     window.history.pushState(null, '', hutViewUrl(readHutView(), tab));
   }, []);
+
+  const activeGroup = groupOf(activeTab);
+  const openGroup = (group: TabGroup) => setActiveTab(lastTabByGroup[group.id] ?? group.tabs[0]);
 
   // Im Kopf steht, was zu sehen ist: Tabs ohne Zwei-Hütten-Ansicht zeigen
   // nur diese Hütte — „Beide“ bleibt für die Portalpreise gemerkt
@@ -257,11 +302,13 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
     );
   }
 
+  const activeInfo = TABS.find((t) => t.id === activeTab);
+  const menu = (
+    <AdminMenu isDemoMode={isDemoMode} onToggleDemoMode={toggleDemoMode} onLogout={onLogout} />
+  );
+
   return (
-    <div
-      className="min-h-screen bg-white admin-panel"
-      style={{ fontFamily: "'Aptos', 'Inter', system-ui, -apple-system, sans-serif" }}
-    >
+    <div className="min-h-screen bg-gray-50 admin-panel">
       {/* Demo Mode Banner */}
       {isDemoMode && (
         <div className="bg-amber-50 border-b border-amber-200 text-amber-800 text-center py-1.5 text-xs font-medium z-50 relative">
@@ -269,96 +316,119 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
         </div>
       )}
 
-      {/* Mobile Header */}
-      <div
-        className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-40"
+      {/* Handy: Kopf mit Bereich und Seite */}
+      <header
+        className="office-bar md:hidden fixed top-0 left-0 right-0 z-40"
         style={isDemoMode ? { top: '32px' } : {}}
       >
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
-            <a href="/" className="p-1 text-gray-400 hover:text-gray-600">
-              <Home className="w-5 h-5" />
-            </a>
+        <div className="flex h-14 items-center gap-3 px-4">
+          <div className="min-w-0 flex-1">
+            <p className="office-kicker truncate">Sechszirbenhütte · {activeGroup.label}</p>
+            <h1 className="office-wordmark mt-1 truncate">{activeInfo?.label}</h1>
           </div>
-          <h1 className="min-w-0 truncate px-2 text-sm font-medium text-gray-900">
-            {TABS.find((t) => t.id === activeTab)?.label}
-          </h1>
           <div className="flex shrink-0 items-center gap-2">
-            <HutSwitch tab={activeTab} view={headerView} onViewChange={changeHutView} compact />
-            <DemoModeToggle isDemoMode={isDemoMode} onToggle={toggleDemoMode} compact />
-            <button
-              onClick={onLogout}
-              title="Abmelden"
-              className="p-1 text-gray-400 hover:text-gray-600"
-            >
-              <LogOut className="w-5 h-5" />
-            </button>
+            <div className="rounded-md bg-white empty:hidden">
+              <HutSwitch tab={activeTab} view={headerView} onViewChange={changeHutView} compact />
+            </div>
+            {menu}
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Desktop Header */}
-      <div className="hidden md:block border-b border-gray-200">
-        <div className="mx-auto px-6 lg:px-8 max-w-[1800px]">
-          <div className="flex items-center justify-between py-5">
-            <div className="flex items-center gap-3">
-              <a href="/" className="text-gray-400 hover:text-gray-600 transition-colors">
-                <Home className="w-5 h-5" />
-              </a>
-              <h1 className="text-xl font-semibold text-gray-900 tracking-tight">
-                Sechszirbenhütte
-              </h1>
-              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
-                Admin
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <HutSwitch tab={activeTab} view={headerView} onViewChange={changeHutView} />
-              <DemoModeToggle isDemoMode={isDemoMode} onToggle={toggleDemoMode} />
-              <button
-                onClick={onLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700 transition rounded-lg hover:bg-gray-100"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Abmelden</span>
-              </button>
-              <a
-                href="/"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 hover:text-logo-green transition rounded-lg hover:bg-gray-100"
-              >
-                <Home className="w-4 h-4" />
-                <span>Zur Homepage</span>
-              </a>
-            </div>
+      {/* Desktop: Kopf mit den fünf Bereichen */}
+      <header className="office-bar hidden md:block">
+        <div className="mx-auto flex h-14 max-w-[1800px] items-stretch gap-4 px-6 lg:px-8">
+          <div className="flex shrink-0 items-center gap-3">
+            <TreePine className="h-5 w-5 text-white/80" />
+            <h1 className="office-wordmark hidden lg:block">Sechszirbenhütte</h1>
+            <span className="hidden h-4 w-px bg-white/20 lg:block" />
+            <span className="office-kicker hidden lg:block">Admin Center</span>
           </div>
 
-          {/* Desktop Tab Navigation — bricht um, damit alle Tabs sichtbar sind */}
-          <div className="flex flex-wrap gap-x-1 -mb-px">
-            {TABS.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
+          <nav aria-label="Bereiche" className="flex items-stretch lg:ml-6">
+            {TAB_GROUPS.map((group) => (
+              <button
+                key={group.id}
+                onClick={() => openGroup(group)}
+                aria-current={activeGroup.id === group.id ? 'page' : undefined}
+                className="office-nav-item"
+              >
+                {group.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="ml-auto flex shrink-0 items-center gap-2">
+            <div className="hidden rounded-md bg-white xl:block xl:empty:hidden">
+              <HutSwitch tab={activeTab} view={headerView} onViewChange={changeHutView} />
+            </div>
+            <div className="rounded-md bg-white empty:hidden xl:hidden">
+              <HutSwitch tab={activeTab} view={headerView} onViewChange={changeHutView} compact />
+            </div>
+            {menu}
+          </div>
+        </div>
+      </header>
+
+      {/* Reiter des gewählten Bereichs */}
+      <div className="office-tabs hidden md:block">
+        <div className="mx-auto flex max-w-[1800px] items-center gap-6 px-6 lg:px-8">
+          <div role="tablist" className="flex min-w-0 overflow-x-auto">
+            {activeGroup.tabs.map((id) => {
+              const tab = TABS.find((t) => t.id === id);
+              if (!tab) return null;
               return (
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 text-sm transition-all border-b-2 whitespace-nowrap ${
-                    isActive
-                      ? 'text-gray-900 border-green-600 font-medium'
-                      : 'text-gray-500 border-transparent hover:text-gray-700'
-                  }`}
+                  key={id}
+                  role="tab"
+                  aria-selected={activeTab === id}
+                  onClick={() => setActiveTab(id)}
+                  className="office-tab"
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-gray-600' : 'text-gray-400'}`} />
                   {tab.label}
                 </button>
               );
             })}
           </div>
+          <p className="ml-auto hidden shrink-0 text-xs text-gray-500 lg:block">
+            {activeInfo?.hint}
+          </p>
         </div>
       </div>
 
       {/* Content Area */}
       <div className="pt-14 pb-20 md:pt-0 md:pb-8">
         <div className="mx-auto px-2 md:px-6 lg:px-8 max-w-[1800px] md:py-6" key={activeTab}>
+          {/* Handy: Reiter des Bereichs als Leiste zum Wischen */}
+          <div
+            role="tablist"
+            className="md:hidden flex gap-1.5 overflow-x-auto px-2 pt-3 pb-1 mb-2"
+          >
+            {activeGroup.tabs.map((id) => {
+              const tab = TABS.find((t) => t.id === id);
+              if (!tab) return null;
+              const Icon = tab.icon;
+              const isActive = activeTab === id;
+              return (
+                <button
+                  key={id}
+                  role="tab"
+                  aria-selected={isActive}
+                  data-mobile-tab={id}
+                  onClick={() => setActiveTab(id)}
+                  className={`flex shrink-0 items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? 'border-zirbe bg-zirbe text-white'
+                      : 'border-gray-200 bg-white text-gray-600 active:bg-gray-100'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
           {activeTab === 'platforms' && <HutDashboard view={hutView} />}
 
           {activeTab === 'guests' && <GuestDatabase demoMode={isDemoMode} />}
@@ -411,24 +481,24 @@ function AdminPageContent({ onLogout }: { onLogout: () => void }) {
         </div>
       </div>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 safe-area-bottom">
-        {/* Scrollbare Leiste statt gequetschter Spalten — min. 64px Touchziel pro Tab */}
-        <div className="flex h-14 overflow-x-auto">
-          {TABS.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
+      {/* Handy: die fünf Bereiche unten */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-gray-200 bg-white/95 backdrop-blur safe-area-bottom">
+        <div className="flex h-14">
+          {TAB_GROUPS.map((group) => {
+            const Icon = group.icon;
+            const isActive = activeGroup.id === group.id;
             return (
               <button
-                key={tab.id}
-                data-mobile-tab={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center justify-center gap-0.5 shrink-0 w-16 transition-colors ${
-                  isActive ? 'text-green-600' : 'text-gray-400 active:text-gray-600'
+                key={group.id}
+                onClick={() => openGroup(group)}
+                aria-current={isActive ? 'page' : undefined}
+                className={`relative flex flex-1 flex-col items-center justify-center gap-0.5 transition-colors ${
+                  isActive ? 'text-zirbe' : 'text-gray-400 active:text-gray-600'
                 }`}
               >
+                {isActive && <span className="absolute top-0 h-0.5 w-10 bg-zirbe" />}
                 <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5]' : ''}`} />
-                <span className="text-[9px] font-medium leading-tight">{tab.shortLabel}</span>
+                <span className="text-[10px] font-bold leading-tight">{group.label}</span>
               </button>
             );
           })}

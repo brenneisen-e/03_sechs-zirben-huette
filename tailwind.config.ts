@@ -1,4 +1,47 @@
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
+
+// Farbskalen, die das Admin Center umstellt (Erscheinungsbild „Kontor“,
+// src/styles/office.css): jede Stufe liest eine Variable und fällt ohne sie auf
+// den Standardwert von Tailwind zurück — die Website sieht aus wie bisher.
+// Einzeln benannt, weil `colors` beim Durchlaufen veraltete Namen meldet.
+const OFFICE_SCALES = {
+  slate: colors.slate,
+  gray: colors.gray,
+  red: colors.red,
+  orange: colors.orange,
+  amber: colors.amber,
+  yellow: colors.yellow,
+  lime: colors.lime,
+  green: colors.green,
+  emerald: colors.emerald,
+  teal: colors.teal,
+  cyan: colors.cyan,
+  sky: colors.sky,
+  blue: colors.blue,
+  indigo: colors.indigo,
+  violet: colors.violet,
+  purple: colors.purple,
+  pink: colors.pink,
+  rose: colors.rose,
+};
+
+function channels(hex: string): string {
+  const n = parseInt(hex.slice(1), 16);
+  return `${(n >> 16) & 255} ${(n >> 8) & 255} ${n & 255}`;
+}
+
+const officeColors = Object.fromEntries(
+  Object.entries(OFFICE_SCALES).map(([name, scale]) => [
+    name,
+    Object.fromEntries(
+      Object.entries(scale).map(([step, hex]) => [
+        step,
+        `rgb(var(--c-${name}-${step}, ${channels(hex)}) / <alpha-value>)`,
+      ]),
+    ),
+  ]),
+);
 
 const config: Config = {
   content: [
@@ -23,6 +66,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        ...officeColors,
         // Markenfarben (Corporate Design V3, src/styles/brand.css)
         'logo-green': '#263d35',
         zirbe: '#263d35',
@@ -64,6 +108,15 @@ const config: Config = {
           900: '#5f3d31',
           950: '#331e18',
         },
+      },
+      // Radien: im Admin Center kleiner (office.css), sonst Standard
+      borderRadius: {
+        sm: 'var(--radius-sm, 0.125rem)',
+        md: 'var(--radius-md, 0.375rem)',
+        lg: 'var(--radius-lg, 0.5rem)',
+        xl: 'var(--radius-xl, 0.75rem)',
+        '2xl': 'var(--radius-2xl, 1rem)',
+        '3xl': 'var(--radius-3xl, 1.5rem)',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],

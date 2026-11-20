@@ -37,6 +37,14 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 - **WICHTIG:** Öffentliche Routen außerhalb von `/api/admin` mit schreibenden Methoden prüfen selbst `isAdminAuthenticated(request)`: `/api/blog` (POST/PUT/DELETE, Entwürfe nur für Admins), `/api/content-texts` (POST), `/api/media` (PATCH), `/api/site-settings` (POST)
 - **WICHTIG:** `cloudflare-worker.js` (Einstieg des Cloudflare-Workers, vor Next.js; kein `middleware.ts`/`proxy.ts`, da Next 16 dort nur Node erlaubt) schützt jede Route unter `/api/admin`. Öffentlich nur `/api/admin/auth` und `/api/admin/media/file/…` (Website-Bilder). Endpunkte für Dritte (Beds24-Webhook, Buchungsschluss, Partner-Verbindung `/api/partner`, Instagram-Rücksprung `/api/instagram/callback`) gehören NICHT unter `/api/admin`. Achtung: Bei `npm run dev` läuft kein Worker, dort ist die Schranke nicht aktiv — nur lokal nutzen.
 
+## Erscheinungsbild „Kontor“ (Admin Center, Wunsch 20.11.2026)
+
+- Gleiches Erscheinungsbild und gleicher Aufbau wie im Admin Center der Natberger Hütte: `src/styles/office.css`, eingeschaltet über `<div className="office">` in `src/app/admin/layout.tsx`. Kopf und Grünskala hier in Zirbengrün (`#263d35`) statt Tannengrün, damit man beim Wechsel sieht, in welchem Admin Center man ist
+- **Wie es wirkt (Tailwind 3, anders als drüben):** `tailwind.config.ts` definiert die Farbskalen (`gray`, `green`, `amber`, `red`, `blue`, `purple` …) als `rgb(var(--c-gray-50, <Standard>) / <alpha-value>)` und die Radien als `var(--radius-lg, 0.5rem)`. Ohne Variable gilt der Standard von Tailwind — die Website bleibt unverändert. `office.css` setzt die Variablen per `html:has(.office)` (Werte als RGB-Kanäle `246 246 241`, nicht Hex), dazu flache Schatten, Schrift Manrope (Text) und Bricolage Grotesque (h1/h2, Kennzahlen) über `@fontsource-variable/*` (lokal, kein Google-Abruf). Nur `@media screen`
+- Deshalb in den Admin-Komponenten weiter die normalen Tailwind-Klassen (`bg-gray-50`, `text-green-600` …) verwenden, keine festen Hex-Farben, keine Verläufe
+- Aufbau `src/app/admin/page.tsx`: dunkler Kopf (`.office-bar`) mit fünf Bereichen (`TAB_GROUPS`: Gäste, Finanzen, Preise, Website, System), darunter die Reiter des Bereichs (`.office-tabs`) mit Kurzbeschreibung (`TABS[].hint`); Demo-Modus, Website und Abmelden im Menü `src/components/admin/AdminMenu.tsx`; Handy: Kopf fest (56 px), Reiter als Leiste zum Wischen, Bereiche unten. Start bleibt Gäste mit dem Kalender. Adressen `?tab=…` gelten unverändert
+- Anmeldemaske: Kennzeile + große Überschrift, kein Schloss-Symbol
+
 ## Beds24
 
 - Admin-Tab „Beds24“: `src/components/admin/Beds24Panel.tsx` + `Beds24Cockpit.tsx`, API `src/app/api/admin/beds24/route.ts`, Server-Lib `src/lib/server/beds24*.ts`
@@ -59,7 +67,7 @@ npm run preview      # Cloudflare Workers Preview (opennextjs-cloudflare + wrang
 
 ## Portalpreise
 
-- Start des Admin Centers: Tab „Gäste“ mit dem Kalender (Wunsch 27.10.2026)
+- Start des Admin Centers: Bereich „Gäste“, Reiter „Gästedatenbank“ mit dem Kalender (Wunsch 27.10.2026)
 - Tab „Portalpreise“ (`src/components/admin/HutDashboard.tsx` + `hut-dashboard/*`, Tab-ID `platforms`, früher „Übersicht“/`dashboard`): tagesaktuelle Preise je Plattform und Belegung, Woche/Monat, blättern per Pfeil/Pfeiltaste/Wischen
 - `src/lib/dashboard/hutDashboard.ts`, `src/lib/server/hutDashboard.ts` und die Komponenten liegen **identisch** im Repo `natbergerhuette` (dort ohne `src/`) — Änderungen immer in beiden Repos
 - Server liest aus Beds24 nur (Kalender mit price1–16, Mindestaufenthalt, Verfügbarkeit, Buchungen des Zimmers über `resolveRoom`); API `src/app/api/admin/dashboard/route.ts`, Partner-Aktionen `dashboardData` (ohne Gastnamen) und `savePlatformConfig`
